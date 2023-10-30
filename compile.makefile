@@ -11,7 +11,7 @@ OBJ=main.o \
     function/utas/utas.o function/tweet_draft/tweet_draft.o \
     function/reply/reply.o function/tweet/tweet.o \
     function/friend_request/friend_request.o function/profile/profile.o \
-    function/color/color.o function/error/error.o
+    function/color/pcolor.o function/error/error.o
 
 # Target utama
 all: main
