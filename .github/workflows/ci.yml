@@ -36,6 +36,12 @@ jobs:
         with:
           style: file
 
+      - name: Install Clang-Format
+        run: sudo apt-get install -y clang-format
+
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0
         run: echo "Some files failed the linting checks!"
+
+      - name: Format code
+        run: clang-format -i function/**/*.c function/**/*.h

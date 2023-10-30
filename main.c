@@ -1,7 +1,3 @@
 #include <stdio.h>
 
-int main() {
-  for ()
-    ;
-  return 0;
-}
+int main() { return 0; }
