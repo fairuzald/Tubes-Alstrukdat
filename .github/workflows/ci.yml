@@ -1,0 +1,51 @@
+name: C Lint and Build CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up GCC
+        run: sudo apt-get install -y gcc
+
+        # Build test
+      - name: Build testing cmd
+        run: make -f compile.makefile
+
+  lint-formatting:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Clang-Format
+        run: sudo apt-get install -y clang-format
+
+        # Linter
+      - name: Lint code
+        uses: cpp-linter/cpp-linter-action@v2
+        id: linter
+        with:
+          style: file
+
+      - name: Fail fast?!
+        if: steps.linter.outputs.checks-failed > 0
+        run: echo "Some files failed the linting checks!"
+
+        # Formatting
+      - name: Format code
+        run: clang-format -i function/**/*.c function/**/*.h
