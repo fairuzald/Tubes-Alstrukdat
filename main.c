@@ -1,3 +1,8 @@
 #include <stdio.h>
 
-int main() { return 0; }
+#include "function/error/error.h"
+
+int main() {
+  throwError("Error handling contohnya langsung gini");
+  return 0;
+}
