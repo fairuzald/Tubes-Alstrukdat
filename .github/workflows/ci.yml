@@ -21,6 +21,7 @@ jobs:
       - name: Set up GCC
         run: sudo apt-get install -y gcc
 
+        # Build test
       - name: Build testing cmd
         run: make -f compile.makefile
 
@@ -31,17 +32,20 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - uses: cpp-linter/cpp-linter-action@v2
+      - name: Install Clang-Format
+        run: sudo apt-get install -y clang-format
+
+        # Linter
+      - name: Lint code
+        uses: cpp-linter/cpp-linter-action@v2
         id: linter
         with:
           style: file
-
-      - name: Install Clang-Format
-        run: sudo apt-get install -y clang-format
 
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0
         run: echo "Some files failed the linting checks!"
 
+        # Formatting
       - name: Format code
         run: clang-format -i function/**/*.c function/**/*.h
