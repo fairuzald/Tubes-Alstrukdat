@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "aaron-bond.better-comments",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "esbenp.prettier-vscode",
+    "ms-vscode.cpptools-extension-pack",
+    "danielpinto8zz6.c-cpp-compile-run",
+    "harshharsh.snippet-generator"
+  ]
+}
