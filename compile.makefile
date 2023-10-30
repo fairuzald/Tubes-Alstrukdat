@@ -2,7 +2,7 @@
 CC=gcc
 
 # Flags kompilasi
-CFLAGS=-Ifunction/friend -Ifunction/initialization -Ifunction/user -Ifunction/input -Ifunction/save_load -Ifunction/utas -Ifunction/tweet_draft -Ifunction/reply -Ifunction/tweet -Ifunction/friend_request -Ifunction/profile -Ifunction/color
+CFLAGS=-Ifunction/friend -Ifunction/initialization -Ifunction/user -Ifunction/input -Ifunction/save_load -Ifunction/utas -Ifunction/tweet_draft -Ifunction/reply -Ifunction/tweet -Ifunction/friend_request -Ifunction/profile -Ifunction/pcolor
 
 # Objek yang dibuat saat kompilasi
 OBJ=main.o \
@@ -11,7 +11,7 @@ OBJ=main.o \
     function/utas/utas.o function/tweet_draft/tweet_draft.o \
     function/reply/reply.o function/tweet/tweet.o \
     function/friend_request/friend_request.o function/profile/profile.o \
-    function/color/pcolor.o function/error/error.o
+    function/pcolor/pcolor.o function/error/error.o
 
 # Target utama
 all: main

@@ -17,7 +17,7 @@ gcc -c function\reply\reply.c
 gcc -c function\tweet\tweet.c
 gcc -c function\friend_request\friend_request.c
 gcc -c function\profile\profile.c
-gcc -c function\color\pcolor.c
+gcc -c function\pcolor\pcolor.c
 gcc -c function\error\error.c
 
 # Buat program dari file .o
