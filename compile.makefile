@@ -22,7 +22,7 @@ OBJ=main.o \
     function/friend/friend.o \
     function/initialization/initialization.o \
     function/user/user.o \
-    function/input/input.o\
+    function/input/input.o \
     function/save_load/save_load.o \
     function/utas/utas.o \
     function/tweet_draft/tweet_draft.o \
@@ -45,6 +45,12 @@ main: $(OBJ)
 
 # Aturan untuk mengkompilasi file .o dari file .c
 %.o: %.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+# Aturan untuk mengkompilasi file .o dari file .c di direktori adt/input/charmachine
+adt/input/charmachine/charmachine.o: adt/input/charmachine/charmachine.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+adt/input/wordmachine/wordmachine.o: adt/input/wordmachine/wordmachine.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # Bersihkan file yang dihasilkan oleh make
