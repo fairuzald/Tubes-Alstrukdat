@@ -16,7 +16,7 @@ CFLAGS=-Ifunction/friend \
        -Ifunction/pcolor \
        -Iadt/input/charmachine \
        -Iadt/input/wordmachine \
-       -Iprocedure/splashscreenhine
+       -Iprocedure/splashscreen
 
 OBJ=main.o \
     function/friend/friend.o \
