@@ -1,16 +1,13 @@
 # Set the compiler executable
 COMPILER = gcc
 
-# Delete existing .o and main.exe files
-clean:
-    if exist *.o del /F /Q *.o
-    if exist main.exe del /F /Q main.exe
 
 # Compile .c files
 main.o: main.c
-    $(COMPILER) -c main.c
+	$(COMPILER) -c main.c
 
 # Add more rules for other .c files as needed
+
 # List object files
 OBJECT_FILES = main.o \
                function/friend/friend.o \
@@ -32,27 +29,27 @@ OBJECT_FILES = main.o \
 
 # Build main.exe from object files
 main.exe: $(OBJECT_FILES)
-    $(COMPILER) -o main.exe \
-      $(OBJECT_FILES) \
-      -Ifunction/friend \
-      -Ifunction/initialization \
-      -Ifunction/user \
-      -Ifunction/input \
-      -Ifunction/save_load \
-      -Ifunction/utas \
-      -Ifunction/tweet_draft \
-      -Ifunction/reply \
-      -Ifunction/tweet \
-      -Ifunction/friend_request \
-      -Ifunction/profile \
-      -Ifunction/pcolor \
-      -Ifunction/error \
-      -Iadt/input \
-      -Iadt/input/wordmachine \
-      -Iadt/input/charmachine \
-      -Iprocedure/splashscreen
+	$(COMPILER) -o main.exe \
+	  $(OBJECT_FILES) \
+	  -Ifunction/friend \
+	  -Ifunction/initialization \
+	  -Ifunction/user \
+	  -Ifunction/input \
+	  -Ifunction/save_load \
+	  -Ifunction/utas \
+	  -Ifunction/tweet_draft \
+	  -Ifunction/reply \
+	  -Ifunction/tweet \
+	  -Ifunction/friend_request \
+	  -Ifunction/profile \
+	  -Ifunction/pcolor \
+	  -Ifunction/error \
+	  -Iadt/input \
+	  -Iadt/input/wordmachine \
+	  -Iadt/input/charmachine \
+	  -Iprocedure/splashscreen
 
 # Clean up .o files
 .PHONY: clean
 clean:
-    if exist *.o del /F /Q *.o
+	if exist *.o del /F /Q *.o
