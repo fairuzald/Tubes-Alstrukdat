@@ -31,7 +31,10 @@ OBJ=main.o \
     function/friend_request/friend_request.o \
     function/profile/profile.o \
     function/pcolor/pcolor.o \
-    function/error/error.o
+    function/error/error.o \
+    adt/input/charmachine/charmachine.o \
+    adt/input/wordmachine/wordmachine.o \
+    procedure/splashscreen/splashscreen.o
 
 # Target utama
 all: main
