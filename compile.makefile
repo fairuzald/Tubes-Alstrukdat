@@ -37,7 +37,7 @@ main: $(OBJ_DIR) $(OBJ)
 	$(CC) -o $@ $(OBJ) $(CFLAGS)
 
 # Aturan untuk mengkompilasi file .o dari file .c
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # Bersihkan file yang dihasilkan oleh make
