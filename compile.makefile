@@ -16,38 +16,30 @@ CFLAGS=-Ifunction/friend \
        -Ifunction/pcolor \
        -Iadt/input/charmachine \
        -Iadt/input/wordmachine \
-       -Iprocedure/splashscreen 
+       -Iprocedure/splashscreen
 
 # Objek yang dibuat saat kompilasi
-OBJ=main.o \
-    function/friend/friend.o \
-    function/initialization/initialization.o \
-    function/user/user.o \
-    function/input/input.o \
-    function/save_load/save_load.o \
-    function/utas/utas.o \
-    function/tweet_draft/tweet_draft.o \
-    function/reply/reply.o \
-    function/tweet/tweet.o \
-    function/friend_request/friend_request.o \
-    function/profile/profile.o \
-    function/pcolor/pcolor.o \
-    function/error/error.o \
-    adt/input/charmachine/charmachine.o \
-    adt/input/wordmachine/wordmachine.o \
-    procedure/splashscreen/splashscreen.o
-    
+OBJ_DIR=obj
+SRC_DIR=.
+SRC_SUBDIRS=$(shell find $(SRC_DIR) -type d)
+SRC=$(wildcard $(addsuffix /*.c,$(SRC_SUBDIRS)))
+OBJ=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
+
 # Target utama
 all: main
 
+# Aturan untuk membuat direktori obj jika belum ada
+$(OBJ_DIR):
+	mkdir -p $@
+
 # Aturan untuk mengkompilasi main utama
-main: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+main: $(OBJ_DIR) $(OBJ)
+	$(CC) -o $@ $(OBJ) $(CFLAGS)
 
 # Aturan untuk mengkompilasi file .o dari file .c
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # Bersihkan file yang dihasilkan oleh make
 clean:
-	rm -f $(OBJ) main
+	rm -rf $(OBJ_DIR) main
