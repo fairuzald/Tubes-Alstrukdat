@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 #include "function/error/error.h"
+#include "procedure/splashscreen.h"
 
 int main() {
-  throwError("Error handling contohnya langsung gini");
+  welcome();
   return 0;
 }
