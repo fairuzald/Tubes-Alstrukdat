@@ -1,21 +1,25 @@
-# Set the compiler executable
-COMPILER=gcc
+# Compiler yang digunakan
+CC=gcc
 
-# Remove existing .o and main executable files
-clean:
-    rm -f *.o main
+# Flags kompilasi
+CFLAGS=-Ifunction/friend \
+       -Ifunction/initialization \
+       -Ifunction/user \
+       -Ifunction/input \
+       -Ifunction/save_load \
+       -Ifunction/utas \
+       -Ifunction/tweet_draft \
+       -Ifunction/reply \
+       -Ifunction/tweet \
+       -Ifunction/friend_request \
+       -Ifunction/profile \
+       -Ifunction/pcolor \
+       -Iadt/input/charmachine \
+       -Iadt/input/wordmachine \
+       -Iprocedure/splashscreen 
 
-# Compile .c files
-main.o: main.c
-    $(COMPILER) -c main.c
-
-function/friend/friend.o: function/friend/friend.c
-    $(COMPILER) -c function/friend/friend.c
-
-# Add more rules for other source files
-
-# List object files
-OBJECT_FILES=main.o \
+# Objek yang dibuat saat kompilasi
+OBJ=main.o \
     function/friend/friend.o \
     function/initialization/initialization.o \
     function/user/user.o \
@@ -29,15 +33,21 @@ OBJECT_FILES=main.o \
     function/profile/profile.o \
     function/pcolor/pcolor.o \
     function/error/error.o \
-    adt/input/wordmachine.o \
-    adt/input/charmachine.o \
-    procedure/splashscreen.o
+    adt/input/charmachine/charmachine.o \
+    adt/input/wordmachine/wordmachine.o \
+    procedure/splashscreen/splashscreen.o
+    
+# Target utama
+all: main
 
-# Build main executable
-main: $(OBJECT_FILES)
-    $(COMPILER) -o main $(OBJECT_FILES) -Ifunction/friend -Ifunction/initialization -Ifunction/user -Ifunction/input -Ifunction/save_load -Ifunction/utas -Ifunction/tweet_draft -Ifunction/reply -Ifunction/tweet -Ifunction/friend_request -Ifunction/profile -Ifunction/pcolor -Ifunction/error -Iadt/input -Iadt/input/wordmachine -Iadt/input/charmachine -Iprocedure/splashscreen
+# Aturan untuk mengkompilasi main utama
+main: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 
-# Clean up object files
+# Aturan untuk mengkompilasi file .o dari file .c
+%.o: %.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+# Bersihkan file yang dihasilkan oleh make
 clean:
-    rm -f *.o
-
+	rm -f $(OBJ) main
