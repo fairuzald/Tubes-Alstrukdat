@@ -76,13 +76,15 @@ boolean isSameWord(Word word1, Word word2) {
   } else {
     boolean same = true;
     int i = 0;
-    while (i < word1.Length) {
+    while (same && i < word1.Length) {
       if (word1.TabWord[i] != word2.TabWord[i]) {
         same = false;
       } else {
         i++;
       }
     }
+
+    return same;
   }
 }
 

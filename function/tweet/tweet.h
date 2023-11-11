@@ -13,14 +13,13 @@ typedef struct tweet {
   Word authorTweet;
   DATETIME timeCreatedTweet;
   long idTweet;
-  long idUtas;
   long idReply;
+  long idUtas;
   long like;
   long depth;
   struct tweet *reply1;  // ke depth yang sama
   struct tweet *reply2;  // ke children
   struct tweet *utas;
-
 } Tweet;
 
 /* Selector Tweet */
@@ -28,8 +27,8 @@ typedef struct tweet {
 #define AuthorTweet(t) (t).authorTweet
 #define TimeCreatedTweet(t) (t).timeCreatedTweet
 #define IdTweet(t) (t).idTweet
-#define IdUtas(t) (t).idUtas
 #define IdReply(t) (t).idReply
+#define IdUtas(t) (t).idUtas
 #define Like(t) (t).like
 #define Depth(t) (t).depth
 #define Reply1(t) (t).reply1
@@ -38,7 +37,9 @@ typedef struct tweet {
 
 /* Constructor Tweet */
 void CreateTweet(Tweet *tweet, Word textTweet, Word authorTweet,
-                 DATETIME timeCreatedTweet, long idTweet);
+                 DATETIME timeCreatedTweet, long idTweet, long idReply,
+                 long idUtas, long like, long depth, Tweet *reply1,
+                 Tweet *reply2, Tweet *utas);
 
 /* Fungsi/prosedur Lain */
 void displayTweet(Tweet tweet);

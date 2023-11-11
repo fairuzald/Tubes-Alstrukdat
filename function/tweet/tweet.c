@@ -5,27 +5,27 @@
 /* Constructor Tweet */
 
 void CreateTweet(Tweet *tweet, Word textTweet, Word authorTweet,
-                 DATETIME timeCreatedTweet, long idTweet, long idUtas,
-                 long idReply, long like, long depth, Tweet *reply1,
+                 DATETIME timeCreatedTweet, long idTweet, long idReply,
+                 long idUtas, long like, long depth, Tweet *reply1,
                  Tweet *reply2, Tweet *utas) {
   TextTweet(*tweet) = textTweet;
   AuthorTweet(*tweet) = authorTweet;
   TimeCreatedTweet(*tweet) = timeCreatedTweet;
   IdTweet(*tweet) = idTweet;
-  IdUtas(*tweet) = idUtas;    // inisialisasi dengan 0
   IdReply(*tweet) = idReply;  // inisialisasi dengan 0
+  IdUtas(*tweet) = idUtas;    // inisialisasi dengan 0
   Like(*tweet) = like;        // inisialisasi dengan 0
   Depth(*tweet) = depth;      // inisialisasi dengan 0
-  Reply1(*tweet) = reply1;
-  Reply2(*tweet) = reply2;
-  Utas(*tweet) = utas;
+  Reply1(*tweet) = reply1;    // inisialisasi dengan NULL
+  Reply2(*tweet) = reply2;    // inisialisasi dengan NULL
+  Utas(*tweet) = utas;        // inisialisasi dengan NULL
 }
 
 /* Fungsi/prosedur lain */
 
 void displayTweet(Tweet tweet) {
   // display ID
-  printf("| ID = %ld\n", Id(tweet));
+  printf("| ID = %ld\n", IdTweet(tweet));
 
   // display author
   printf("| ");

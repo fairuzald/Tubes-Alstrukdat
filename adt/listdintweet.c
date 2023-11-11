@@ -130,7 +130,7 @@ void compressList(ListDinTweet *l) {
 
 /* FITUR-FITUR UTAMA*/
 
-void tweet(ListDinTweet *listTweet) {
+void newTweet(ListDinTweet *listTweet) {
   // Memasukkan text kicauan
   printf("Masukkan kicauan:\n");
   Word text;
@@ -148,8 +148,6 @@ void tweet(ListDinTweet *listTweet) {
     // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal dibuat
     printf("Kicauan tidak boleh hanya berisi spasi!\n");
   } else {
-    long id = NEFF(*listTweet) + 1;
-
     // (WIP) Author, timeCreated sementara
     Word author;
     author.TabWord[0] = 'x';  // author = "x"
@@ -158,9 +156,19 @@ void tweet(ListDinTweet *listTweet) {
     CreateDATETIME(&timeCreated, 1, 1, 2000, 0, 0,
                    0);  // timeCreated = 01/01/2000 00:00:00
 
+    long idTweet = NEFF(*listTweet) + 1;
+    long idReply = 0;
+    long idUtas = 0;
+    long like = 0;
+    long depth = 0;
+    Tweet *reply1 = NULL;
+    Tweet *reply2 = NULL;
+    Tweet *utas = NULL;
+
     // Memasukkan semua informasi ke dalam Tweet
     Tweet newTweet;
-    CreateTweet(&newTweet, text, author, timeCreated, id);
+    CreateTweet(&newTweet, text, author, timeCreated, idTweet, idReply, idUtas,
+                like, depth, reply1, reply2, utas);
 
     // Memasukkan tweet ke dalam list Tweet
     if (isFull(*listTweet)) {
@@ -199,7 +207,7 @@ void like(ListDinTweet *listTweet, long id) {
   }
 }
 
-void edit(ListDinTweet *listTweet, long id) {
+void editTweetInList(ListDinTweet *listTweet, long id) {
   if (!isIdExist(*listTweet, id)) {
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
   } else {
@@ -253,5 +261,3 @@ boolean isIdExist(ListDinTweet listTweet, long id) {
   /* yaitu antara 1..NEFF(listTweet) */
   return 1 <= id && id <= NEFF(listTweet);
 }
-
-DATETIME getCurrentTime() {}

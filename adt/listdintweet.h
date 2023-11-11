@@ -121,10 +121,10 @@ void compressList(ListDinTweet *l);
 /* F.S. Ukuran capacity = nEff */
 
 /* FITUR-FITUR UTAMA*/
-void tweet(ListDinTweet *listTweet);
+void newTweet(ListDinTweet *listTweet);
 void displayListTweet(ListDinTweet listTweet);
 void like(ListDinTweet *listTweet, long id);
-void edit(ListDinTweet *listTweet, long id);
+void editTweetInList(ListDinTweet *listTweet, long id);
 
 /* Fungsi/prosedur tambahan */
 boolean isOnlySpace(Word text);
