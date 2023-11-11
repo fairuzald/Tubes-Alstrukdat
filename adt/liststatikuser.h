@@ -2,7 +2,7 @@
 #define LISTSTATIKUSER_H
 
 #include "boolean.h"
-#include "wordmachine.h"
+#include "input\wordmachine.h"
 #include "../function/user/user.h"
 
 /*  Kamus Umum */
