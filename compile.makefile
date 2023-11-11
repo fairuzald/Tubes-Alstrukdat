@@ -21,7 +21,7 @@ CFLAGS=-Ifunction/friend \
 # Objek yang dibuat saat kompilasi
 OBJ_DIR=obj
 SRC_DIR=.
-SRC_SUBDIRS=$(shell find $(SRC_DIR) -type d)
+SRC_SUBDIRS=$(shell find $(SRC_DIR) -type d -not -path "./driver*")
 SRC=$(wildcard $(addsuffix /*.c,$(SRC_SUBDIRS)))
 OBJ=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
