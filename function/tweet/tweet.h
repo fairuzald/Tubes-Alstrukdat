@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "../../adt/datetime.h"
-#include "../../adt/wordmachine.h"
+#include "../../adt/input/wordmachine.h"
 // #include "../user/user.h"
 
 /* Definisi type Tweet */

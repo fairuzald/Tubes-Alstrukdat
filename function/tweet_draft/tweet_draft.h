@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "../../adt/datetime.h"
-#include "../../adt/wordmachine.h"
+#include "../../adt/input/wordmachine.h"
 
 /* Definisi type Draft */
 typedef struct {

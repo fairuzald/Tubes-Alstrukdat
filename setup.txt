@@ -1,1 +1,0 @@
-gcc test.c adt/listdintweet.c function/tweet/tweet.c adt/time.c adt/datetime.c adt/charmachine.c adt/wordmachine.c -o test
