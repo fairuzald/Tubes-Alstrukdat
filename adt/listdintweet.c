@@ -148,14 +148,12 @@ void newTweet(ListDinTweet *listTweet) {
     // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal dibuat
     printf("Kicauan tidak boleh hanya berisi spasi!\n");
   } else {
-    // (WIP) Author, timeCreated sementara
+    // (WIP) Author masih sementara
     Word author;
     author.TabWord[0] = 'x';  // author = "x"
     author.Length = 1;
-    DATETIME timeCreated;
-    CreateDATETIME(&timeCreated, 1, 1, 2000, 0, 0,
-                   0);  // timeCreated = 01/01/2000 00:00:00
 
+    DATETIME timeCreated = getCurrentDateTime();
     long idTweet = NEFF(*listTweet) + 1;
     long idReply = 0;
     long idUtas = 0;

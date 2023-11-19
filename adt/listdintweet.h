@@ -129,7 +129,6 @@ void editTweetInList(ListDinTweet *listTweet, long id);
 /* Fungsi/prosedur tambahan */
 boolean isOnlySpace(Word text);
 boolean isIdExist(ListDinTweet listTweet, long id);
-DATETIME getCurrentTime();
 boolean isPrivateAccount();
 boolean isFriend();
 

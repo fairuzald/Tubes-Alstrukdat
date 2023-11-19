@@ -1,6 +1,7 @@
 #include "datetime.h"
 
 #include <stdio.h>
+#include <time.h>
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
@@ -147,69 +148,17 @@ boolean DGT(DATETIME D1, DATETIME D2) {
   }
   return TGT(Time(D1), Time(D2));
 }
-DATETIME DATETIMENextNDetik(DATETIME D, int N) {
-  /* Mengirim salinan D dengan detik ditambah N */
 
-  Time(D) = NextNDetik(Time(D), N);
+/* Fungsi/prosedur tambahan */
 
-  int days = N / (24 * 60 * 60);
+DATETIME getCurrentDateTime() {
+  /* Mengembalikan waktu lokal saat ini */
 
-  // Menambahkan days dengan selisih hari dari tanggal saat ini dengan tanggal 1
-  // di bulan saat ini
-  days += Day(D) - 1;
-
-  // Perhitungan dimulai dari tanggal 1 di bulan saat ini
-  Day(D) = 1;
-
-  while (days >= GetMaxDay(Month(D), Year(D))) {
-    days -= GetMaxDay(Month(D), Year(D));
-    if (Month(D) == 12) {
-      Year(D)++;
-      Month(D) = 1;
-    } else {
-      Month(D)++;
-    }
-  }
-
-  Day(D) += days;
-
-  return D;
-}
-DATETIME DATETIMEPrevNDetik(DATETIME D, int N) {
-  /* Mengirim salinan D dengan detik dikurang N */
-
-  Time(D) = PrevNDetik(Time(D), N);
-
-  int days = N / (24 * 60 * 60);
-
-  // Menambahkan days dengan selisih hari dari tanggal terakhir di bulan saat
-  // ini dengan tanggal saat ini
-  days += GetMaxDay(Month(D), Year(D)) - Day(D);
-
-  // Perhitungan dimulai dari tanggal terakhir di bulan saat ini
-  Day(D) = GetMaxDay(Month(D), Year(D));
-
-  while (days >= GetMaxDay(Month(D), Year(D))) {
-    days -= GetMaxDay(Month(D), Year(D));
-    if (Month(D) == 1) {
-      Year(D)--;
-      Month(D) = 12;
-    } else {
-      Month(D)--;
-    }
-
-    // Tanggal menjadi tanggal terakhir di bulan sebelumnya
-    Day(D) = GetMaxDay(Month(D), Year(D));
-  }
-
-  Day(D) -= days;
-
-  return D;
-}
-/* *** Kelompok Operator Aritmetika terhadap DATETIME *** */
-long int DATETIMEDurasi(DATETIME DAw, DATETIME DAkh) {
-  /* Mengirim DAkh-DAw dlm Detik, dengan kalkulasi */
-  /* Prekondisi: DAkh > DAw */
-
-  return 0;
+  time_t t = time(NULL);
+  struct tm *p;
+  p = localtime(&t);
+  DATETIME dt;
+  CreateDATETIME(&dt, p->tm_mday, p->tm_mon + 1, p->tm_year + 1900, p->tm_hour,
+                 p->tm_min, p->tm_sec);
+  return dt;
 }
