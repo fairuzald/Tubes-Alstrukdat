@@ -4,15 +4,14 @@
 #ifndef USER_H
 #define USER_H
 
-typedef struct
-{
-    Word nama;             /* nama pengguna, unik*/
-    Word password;       /* password pengguna */
-    Word bio;
-    int nomorHP;
-    Word weton;
-    boolean public;
-    PhotoMat fotoProfil;
+typedef struct {
+  Word nama;     /* nama pengguna, unik*/
+  Word password; /* password pengguna */
+  Word bio;
+  Word nomorHP;
+  Word weton;
+  boolean public;
+  PhotoMat fotoProfil;
 } User;
 
 /* ********** SELEKTOR ********** */
@@ -29,7 +28,8 @@ extern User currentUser;
 extern boolean sudahMasuk;
 
 boolean cekUnik(Word w);
-/*true jika w tidak ada di dalam l, digunakan untuk mengecek keunikan nama pengguna*/
+/*true jika w tidak ada di dalam l, digunakan untuk mengecek keunikan nama
+ * pengguna*/
 
 void daftar();
 /*prosedur pendaftaran user*/

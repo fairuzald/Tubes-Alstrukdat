@@ -29,24 +29,25 @@ void STARTWORD() {
   }
 }
 
-void STARTWORDnoIgnore(int maxChar){
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, currentChar = MARK, dan currentWord adalah seluruh masukan;*/
-   /*KAMUS LOKAL*/
-   int ctr;
+void STARTWORDnoIgnore(int maxChar) {
+  /* I.S. : currentChar sembarang
+     F.S. : EndWord = true, currentChar = MARK, dan currentWord adalah seluruh
+     masukan;*/
+  /*KAMUS LOKAL*/
+  int ctr;
 
-   /*ALGORITMA*/
-    ctr=0;
-    START();
-    while(currentChar!=MARK){
-        if(ctr<maxChar){
-            currentWord.TabWord[ctr]=currentChar;
-            ctr+=1;
-        }
-        ADV();
+  /*ALGORITMA*/
+  ctr = 0;
+  START();
+  while (currentChar != MARK) {
+    if (ctr < maxChar) {
+      currentWord.TabWord[ctr] = currentChar;
+      ctr += 1;
     }
-    currentWord.Length=ctr;
-    endWord=true;
+    ADV();
+  }
+  currentWord.Length = ctr;
+  endWord = true;
 }
 
 void ADVWORD() {
@@ -97,68 +98,102 @@ void LowerCase() {
   }
 }
 
-boolean compareWordwString(Word w, char st[]){
-/*membandingkan word dengan string, true jika sama dan false jika berbeda*/
-    /*KAMUS LOKAL*/
-    int i;
-    /*ALGORITMA*/
-    i=0;
-    while (w.TabWord[i]==st[i] && i<w.Length && st[i]!='\0'){
-    i+=1;
-    }
-    return (i==w.Length && st[i]=='\0');
-}
-
-boolean compareWordwWord(Word w1, Word w2){
+boolean compareWordwString(Word w, char st[]) {
   /*membandingkan word dengan string, true jika sama dan false jika berbeda*/
-    /*KAMUS LOKAL*/
-    int i;
-    boolean sama;
-
-    /*ALGORITMA*/
-    if (w1.Length!=w2.Length) sama=false;
-    else {
-        i=0;
-        sama=true;
-        while (i<w1.Length && sama){
-            if (w1.TabWord[i]!=w2.TabWord[i]) sama=false;
-        }
-    }
-    return (sama);
+  /*KAMUS LOKAL*/
+  int i;
+  /*ALGORITMA*/
+  i = 0;
+  while (w.TabWord[i] == st[i] && i < w.Length && st[i] != '\0') {
+    i += 1;
+  }
+  return (i == w.Length && st[i] == '\0');
 }
 
-void printWord(Word w){
- /*mencetak word ke layar tanpa karakter tambahan sebelum ataupun sesudah word*/
-    for(int i=0;i<w.Length;i++){
-        printf("%c",w.TabWord[i]);
+boolean compareWordwWord(Word w1, Word w2) {
+  /*membandingkan word dengan string, true jika sama dan false jika berbeda*/
+  /*KAMUS LOKAL*/
+  int i;
+  boolean sama;
+
+  /*ALGORITMA*/
+  if (w1.Length != w2.Length)
+    sama = false;
+  else {
+    i = 0;
+    sama = true;
+    while (i < w1.Length && sama) {
+      if (w1.TabWord[i] != w2.TabWord[i]) sama = false;
     }
+  }
+  return (sama);
 }
 
-int wordToInt(Word w){
- /*mengubah word menjadi integer*/
-    /*KAMUS LOKAL*/
-    int i,hasil;
-
-    /*ALGORITMA*/
-    hasil=0;
-    for(i=0;i<w.Length;i++){
-        hasil=hasil*10+(w.TabWord[i]-'0');
-    }
+void printWord(Word w) {
+  /*mencetak word ke layar tanpa karakter tambahan sebelum ataupun sesudah
+   * word*/
+  for (int i = 0; i < w.Length; i++) {
+    printf("%c", w.TabWord[i]);
+  }
 }
 
-Word stringToWord(char* st){
-/*mengubah string menjadi word*/
-    /*KAMUS LOKAL*/
-    Word w;
-    int i;
+int wordToInt(Word w) {
+  /*mengubah word menjadi integer*/
+  /*KAMUS LOKAL*/
+  int i, hasil;
 
-    /*ALGORITMA*/
-    i=0;
-    w.Length=0;
-    while (st[i]!='\0'){
-        w.TabWord[i]=st[i];
-        w.Length+=1;
-        i+=1;
+  /*ALGORITMA*/
+  hasil = 0;
+  for (i = 0; i < w.Length; i++) {
+    hasil = hasil * 10 + (w.TabWord[i] - '0');
+  }
+}
+
+Word stringToWord(char *st) {
+  /*mengubah string menjadi word*/
+  /*KAMUS LOKAL*/
+  Word w;
+  int i;
+
+  /*ALGORITMA*/
+  i = 0;
+  w.Length = 0;
+  while (st[i] != '\0') {
+    w.TabWord[i] = st[i];
+    w.Length += 1;
+    i += 1;
+  }
+  return w;
+}
+
+void ConcatWords(Word *result, const Word *word1, const Word *word2) {
+  int i, j;
+
+  // Copy characters from word1 to result
+  for (i = 0; i < word1->Length; i++) {
+    result->TabWord[i] = word1->TabWord[i];
+  }
+
+  // Concatenate characters from word2 to result
+  for (j = 0; j < word2->Length; j++) {
+    if (i < NMax - 1) {
+      result->TabWord[i] = word2->TabWord[j];
+      i++;
+    } else {
+      break;
     }
-    return w;
+  }
+
+  result->TabWord[i] = '\0';
+  result->Length = i;
+}
+
+void CopyWordwWord(Word *dest, Word *src) {
+  int i;
+
+  for (i = 0; i < src->Length; i++) {
+    dest->TabWord[i] = src->TabWord[i];
+  }
+
+  dest->Length = src->Length;
 }

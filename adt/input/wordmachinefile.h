@@ -1,71 +1,45 @@
 /* File: wordmachine.h */
 /* Definisi Word Machine: Model Akuisisi Versi I */
 
-#ifndef __MESINKATA_H__
-#define __MESINKATA_H__
+#ifndef __MESINKATAFILE_H__
+#define __MESINKATAFILE_H__
 
 #include "../boolean.h"
-#include "charmachine.h"
-
-#define NMax 200
-#define BLANK ' '
-
-typedef struct {
-  char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai
-                         [0..NMax-1] */
-  int Length;
-} Word;
+#include "charmachinefile.h"
+#include "wordmachine.h"
 
 /* State Mesin Word */
-extern boolean endWord;
-extern Word currentWord;
+extern boolean endWordFile;
+extern Word currentWordFile;
 
-void IgnoreBlanks();
+void IgnoreBlanksFile();
 /* Mengabaikan satu atau beberapa BLANK
 I.S. : currentChar sembarang
 F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD();
+void STARTWORDFILE(char path[]);
 /* I.S. : currentChar sembarang
 F.S. : EndWord = true, dan currentChar = MARK;
         atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
         currentChar karakter pertama sesudah karakter terakhir kata */
+void CopyWordFileNoBlank();
+void ADVWORDFILEnoBLANK();
 
-void STARTWORDnoIgnore(int maxChar);
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, currentChar = MARK, dan currentWord adalah seluruh
-   masukan*/
-
-void ADVWORD();
+void ADVWORDFILE();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
 F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
         currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
         Jika currentChar = MARK, EndWord = true.
 Proses : Akuisisi kata menggunakan procedure SalinWord */
-
-void CopyWord();
+void CropWord(Word *word, int maxLength);
+void CopyWordFile();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi;
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void LowerCase();
+void STARTWORDFilenoIgnore(int maxChar);
+void copyIntegerFromWordMachine(int *num, Word word);
 
-boolean compareWordwString(Word w, char w2[]);
-/*membandingkan word dengan string, true jika sama dan false jika berbeda*/
-
-boolean compareWordwWord(Word w1, Word w2);
-/*membandingkan word dengan string, true jika sama dan false jika berbeda*/
-
-void printWord(Word w);
-/*mencetak word ke layar tanpa karakter tambahan sebelum ataupun sesudah word*/
-
-int wordToInt(Word w);
-/*mengubah word menjadi integer (untuk input integer)*/
-
-Word stringToWord(char *);
-/*mengubah string menjadi word*/
-void ConcatWords(Word *result, const Word *word1, const Word *word2);
-void CopyWordwWord(Word *dest, Word *src);
 #endif
