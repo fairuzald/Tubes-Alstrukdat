@@ -40,6 +40,9 @@ typedef struct {
   Definisi elemen pertama : l.buffer[i] dengan i=0
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
+/* State Global ListDinTweet */
+extern ListDinTweet listTweetMain;
+
 /* ********** SELEKTOR ********** */
 
 #define BUFFER(l) (l).buffer
