@@ -307,7 +307,7 @@ boolean isIdExist(ListDinTweet listTweet, long id) {
 boolean isTweetAuthor(Tweet tweet, User user) {
   /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
 
-  return compareWordwWord(AuthorTweet(tweet), user);
+  return compareWordwWord(AuthorTweet(tweet), NAMA(user));
 }
 
 boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet) {
@@ -316,12 +316,10 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet) {
   /* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
    * listUser*/
 
-  User user = listUser.contents[0];
-  int i = 1;
-  while (!isTweetAuthor(tweet, user)) {
-    user = listUser.contents[i];
+  int i = 0;
+  while (!isTweetAuthor(tweet, listUser.contents[i])) {
     i++;
   }
 
-  return !user.public;
+  return !listUser.contents[i].public;
 }
