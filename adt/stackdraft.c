@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "stackdraft.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +7,7 @@
 
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmpty(Stack* S, long capacity) {
+void CreateEmpty(StackDraft* S, long capacity) {
   /* I.S. sembarang; */
   /* F.S. Membuat sebuah stack S yang kosong berkapasitas capacity */
   /* jadi indeksnya antara 0.. capacity */
@@ -17,7 +17,7 @@ void CreateEmpty(Stack* S, long capacity) {
   Capacity(*S) = capacity;
 }
 
-void dealocateStack(Stack* s) {
+void dealocateStack(StackDraft* s) {
   /* I.S. s terdefinisi; */
   /* F.S. (s) dikembalikan ke system, Top(s)=Nil; Capacity(s)=0 */
   free(Table(*s));
@@ -27,19 +27,19 @@ void dealocateStack(Stack* s) {
 
 /* ************ Predikat untuk test keadaan KOLEKSI ************ */
 
-boolean IsEmpty(Stack S) {
+boolean IsEmpty(StackDraft S) {
   /* Mengirim true jika Stack kosong: lihat definisi di atas */
   return Nil == Top(S);
 }
 
-boolean IsFull(Stack S) {
+boolean IsFull(StackDraft S) {
   /* Mengirim true jika tabel penampung nilai elemen stack penuh */
   return Top(S) == Capacity(S) - 1;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 
-void Push(Stack* S, infotype X) {
+void Push(StackDraft* S, infotype X) {
   /* Menambahkan X sebagai elemen Stack S. */
   /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
   /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
@@ -54,7 +54,7 @@ void Push(Stack* S, infotype X) {
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 
-void Pop(Stack* S, infotype* X) {
+void Pop(StackDraft* S, infotype* X) {
   /* Menghapus X dari Stack S. */
   /* I.S. S tidak mungkin kosong */
   /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
@@ -68,7 +68,7 @@ void Pop(Stack* S, infotype* X) {
 
 /* ********* Mengubah Ukuran Stack ********* */
 
-void expandStack(Stack* s, long num) {
+void expandStack(StackDraft* s, long num) {
   /* Proses : Menambahkan capacity s sebanyak num */
   /* I.S. Stack sudah terdefinisi */
   /* F.S. Ukuran Stack bertambah sebanyak num */
@@ -77,7 +77,7 @@ void expandStack(Stack* s, long num) {
   Capacity(*s) += num;
 }
 
-void shrinkStack(Stack* s, long num) {
+void shrinkStack(StackDraft* s, long num) {
   /* Proses : Mengurangi capacity s sebanyak num */
   /* I.S. Stack sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
    * num. */

@@ -1,9 +1,10 @@
-/* File : stack.h */
+/* File : stackdraft.h */
 /* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
 /* TOP adalah alamat elemen puncak */
 /* Implementasi dalam bahasa C dengan alokasi dinamis */
-#ifndef STACK_H
-#define STACK_H
+
+#ifndef STACKDRAFT_H
+#define STACKDRAFT_H
 
 #include "../function/tweet_draft/tweet_draft.h"
 #include "boolean.h"
@@ -21,7 +22,7 @@ typedef struct {
   infotype* T; /* tabel penyimpan elemen */
   address TOP; /* alamat TOP: elemen puncak */
   long capacity;
-} StackDinDraft;
+} StackDraft;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
 /* Jika S adalah Stack maka akses elemen : */
@@ -39,46 +40,46 @@ typedef struct {
 
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmpty(Stack* S, long capacity);
+void CreateEmpty(StackDraft* S, long capacity);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas capacity */
 /* jadi indeksnya antara 0.. capacity */
 /* Ciri stack kosong : TOP bernilai Nil */
 
-void dealocateStack(Stack* s);
+void dealocateStack(StackDraft* s);
 /* I.S. s terdefinisi; */
 /* F.S. (s) dikembalikan ke system, Top(s)=Nil; Capacity(s)=0 */
 
 /* ************ Predikat untuk test keadaan KOLEKSI ************ */
 
-boolean IsEmpty(Stack S);
+boolean IsEmpty(StackDraft S);
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 
-boolean IsFull(Stack S);
+boolean IsFull(StackDraft S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 
-void Push(Stack* S, infotype X);
+void Push(StackDraft* S, infotype X);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 
-void Pop(Stack* S, infotype* X);
+void Pop(StackDraft* S, infotype* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 /* ********* Mengubah Ukuran Stack ********* */
 
-void expandStack(Stack* s, long num);
+void expandStack(StackDraft* s, long num);
 /* Proses : Menambahkan capacity s sebanyak num */
 /* I.S. Stack sudah terdefinisi */
 /* F.S. Ukuran Stack bertambah sebanyak num */
 
-void shrinkStack(Stack* s, long num);
+void shrinkStack(StackDraft* s, long num);
 /* Proses : Mengurangi capacity s sebanyak num */
 /* I.S. Stack sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
  * num. */
