@@ -38,19 +38,6 @@ void TulisDATETIME(DATETIME D);
    HH:MM:SS tanpa karakter apa pun di depan atau belakangnya, termasuk spasi,
    enter, dll.*/
 
-/* ***************************************************************** */
-/* KELOMPOK OPERASI TERHADAP TYPE                                    */
-/* ***************************************************************** */
-/* *** Kelompok operasi relasional terhadap DATETIME *** */
-boolean DEQ(DATETIME D1, DATETIME D2);
-/* Mengirimkan true jika D1=D2, false jika tidak */
-boolean DNEQ(DATETIME D1, DATETIME D2);
-/* Mengirimkan true jika D1 tidak sama dengan D2 */
-boolean DLT(DATETIME D1, DATETIME D2);
-/* Mengirimkan true jika D1<D2, false jika tidak */
-boolean DGT(DATETIME D1, DATETIME D2);
-/* Mengirimkan true jika D1>D2, false jika tidak */
-
 /* Mendapatkan waktu lokal */
 
 DATETIME getCurrentDateTime();

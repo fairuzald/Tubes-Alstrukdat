@@ -8,7 +8,9 @@
 #define LISTDINTWEET_H
 
 #include "../function/tweet/tweet.h"
+#include "../function/user/user.h"
 #include "boolean.h"
+#include "liststatikuser.h"
 
 /*  Kamus Umum */
 #define IDX_MIN 0
@@ -37,13 +39,16 @@ typedef struct {
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
 /* ********** SELEKTOR ********** */
+
 #define BUFFER(l) (l).buffer
 #define ELMT(l, i) (l).buffer[i]
 #define NEFF(l) (l).nEff
 #define CAPACITY(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */
+
 /* Konstruktor : create list kosong  */
+
 void CreateListDinTweet(ListDinTweet *l, long capacity);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
@@ -53,49 +58,64 @@ void dealocateList(ListDinTweet *l);
 /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
+
 /* *** Banyaknya elemen *** */
+
 int listLength(ListDinTweet l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list l kosong */
 /* *** Daya tampung container *** */
 
 /* *** Selektor INDEKS *** */
+
 IdxType getFirstIdx(ListDinTweet l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
+
 IdxType getLastIdx(ListDinTweet l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
 /* ********** Test Indeks yang valid ********** */
+
 boolean isIdxValid(ListDinTweet l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
 /* yaitu antara indeks yang terdefinisi utk container*/
+
 boolean isIdxEff(ListDinTweet l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 0..NEFF(l) */
 
 /* ********** TEST KOSONG/PENUH ********** */
+
 /* *** Test list kosong *** */
+
 boolean isEmpty(ListDinTweet l);
 /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
+
 /* *** Test list penuh *** */
+
 boolean isFull(ListDinTweet l);
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
 /* ********** OPERASI LAIN ********** */
+
 void copyList(ListDinTweet lIn, ListDinTweet *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
+
 /* *** Menambahkan elemen terakhir *** */
+
 void insertLast(ListDinTweet *l, ElType val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
+
 /* ********** MENGHAPUS ELEMEN ********** */
+
 void deleteLast(ListDinTweet *l, ElType *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
@@ -104,6 +124,7 @@ void deleteLast(ListDinTweet *l, ElType *val);
 /*      List l mungkin menjadi kosong */
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
+
 void expandList(ListDinTweet *l, int num);
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */
@@ -120,16 +141,43 @@ void compressList(ListDinTweet *l);
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
 
-/* FITUR-FITUR UTAMA*/
-void newTweet(ListDinTweet *listTweet);
+/* Fitur-Fitur Utama */
+
+void newTweet(ListDinTweet *listTweet, User currentUser);
+/* Bagian dari fitur utama kicauan */
+/* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
+ * dalam list */
+
 void displayListTweet(ListDinTweet listTweet);
+/* Bagian dari fitur utama kicauan */
+/* Menampilkan semua tweet yang berada di dalam list */
+
 void like(ListDinTweet *listTweet, long id);
-void editTweetInList(ListDinTweet *listTweet, long id);
+/* Bagian dari fitur utama kicauan */
+/* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
+ * pada tweet tersebut */
+
+void editTweetInList(ListDinTweet *listTweet, long id, User currentUser);
+/* Bagian dari fitur utama kicauan */
+/* Mencari tweet dengan id "id" di dalam list, kemudian mengganti text tweet
+ * tersebut berdasarkan masukan dari pengguna */
 
 /* Fungsi/prosedur tambahan */
+
 boolean isOnlySpace(Word text);
+/* Mengirimkan true jika text hanya berisi spasi */
+
 boolean isIdExist(ListDinTweet listTweet, long id);
-boolean isPrivateAccount();
+/* Mengirimkan true jika tweet dengan id tersebut berada di dalam list */
+/* yaitu antara 1..NEFF(listTweet) */
+
+boolean isTweetAuthor(Tweet tweet, User user);
+/* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
+
+boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet);
+/* Mengirimkan true jika tweet tersebut dibuat oleh user yang akunnya private */
+
 boolean isFriend();
+/* (Work in Progress) */
 
 #endif

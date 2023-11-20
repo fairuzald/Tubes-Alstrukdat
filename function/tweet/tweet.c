@@ -8,6 +8,9 @@ void CreateTweet(Tweet *tweet, Word textTweet, Word authorTweet,
                  DATETIME timeCreatedTweet, long idTweet, long idReply,
                  long idUtas, long like, long depth, Tweet *reply1,
                  Tweet *reply2, Tweet *utas) {
+  /* Membentuk tweet baru dan memasukkan semua informasi ke dalam tweet tersebut
+   */
+
   TextTweet(*tweet) = textTweet;
   AuthorTweet(*tweet) = authorTweet;
   TimeCreatedTweet(*tweet) = timeCreatedTweet;
@@ -24,6 +27,8 @@ void CreateTweet(Tweet *tweet, Word textTweet, Word authorTweet,
 /* Fungsi/prosedur lain */
 
 void displayTweet(Tweet tweet) {
+  /* Menampilkan ID, author, timeCreated, text, dan like dari suatu tweet */
+
   // display ID
   printf("| ID = %ld\n", IdTweet(tweet));
 
@@ -55,6 +60,14 @@ void displayTweet(Tweet tweet) {
   printf("\n");
 }
 
-void likeTweet(Tweet *tweet) { Like(*tweet)++; }
+void likeTweet(Tweet *tweet) {
+  /* Menambah jumlah like dari suatu tweet */
 
-void editTweet(Tweet *tweet, Word newText) { TextTweet(*tweet) = newText; }
+  Like(*tweet)++;
+}
+
+void editTweet(Tweet *tweet, Word newText) {
+  /* Mengganti text dari suatu tweet */
+
+  TextTweet(*tweet) = newText;
+}
