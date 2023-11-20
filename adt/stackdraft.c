@@ -24,6 +24,7 @@ void dealocateStack(StackDraft* s) {
   free(Table(*s));
   Top(*s) = Nil;
   Capacity(*s) = 0;
+  AuthorDraft(*s).Length = 0;
 }
 
 /* ************ Predikat untuk test keadaan KOLEKSI ************ */

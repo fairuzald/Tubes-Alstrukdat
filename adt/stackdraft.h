@@ -33,9 +33,9 @@ typedef struct {
 
 /* Definisi akses dengan Selektor : Set dan Get */
 
+#define Table(S) (S).T
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
-#define Table(S) (S).T
 #define Capacity(S) (S).capacity
 #define AuthorDraft(S) (S).authorDraft
 
