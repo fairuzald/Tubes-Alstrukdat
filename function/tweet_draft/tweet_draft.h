@@ -7,20 +7,29 @@
 #include "../../adt/input/wordmachine.h"
 
 /* Definisi type Draft */
+
 typedef struct {
-  Word text;
-  DATETIME timeCreated;
+  Word textDraft;
+  DATETIME timeCreatedDraft;
 } Draft;
 
 /* Selector Draft */
-#define TextDraft(d) (d).text
-#define TimeCreatedDraft(d) (d).timeCreated
+
+#define TextDraft(d) (d).textDraft
+#define TimeCreatedDraft(d) (d).timeCreatedDraft
 
 /* Constructor Draft */
-void CreateDraft(Draft *draft, Word text, DATETIME timeCreated);
+
+void CreateDraft(Draft *draft, Word textDraft, DATETIME timeCreatedDraft);
+/* Membentuk draft baru dan memasukkan semua informasi ke dalam draft tersebut
+ */
 
 /* Fungsi/prosedur Lain*/
+
 void displayDraft(Draft draft);
-void editDraft(Draft *draft, Word newText, DATETIME newTime);
+/* Menampilkan text dan timeCreated dari suatu draft */
+
+void editDraft(Draft *draft, Word newTextDraft, DATETIME newTimeCreatedDraft);
+/* Mengganti text dan timeCreated dari suatu draft */
 
 #endif
