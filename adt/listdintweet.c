@@ -17,7 +17,7 @@ void CreateListDinTweet(ListDinTweet *l, long capacity) {
   CAPACITY(*l) = capacity;
 }
 
-void dealocateList(ListDinTweet *l) {
+void dealocateListDinTweet(ListDinTweet *l) {
   /* I.S. l terdefinisi; */
   /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
   free(BUFFER(*l));
@@ -29,98 +29,43 @@ void dealocateList(ListDinTweet *l) {
 
 /* *** Banyaknya elemen *** */
 
-int listLength(ListDinTweet l) {
+int listTweetLength(ListDinTweet l) {
   /* Mengirimkan banyaknya elemen efektif list */
   /* Mengirimkan nol jika list l kosong */
   return NEFF(l);
-}
-
-/* *** Selektor INDEKS *** */
-
-IdxType getFirstIdx(ListDinTweet l) {
-  /* Prekondisi : List l tidak kosong */
-  /* Mengirimkan indeks elemen l pertama */
-  return IDX_MIN;
-}
-
-IdxType getLastIdx(ListDinTweet l) {
-  /* Prekondisi : List l tidak kosong */
-  /* Mengirimkan indeks elemen l terakhir */
-  return listLength(l) - 1;
-}
-
-/* ********** Test Indeks yang valid ********** */
-
-boolean isIdxValid(ListDinTweet l, IdxType i) {
-  /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
-  /* yaitu antara indeks yang terdefinisi utk container*/
-  return IDX_MIN <= i && i <= CAPACITY(l) - 1;
-}
-
-boolean isIdxEff(ListDinTweet l, IdxType i) {
-  /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
-  /* yaitu antara 0..NEFF(l) */
-  return IDX_MIN <= i && i <= NEFF(l) - 1;
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
 
 /* *** Test list kosong *** */
 
-boolean isEmpty(ListDinTweet l) {
+boolean isEmptyListTweet(ListDinTweet l) {
   /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
-  return listLength(l) == 0;
+  return listTweetLength(l) == 0;
 }
 
 /* *** Test list penuh *** */
 
-boolean isFull(ListDinTweet l) {
+boolean isFullListTweet(ListDinTweet l) {
   /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
-  return listLength(l) == CAPACITY(l);
+  return listTweetLength(l) == CAPACITY(l);
 }
 
-/* ********** OPERASI LAIN ********** */
-
-void copyList(ListDinTweet lIn, ListDinTweet *lOut) {
-  /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
-  /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-  /* Proses : Menyalin isi lIn ke lOut */
-  CreateListDinTweet(lOut, CAPACITY(lIn));
-  NEFF(*lOut) = NEFF(lIn);
-
-  IdxType i;
-  for (i = IDX_MIN; i <= listLength(lIn) - 1; i++) {
-    ELMT(*lOut, i) = ELMT(lIn, i);
-  }
-}
-
-/* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
+/* ********** MENAMBAH DAN ELEMEN DI AKHIR ********** */
 
 /* *** Menambahkan elemen terakhir *** */
 
-void insertLast(ListDinTweet *l, ElType val) {
+void insertLastListTweet(ListDinTweet *l, ElType val) {
   /* Proses: Menambahkan val sebagai elemen terakhir list */
   /* I.S. List l boleh kosong, tetapi tidak penuh */
   /* F.S. val adalah elemen terakhir l yang baru */
-  ELMT(*l, listLength(*l)) = val;
+  ELMT(*l, listTweetLength(*l)) = val;
   NEFF(*l)++;
-}
-
-/* ********** MENGHAPUS ELEMEN ********** */
-
-void deleteLast(ListDinTweet *l, ElType *val) {
-  /* Proses : Menghapus elemen terakhir list */
-  /* I.S. List tidak kosong */
-  /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
-  /*      Banyaknya elemen list berkurang satu */
-  /*      List l mungkin menjadi kosong */
-  *val = ELMT(*l, listLength(*l) - 1);
-  NEFF(*l)--;
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
 
-void expandList(ListDinTweet *l, int num) {
+void expandListTweet(ListDinTweet *l, int num) {
   /* Proses : Menambahkan capacity l sebanyak num */
   /* I.S. List sudah terdefinisi */
   /* F.S. Ukuran list bertambah sebanyak num */
@@ -129,7 +74,7 @@ void expandList(ListDinTweet *l, int num) {
   CAPACITY(*l) += num;
 }
 
-void shrinkList(ListDinTweet *l, int num) {
+void shrinkListTweet(ListDinTweet *l, int num) {
   /* Proses : Mengurangi capacity sebanyak num */
   /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
    * num. */
@@ -137,14 +82,6 @@ void shrinkList(ListDinTweet *l, int num) {
   BUFFER(*l) =
       (ElType *)realloc(BUFFER(*l), (CAPACITY(*l) - num) * sizeof(ElType));
   CAPACITY(*l) -= num;
-}
-
-void compressList(ListDinTweet *l) {
-  /* Proses : Mengubah capacity sehingga capacity = nEff */
-  /* I.S. List tidak kosong */
-  /* F.S. Ukuran capacity = nEff */
-  BUFFER(*l) = (ElType *)realloc(BUFFER(*l), NEFF(*l) * sizeof(ElType));
-  CAPACITY(*l) = NEFF(*l);
 }
 
 /* Fitur-Fitur Utama */
@@ -188,11 +125,11 @@ void newTweet(ListDinTweet *listTweet, User currentUser) {
                 like, depth, reply1, reply2, utas);
 
     // Memasukkan tweet ke dalam list Tweet
-    if (isFull(*listTweet)) {
-      expandList(listTweet, CAPACITY(*listTweet));
+    if (isFullListTweet(*listTweet)) {
+      expandListTweet(listTweet, CAPACITY(*listTweet));
     }
 
-    insertLast(listTweet, newTweet);
+    insertLastListTweet(listTweet, newTweet);
 
     // Menampilkan pesan bahwa tweet berhasil dibuat
     printf("Selamat! kicauan telah diterbitkan!\n");
@@ -206,11 +143,11 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
   /* Bagian dari fitur utama kicauan */
   /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
-  if (isEmpty(listTweet)) {
+  if (isEmptyListTweet(listTweet)) {
     printf("Daftar kicauan kosong !\n");
   } else {
     int i;
-    for (i = 0; i < listLength(listTweet); i++) {
+    for (i = 0; i < listTweetLength(listTweet); i++) {
       Tweet tweet = ELMT(listTweet, i);
       if (isTweetAuthor(tweet, currentUser) ||
           isFriend(listUser, friendshipMatrix, Name(currentUser),
