@@ -150,7 +150,7 @@ void newTweet(ListDinTweet *listTweet, User currentUser);
 
 void displayListTweet(ListDinTweet listTweet);
 /* Bagian dari fitur utama kicauan */
-/* Menampilkan semua tweet yang berada di dalam list */
+/* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
 void like(ListDinTweet *listTweet, long id);
 /* Bagian dari fitur utama kicauan */
