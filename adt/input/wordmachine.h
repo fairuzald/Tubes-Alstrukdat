@@ -7,7 +7,7 @@
 #include "../boolean.h"
 #include "charmachine.h"
 
-#define NMax 50
+#define NMax 280
 #define BLANK ' '
 
 typedef struct {
@@ -33,7 +33,8 @@ F.S. : EndWord = true, dan currentChar = MARK;
 
 void STARTWORDnoIgnore(int maxChar);
 /* I.S. : currentChar sembarang
-   F.S. : EndWord = true, currentChar = MARK, dan currentWord adalah seluruh masukan*/
+   F.S. : EndWord = true, currentChar = MARK, dan currentWord adalah seluruh
+   masukan*/
 
 void ADVWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -52,16 +53,16 @@ void CopyWord();
 void LowerCase();
 
 boolean compareWordwString(Word w, char w2[]);
-  /*membandingkan word dengan string, true jika sama dan false jika berbeda*/
+/*membandingkan word dengan string, true jika sama dan false jika berbeda*/
 
 boolean compareWordwWord(Word w1, Word w2);
-  /*membandingkan word dengan string, true jika sama dan false jika berbeda*/
-  
+/*membandingkan word dengan string, true jika sama dan false jika berbeda*/
+
 void printWord(Word w);
- /*mencetak word ke layar tanpa karakter tambahan sebelum ataupun sesudah word*/
+/*mencetak word ke layar tanpa karakter tambahan sebelum ataupun sesudah word*/
 
 int wordToInt(Word w);
- /*mengubah word menjadi integer (untuk input integer)*/
+/*mengubah word menjadi integer (untuk input integer)*/
 
 Word stringToWord(char*);
 /*mengubah string menjadi word*/

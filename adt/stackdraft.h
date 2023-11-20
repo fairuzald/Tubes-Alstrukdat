@@ -8,6 +8,7 @@
 
 #include "../function/tweet_draft/tweet_draft.h"
 #include "boolean.h"
+#include "input/wordmachine.h"
 
 #define Nil -1
 #define MaxEl 100
@@ -19,9 +20,10 @@ typedef long address; /* indeks tabel */
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct {
-  infotype* T; /* tabel penyimpan elemen */
-  address TOP; /* alamat TOP: elemen puncak */
-  long capacity;
+  infotype* T;      /* tabel penyimpan elemen */
+  address TOP;      /* alamat TOP: elemen puncak */
+  long capacity;    /* kapasitas Stack */
+  Word authorDraft; /* username pemilik Draft */
 } StackDraft;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
@@ -35,12 +37,13 @@ typedef struct {
 #define InfoTop(S) (S).T[(S).TOP]
 #define Table(S) (S).T
 #define Capacity(S) (S).capacity
+#define AuthorDraft(S) (S).authorDraft
 
 /* ************ Prototype ************ */
 
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmpty(StackDraft* S, long capacity);
+void CreateEmpty(StackDraft* S, long capacity, Word authorDraft);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas capacity */
 /* jadi indeksnya antara 0.. capacity */

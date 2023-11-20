@@ -7,7 +7,7 @@
 
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmpty(StackDraft* S, long capacity) {
+void CreateEmpty(StackDraft* S, long capacity, Word authorDraft) {
   /* I.S. sembarang; */
   /* F.S. Membuat sebuah stack S yang kosong berkapasitas capacity */
   /* jadi indeksnya antara 0.. capacity */
@@ -15,6 +15,7 @@ void CreateEmpty(StackDraft* S, long capacity) {
   Table(*S) = (infotype*)malloc(capacity * sizeof(infotype));
   Top(*S) = Nil;
   Capacity(*S) = capacity;
+  AuthorDraft(*S) = authorDraft;
 }
 
 void dealocateStack(StackDraft* s) {
