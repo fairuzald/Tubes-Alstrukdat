@@ -99,12 +99,6 @@ void expandListTweet(ListDinTweet *l, int num);
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
 
-void shrinkListTweet(ListDinTweet *l, int num);
-/* Proses : Mengurangi capacity sebanyak num */
-/* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
- * num. */
-/* F.S. Ukuran list berkurang sebanyak num. */
-
 /* Fitur-Fitur Utama */
 
 void newTweet(ListDinTweet *listTweet, User currentUser);
