@@ -21,7 +21,7 @@
 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef Tweet ElType; /* type elemen list */
+typedef AddressTweet ElType; /* type elemen list */
 typedef long IdxType;
 typedef struct {
   ElType *buffer; /* memori tempat penyimpan elemen (container) */
@@ -131,10 +131,11 @@ boolean isIdExist(ListDinTweet listTweet, long id);
 /* Mengirimkan true jika tweet dengan id tersebut berada di dalam list */
 /* yaitu antara 1..NEFF(listTweet) */
 
-boolean isTweetAuthor(Tweet tweet, User user);
+boolean isTweetAuthor(AddressTweet ptweet, User user);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
 
-boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet);
+boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
+                                    AddressTweet pTweet);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user yang akunnya private */
 /* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
  * listUser*/
