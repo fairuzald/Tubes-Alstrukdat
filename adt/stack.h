@@ -7,7 +7,6 @@
 
 #include "../function/tweet_draft/tweet_draft.h"
 #include "boolean.h"
-#include "listdintweet.h"
 
 #define Nil -1
 #define MaxEl 100

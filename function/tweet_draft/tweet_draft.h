@@ -1,8 +1,6 @@
 #ifndef DRAFT_H
 #define DRAFT_H
 
-#include <time.h>
-
 #include "../../adt/datetime.h"
 #include "../../adt/input/wordmachine.h"
 
