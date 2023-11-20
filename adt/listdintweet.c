@@ -76,7 +76,7 @@ void expandListTweet(ListDinTweet *l, int num) {
 
 /* Fitur-Fitur Utama */
 
-void newTweet(ListDinTweet *listTweet, User currentUser) {
+void inputTweet(ListDinTweet *listTweet, User currentUser) {
   /* Bagian dari fitur utama kicauan */
   /* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
    * dalam list */
