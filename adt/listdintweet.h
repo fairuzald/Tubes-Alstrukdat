@@ -7,9 +7,11 @@
 #ifndef LISTDINTWEET_H
 #define LISTDINTWEET_H
 
+#include "../function/friend/friend.h"
 #include "../function/tweet/tweet.h"
 #include "../function/user/user.h"
 #include "boolean.h"
+#include "graph.h"
 #include "liststatikuser.h"
 
 /*  Kamus Umum */
@@ -148,11 +150,13 @@ void newTweet(ListDinTweet *listTweet, User currentUser);
 /* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
  * dalam list */
 
-void displayListTweet(ListDinTweet listTweet);
+void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
+                      FriendshipMatrix friendshipMatrix, User currentUser);
 /* Bagian dari fitur utama kicauan */
 /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
-void like(ListDinTweet *listTweet, long id);
+void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
+          FriendshipMatrix friendshipMatrix, User currentUser);
 /* Bagian dari fitur utama kicauan */
 /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
  * pada tweet tersebut */
@@ -176,8 +180,11 @@ boolean isTweetAuthor(Tweet tweet, User user);
 
 boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user yang akunnya private */
+/* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
+ * listUser*/
 
-boolean isFriend();
-/* (Work in Progress) */
+boolean isFriend(ListStatikUser listUser, FriendshipMatrix friendshipMatrix,
+                 Word username1, Word username2);
+/* Mengirimkan true jika akun username1 berteman dengan akun username2 */
 
 #endif

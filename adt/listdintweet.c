@@ -199,8 +199,8 @@ void newTweet(ListDinTweet *listTweet, User currentUser) {
   }
 }
 
-void displayListTweet(ListDinTweet listTweet,
-                      User currentUser /* perlu data pertemanan */) {
+void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
+                      FriendshipMatrix friendshipMatrix, User currentUser) {
   /* Bagian dari fitur utama kicauan */
   /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
@@ -210,28 +210,26 @@ void displayListTweet(ListDinTweet listTweet,
     int i;
     for (i = 0; i < listLength(listTweet); i++) {
       Tweet tweet = ELMT(listTweet, i);
-      if (isTweetAuthor(tweet, currentUser)) {
-        // (Work in Progress) Validasi pertemanan
-        // sementara hanya tweet milik pengguna yang ditampilkan
-
+      if (isTweetAuthor(tweet, currentUser) ||
+          isFriend(listUser, friendshipMatrix, Name(currentUser),
+                   AuthorTweet(tweet))) {
         displayTweet(tweet)
-      };
+      }
     }
   }
 }
 
-void like(ListDinTweet *listTweet, long id,
-          ListStatikUser listUser /* perlu data pertemanan */) {
+void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
+          FriendshipMatrix friendshipMatrix, User currentUser) {
   /* Bagian dari fitur utama kicauan */
   /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
    * pada tweet tersebut */
 
   if (!isIdExist(*listTweet, id)) {
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
-  } else if (isTweetAuthorPrivateAccount(listUser, ELMT(*listTweet, id - 1))) {
-    // (Work in Progress) Validasi pertemanan
-    // sementara semua akun private tidak bisa di-like
-
+  } else if (isTweetAuthorPrivateAccount(listUser, ELMT(*listTweet, id - 1)) &&
+             !isFriend(listUser, friendshipMatrix, Name(currentUser),
+                       AuthorTweet(ELMT(*listTweet, id - 1)))) {
     printf(
         "Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu "
         "ya.\n");
@@ -322,4 +320,13 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser, Tweet tweet) {
   }
 
   return !listUser.contents[i].public;
+}
+
+boolean isFriend(ListStatikUser listUser, FriendshipMatrix friendshipMatrix,
+                 Word username1, Word username2) {
+  /* Mengirimkan true jika akun username1 berteman dengan akun username2 */
+
+  int user1Index = findIdx(&listUser, username1);
+  int user2Index = findIdx(&listUser, username2);
+  return 1 == friendshipMatrix.Friendship.adjMatrix.mem[user1Index][user2Index];
 }
