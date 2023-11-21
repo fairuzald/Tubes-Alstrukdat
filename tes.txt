@@ -1,0 +1,1 @@
+gcc -o tes adt/input/wordmachine.c adt/input/charmachine.c adt/input/wordmachinefile.c adt/input/charmachinefile.c function/profile/profile.c function/user/user.c function/initialization/loadUser.c adt/liststatikuser.c function/pcolor/pcolor.c
