@@ -49,7 +49,7 @@ void masuk(){
 /*prosedur log-in*/
   /*KAMUS LOKAL*/
   Word name;
-  IdxType i;
+  int i;
 
   /*ALGORITMA*/
   if (sudahMasuk) printf("Wah, Anda sudah masuk. Keluar dulu yuk!\n");

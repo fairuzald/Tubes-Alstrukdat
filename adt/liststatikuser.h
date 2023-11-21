@@ -1,10 +1,41 @@
 #ifndef LISTSTATIKUSER_H
 #define LISTSTATIKUSER_H
 
-#include "../function/user/user.h"
 #include "boolean.h"
 #include "input/wordmachine.h"
 #include "input/charmachine.h"
+
+/*ADT untuk user dan foto profil*/
+typedef struct {
+  char content[5][5];
+  char color[5][5];
+} PhotoMat;
+
+#define CONTENT(M, i, j) (M).content[(i)][(j)]
+#define COLOR(M, i, j) (M).color[(i)][(j)]
+
+typedef struct {
+  Word nama;     /* nama pengguna, unik*/
+  Word password; /* password pengguna */
+  Word bio;
+  Word nomorHP;
+  Word weton;
+  boolean public;
+  PhotoMat fotoProfil;
+} User;
+
+extern User currentUser;
+extern boolean sudahMasuk;
+
+/* ********** SELEKTOR ********** */
+#define USER(i) (userList).contents[(i)]
+#define NAMA(i) USER(i).nama
+#define PASS(i) USER(i).password
+#define BIO(i) USER(i).bio
+#define HP(i) USER(i).nomorHP
+#define WETON(i) USER(i).weton
+#define PUBLIC(i) USER(i).public
+#define FOTO(i) USER(i).fotoProfil
 
 /*  Kamus Umum */
 #define CAPACITY 20
@@ -17,7 +48,6 @@
 /* Elemen string yang kosong*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int IdxType;
 typedef struct {
   User contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatikUser;
@@ -29,6 +59,9 @@ typedef struct {
 extern ListStatikUser userList; /*men-global-kan userList*/
 
 /* ********** KONSTRUKTOR ********** */
+void initPP(PhotoMat P);
+/* Menginitialisasi foto profil */
+
 void CreateuserList();
 /* I.S. userList sembarang */
 /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
@@ -41,7 +74,7 @@ int userCount();
 /* Mengirimkan nol jika belum ada user */
 
 /* *** Selektor INDEKS *** */
-IdxType getLastIdx();
+int getLastIdx();
 /* Prekondisi : userList tidak kosong */
 /* Mengirimkan indeks elemen userList terakhir */
 

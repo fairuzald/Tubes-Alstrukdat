@@ -5,12 +5,26 @@
 ListStatikUser userList;
 
 /* ********** KONSTRUKTOR ********** */
+void initPP(PhotoMat P) {
+  /* Menginitialisasi foto profil */
+  /*KAMUS LOKAL*/
+  int i, j;
+
+  /*ALGORITMA*/
+  for (i = 0; i < 5; i++) {
+    for (j = 0; j < 5; j++) {
+      CONTENT(P, i, j) = '*';
+      COLOR(P, i, j) = 'R';
+    }
+  }
+}
+
 void CreateuserList() {
   /* I.S. userList sembarang */
   /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
   /* Proses: Inisialisasi semua elemen userList sesuai nilai bawaan */
   /*KAMUS LOKAL*/
-  IdxType i, j, k;
+  int i, j, k;
   Word emptyWord;
 
   /*ALGORITMA*/
@@ -46,7 +60,7 @@ int userCount() {
 }
 
 /* *** Selektor INDEKS *** */
-IdxType getLastIdx() {
+int getLastIdx() {
   /* Prekondisi : userList tidak kosong */
   /* Mengirimkan indeks elemen userList terakhir */
   return (userCount() - 1);
@@ -120,7 +134,7 @@ void displayAllUsers() {
     printf("List of Users:\n");
     printf("=====================\n");
 
-    for (IdxType i = IDX_MIN; i <= getLastIdx(); i++) {
+    for (int i = IDX_MIN; i <= getLastIdx(); i++) {
       printf("Index: %d\n", i);
       printf("Name: %s\n", NAMA(i).TabWord);
       printf("Password: %s\n", PASS(i).TabWord);
