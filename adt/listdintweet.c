@@ -76,29 +76,33 @@ void expandListTweet(ListDinTweet *l, int num) {
 
 /* Fitur-Fitur Utama */
 
-void inputNewTweet(ListDinTweet *listTweet, User currentUser) {
+void inputNewTweet(ListDinTweet *listTweet, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
    * dalam list */
 
   // Memasukkan text kicauan
-  printf("Masukkan kicauan:\n");
-  Word text;
-  int i = 0;
-  START();
-  while (!EOP && i < NMax) {
-    text.TabWord[i] = currentChar;
-    i++;
-    ADV();
-  }
-  text.Length = i;
+
+  // printf("Masukkan kicauan:\n");
+  // Word text;
+  // int i = 0;
+  // START();
+  // while (!EOP && i < NMax) {
+  //   text.TabWord[i] = currentChar;
+  //   i++;
+  //   ADV();
+  // }
+
+  // text.Length = i;
+
+  STARTWORDnoIgnore(MAX_TWEET_LENGTH);
 
   // Validasi masukan text kicauan
-  if (isOnlySpace(text)) {
+  if (isOnlySpace(currentWord)) {
     // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal dibuat
     printf("Kicauan tidak boleh hanya berisi spasi!\n");
   } else {
-    Word author = NAMA(currentUser);
+    Word author = NAMA(user);
     DATETIME timeCreated = getCurrentDateTime();
     long idTweet = NEFF_LISTDINTWEET(*listTweet) + 1;
     long idReply = 0;
@@ -110,9 +114,9 @@ void inputNewTweet(ListDinTweet *listTweet, User currentUser) {
     Tweet *utas = NULL;
 
     // Memasukkan semua informasi ke dalam Tweet
-    AddressTweet pNewTweet CreateTweet(text, author, timeCreated, idTweet,
-                                       idReply, idUtas, like, depth, reply1,
-                                       reply2, utas);
+    AddressTweet pNewTweet =
+        CreateTweet(currentWord, author, timeCreated, idTweet, idReply, idUtas,
+                    like, depth, reply1, reply2, utas);
 
     // Memasukkan tweet ke dalam list Tweet
     if (isFullListTweet(*listTweet)) {
@@ -129,7 +133,7 @@ void inputNewTweet(ListDinTweet *listTweet, User currentUser) {
 }
 
 void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
-                      FriendshipMatrix friendshipMatrix, User currentUser) {
+                      FriendshipMatrix friendshipMatrix, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
@@ -139,8 +143,8 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
     int i;
     for (i = 0; i < listTweetLength(listTweet); i++) {
       AddressTweet pTweet = ELMT_LISTDINTWEET(listTweet, i);
-      if (isTweetAuthor(pTweet, currentUser) ||
-          isFriend(listUser, friendshipMatrix, Name(currentUser),
+      if (isTweetAuthor(pTweet, user) ||
+          isFriend(listUser, friendshipMatrix, Name(user),
                    AuthorTweet(pTweet))) {
         displayTweet(pTweet)
       }
@@ -149,7 +153,7 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
 }
 
 void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
-          FriendshipMatrix friendshipMatrix, User currentUser) {
+          FriendshipMatrix friendshipMatrix, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
    * pada tweet tersebut */
@@ -158,7 +162,7 @@ void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
   } else if (isTweetAuthorPrivateAccount(
                  listUser, ELMT_LISTDINTWEET(*listTweet, id - 1)) &&
-             !isFriend(listUser, friendshipMatrix, Name(currentUser),
+             !isFriend(listUser, friendshipMatrix, Name(user),
                        AuthorTweet(ELMT_LISTDINTWEET(*listTweet, id - 1)))) {
     printf(
         "Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu "
@@ -171,31 +175,33 @@ void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
   }
 }
 
-void editTweetInList(ListDinTweet *listTweet, long id, User currentUser) {
+void editTweetInList(ListDinTweet *listTweet, long id, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Mencari tweet dengan id "id" di dalam list, kemudian mengganti text tweet
    * tersebut berdasarkan masukan dari pengguna */
 
   if (!isIdExist(*listTweet, id)) {
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
-  } else if (!isTweetAuthor(ELMT_LISTDINTWEET(*listTweet, id - 1)),
-             currentUser) {
+  } else if (!isTweetAuthor(ELMT_LISTDINTWEET(*listTweet, id - 1)), user) {
     printf("Kicauan dengan ID = %ld bukan milikmu!\n", id);
   } else {
     // Memasukkan text kicauan
-    printf("Masukkan kicauan baru:\n");
-    Word newText;
-    int i = 0;
-    START();
-    while (!EOP && i < NMax) {
-      newText.TabWord[i] = currentChar;
-      i++;
-      ADV();
-    }
-    newText.Length = i;
+
+    // printf("Masukkan kicauan baru:\n");
+    // Word newText;
+    // int i = 0;
+    // START();
+    // while (!EOP && i < NMax) {
+    //   newText.TabWord[i] = currentChar;
+    //   i++;
+    //   ADV();
+    // }
+    // newText.Length = i;
+
+    STARTWORDnoIgnore(MAX_TWEET_LENGTH);
 
     // Validasi masukan text kicauan
-    if (isOnlySpace(newText)) {
+    if (isOnlySpace(currentWord)) {
       // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal di-edit
       printf("Kicauan tidak boleh hanya berisi spasi!\n");
     } else {

@@ -6,6 +6,10 @@
 #include "../../adt/datetime.h"
 #include "../../adt/input/wordmachine.h"
 
+/* Definisi Konstanta */
+
+#define MAX_TWEET_LENGTH 280;
+
 /* Definisi type Tweet */
 
 typedef struct tweet *AddressTweet;

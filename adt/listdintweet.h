@@ -101,23 +101,23 @@ void expandListTweet(ListDinTweet *l, int num);
 
 /* Fitur-Fitur Utama */
 
-void inputNewTweet(ListDinTweet *listTweet, User currentUser);
+void inputNewTweet(ListDinTweet *listTweet, User user);
 /* Bagian dari fitur utama kicauan */
 /* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
  * dalam list */
 
 void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
-                      FriendshipMatrix friendshipMatrix, User currentUser);
+                      FriendshipMatrix friendshipMatrix, User user);
 /* Bagian dari fitur utama kicauan */
 /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
 void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
-          FriendshipMatrix friendshipMatrix, User currentUser);
+          FriendshipMatrix friendshipMatrix, User user);
 /* Bagian dari fitur utama kicauan */
 /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
  * pada tweet tersebut */
 
-void editTweetInList(ListDinTweet *listTweet, long id, User currentUser);
+void editTweetInList(ListDinTweet *listTweet, long id, User user);
 /* Bagian dari fitur utama kicauan */
 /* Mencari tweet dengan id "id" di dalam list, kemudian mengganti text tweet
  * tersebut berdasarkan masukan dari pengguna */
