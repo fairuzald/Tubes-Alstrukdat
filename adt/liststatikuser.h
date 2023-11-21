@@ -4,6 +4,7 @@
 #include "../function/user/user.h"
 #include "boolean.h"
 #include "input/wordmachine.h"
+#include "input/charmachine.h"
 
 /*  Kamus Umum */
 #define CAPACITY 20
@@ -44,9 +45,6 @@ IdxType getLastIdx();
 /* Prekondisi : userList tidak kosong */
 /* Mengirimkan indeks elemen userList terakhir */
 
-/* ********** Test Indeks yang valid ********** */
-boolean isIdxEff(IdxType i);
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk userList */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */

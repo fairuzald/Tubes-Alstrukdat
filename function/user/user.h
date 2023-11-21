@@ -1,8 +1,17 @@
 #include "../../adt/liststatikuser.h"
-#include "../profile/profile.h"
+#include "../../adt/input/wordmachine.h"
 
 #ifndef USER_H
 #define USER_H
+
+typedef int IdxType;
+typedef struct {
+  char content[5][5];
+  char color[5][5];
+} PhotoMat;
+
+#define CONTENT(M, i, j) (M).content[(i)][(j)]
+#define COLOR(M, i, j) (M).color[(i)][(j)]
 
 typedef struct {
   Word nama;     /* nama pengguna, unik*/

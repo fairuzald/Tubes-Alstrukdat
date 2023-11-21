@@ -35,16 +35,12 @@ int userCount() {
   /* Mengirimkan banyaknya user yang terdaftar */
   /* Mengirimkan nol jika belum ada user */
   /*kamus*/
-  IdxType i;
   int counter;
 
   /*algoritma*/
-  i = IDX_MIN;
   counter = 0;
-  while (NAMA(i).Length != 0 && i < CAPACITY) {
-    printf("%d", NAMA(i).Length);
+  while (NAMA(counter).Length != 0 && counter < CAPACITY) {
     counter += 1;
-    i += 1;
   }
   return counter;
 }
@@ -56,11 +52,6 @@ IdxType getLastIdx() {
   return (userCount() - 1);
 }
 
-/* ********** Test Indeks yang valid ********** */
-boolean isIdxEff(IdxType i) {
-  /* Mengirimkan true jika i adalah indeks yang terdefinisi utk userList */
-  return (IDX_MIN <= i && i < userCount());
-}
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */

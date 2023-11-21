@@ -18,6 +18,7 @@ void START() {
 
   /* Algoritma */
   pita = stdin;
+  pita = stdin;
   ADV();
 }
 
@@ -29,10 +30,13 @@ void ADV() {
             currentChar mungkin = MARK.
                   Jika  currentChar = MARK maka EOP akan menyala (true) */
 
-  /* Algoritma */
   retval = fscanf(pita, "%c", &currentChar);
   EOP = (currentChar == MARK);
   if (EOP) {
-    fclose(pita);
-  }
+    // fclose(pita); -> ada masalah jika dipanggil di banyak tempat
+    // cara penyelesaian:
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+}
 }

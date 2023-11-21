@@ -39,15 +39,20 @@ void STARTWORDnoIgnore(int maxChar) {
   /*ALGORITMA*/
   ctr = 0;
   START();
-  while (currentChar != MARK) {
-    if (ctr < maxChar) {
-      currentWord.TabWord[ctr] = currentChar;
-      ctr += 1;
+  if (currentChar == MARK) {
+    endWord = true;
+  } else {
+    endWord = false;
+    while (currentChar != MARK) {
+      if (ctr < NMax) {
+        currentWord.TabWord[ctr] = currentChar;
+      }
+      ADV();
+      ctr++;
     }
-    ADV();
+    if (ctr < NMax) currentWord.Length = ctr; 
+    else currentWord.Length = maxChar;
   }
-  currentWord.Length = ctr;
-  endWord = true;
 }
 
 void ADVWORD() {
@@ -117,13 +122,15 @@ boolean compareWordwWord(Word w1, Word w2) {
   boolean sama;
 
   /*ALGORITMA*/
-  if (w1.Length != w2.Length)
+  if (w1.Length != w2.Length) {
     sama = false;
+    }
   else {
     i = 0;
     sama = true;
     while (i < w1.Length && sama) {
       if (w1.TabWord[i] != w2.TabWord[i]) sama = false;
+      i++;
     }
   }
   return (sama);
