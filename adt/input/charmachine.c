@@ -18,8 +18,8 @@ void START() {
 
   /* Algoritma */
   pita = stdin;
-  pita = stdin;
-  ADV();
+  if(currentChar==MARK) ADV(); /*untuk pemanggilan kedua dan selanjutnya, agar mark dari input sebelumnya terskip*/
+  ADV(); /*untuk pemanggilan kedua, mengeskip '\n' dari input sebelumnya juga*/
 }
 
 void ADV() {
@@ -30,13 +30,8 @@ void ADV() {
             currentChar mungkin = MARK.
                   Jika  currentChar = MARK maka EOP akan menyala (true) */
 
+  /* Algoritma */
   retval = fscanf(pita, "%c", &currentChar);
-  EOP = (currentChar == MARK);
-  if (EOP) {
-    // fclose(pita); -> ada masalah jika dipanggil di banyak tempat
-    // cara penyelesaian:
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {
-    }
-}
+  if (currentChar==MARK)EOP = true;
+  else EOP=false;
 }
