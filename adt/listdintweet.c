@@ -84,7 +84,7 @@ void inputNewTweet(ListDinTweet *listTweet, User user) {
 
   // Memasukkan text kicauan
 
-  // printf("Masukkan kicauan:\n");
+  printf("Masukkan kicauan:\n");
   // Word text;
   // int i = 0;
   // START();
@@ -103,7 +103,7 @@ void inputNewTweet(ListDinTweet *listTweet, User user) {
     // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal dibuat
     printf("Kicauan tidak boleh hanya berisi spasi!\n");
   } else {
-    Word author = NAMA(user);
+    Word author = user.nama;
     DATETIME timeCreated = getCurrentDateTime();
     long idTweet = NEFF_LISTDINTWEET(*listTweet) + 1;
     long idReply = 0;
@@ -145,9 +145,9 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
     for (i = 0; i < listTweetLength(listTweet); i++) {
       AddressTweet pTweet = ELMT_LISTDINTWEET(listTweet, i);
       if (isTweetAuthor(pTweet, user) ||
-          isFriend(listUser, friendshipMatrix, Name(user),
+          isFriend(listUser, friendshipMatrix, user.nama,
                    AuthorTweet(pTweet))) {
-        displayTweet(pTweet)
+        displayTweet(pTweet);
       }
     }
   }
@@ -163,7 +163,7 @@ void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
   } else if (isTweetAuthorPrivateAccount(
                  listUser, ELMT_LISTDINTWEET(*listTweet, id - 1)) &&
-             !isFriend(listUser, friendshipMatrix, Name(user),
+             !isFriend(listUser, friendshipMatrix, user.nama,
                        AuthorTweet(ELMT_LISTDINTWEET(*listTweet, id - 1)))) {
     printf(
         "Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu "
@@ -183,12 +183,12 @@ void editTweetInList(ListDinTweet *listTweet, long id, User user) {
 
   if (!isIdExist(*listTweet, id)) {
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
-  } else if (!isTweetAuthor(ELMT_LISTDINTWEET(*listTweet, id - 1)), user) {
+  } else if (!isTweetAuthor(ELMT_LISTDINTWEET(*listTweet, id - 1), user)) {
     printf("Kicauan dengan ID = %ld bukan milikmu!\n", id);
   } else {
     // Memasukkan text kicauan
 
-    // printf("Masukkan kicauan baru:\n");
+    printf("Masukkan kicauan baru:\n");
     // Word newText;
     // int i = 0;
     // START();
@@ -206,7 +206,7 @@ void editTweetInList(ListDinTweet *listTweet, long id, User user) {
       // Jika masukan tidak valid, menampilkan pesan bahwa tweet gagal di-edit
       printf("Kicauan tidak boleh hanya berisi spasi!\n");
     } else {
-      editTweet(ELMT_LISTDINTWEET(*listTweet, id - 1), newText);
+      editTweet(ELMT_LISTDINTWEET(*listTweet, id - 1), currentWord);
 
       // Menampilkan pesan bahwa tweet berhasil dibuat
       printf("Selamat! kicauan telah diterbitkan!\n");
@@ -243,7 +243,7 @@ boolean isIdExist(ListDinTweet listTweet, long id) {
 boolean isTweetAuthor(AddressTweet pTweet, User user) {
   /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
 
-  return compareWordwWord(AuthorTweet(pTweet), NAMA(user));
+  return compareWordwWord(AuthorTweet(pTweet), user.nama);
 }
 
 boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,

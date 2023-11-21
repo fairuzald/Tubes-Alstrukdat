@@ -8,7 +8,7 @@
 
 /* Definisi Konstanta */
 
-#define MAX_TWEET_LENGTH 280;
+#define MAX_TWEET_LENGTH 280
 
 /* Definisi type Tweet */
 

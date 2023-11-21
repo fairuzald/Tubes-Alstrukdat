@@ -6,7 +6,6 @@
 #ifndef LISTSTACKDRAFT_H
 #define LISTSTACKDRAFT_H
 
-#include "../function/user/user.h"
 #include "boolean.h"
 #include "listdintweet.h"
 #include "stackdraft.h"
@@ -95,7 +94,8 @@ void insertLastListStackDraft(ListStackDraft *l, ElType val);
 
 /* Fitur-Fitur Utama */
 
-void inputNewDraft(ListStackDraft *listStackDraft, User user);
+void inputNewDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
+                   User user);
 /* Menambahkan sebuah draft */
 /* Kemudian, user dapat memilih untuk menghapus, menyimpan, atau menerbitkan
  * draft */
