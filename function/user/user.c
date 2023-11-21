@@ -14,6 +14,7 @@ boolean cekUnik(Word w){
   i=0;
   unique=true;
   while(i<userCount() && unique){
+    boolean a=compareWordwWord(NAMA(i),w);
     if (compareWordwWord(NAMA(i),w)) unique=false;
     i+=1;
   }
@@ -26,9 +27,9 @@ void daftar(){
   Word nama,pass;
 
   /*ALGORITMA*/
-  if (userFull) printf("/nMaaf, jumlah user saat ini sudah maksimal./n");
+  if (userFull()) printf("Maaf, jumlah user saat ini sudah maksimal./n");
   else{
-    printf("\nMasukkan nama: \n");
+    printf("Masukkan nama: \n");
     STARTWORDnoIgnore(20);
     while(!cekUnik(currentWord)){
       printf("\nWah, sayang sekali nama tersebut telah diambil.\n");
@@ -40,7 +41,7 @@ void daftar(){
     STARTWORDnoIgnore(20);
     pass=currentWord;
     addUser(nama,pass);
-    printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
+    printf("\nPengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
   }
 }
 
@@ -58,21 +59,23 @@ void masuk(){
       i=userIndex(currentWord);
       while (i==IDX_UNDEF){
         printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
-        printf("Masukkan nama:\n");
+        printf("\nMasukkan nama:\n");
         STARTWORDnoIgnore(20);
         i=userIndex(currentWord);
       }
       name=currentWord;
-      printf("Masukkan kata sandi:\n");
+      printf("\nMasukkan kata sandi:\n");
       STARTWORDnoIgnore(20);
       while (!compareWordwWord(currentWord,PASS(i))){
         printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
-        printf("Masukkan kata sandi:\n");
+        printf("\nMasukkan kata sandi:\n");
         STARTWORDnoIgnore(20);
       }
       currentUser=USER(i);
       sudahMasuk=true;
-      printf("Anda telah berhasil masuk dengan nama pengguna %s. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n",currentUser.nama.TabWord);
+      printf("\nAnda telah berhasil masuk dengan nama pengguna ");
+      printWord(currentUser.nama);
+      printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
   }
 }
 
@@ -81,5 +84,10 @@ void keluar(){
   /*KAMUS LOKAL*/
 
   /*ALGORITMA*/
-
+  if(!sudahMasuk) printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
+  else{
+    printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!");
+    sudahMasuk=false;
+    /*currentUser tidak diganti karena untuk bisa-tidaknya menggunakan fungsi, dicek dari sudahMasuk.*/
+  }
 }

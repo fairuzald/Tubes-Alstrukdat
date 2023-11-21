@@ -1,9 +1,10 @@
 #ifndef LISTSTATIKUSER_H
 #define LISTSTATIKUSER_H
 
-#include "boolean.h"
-#include "input\wordmachine.h"
 #include "../function/user/user.h"
+#include "boolean.h"
+#include "input/wordmachine.h"
+#include "input/charmachine.h"
 
 /*  Kamus Umum */
 #define CAPACITY 20
@@ -21,8 +22,9 @@ typedef struct {
   User contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatikUser;
 /* Definisi :
-   List kosong: semua user berisi nilai bawaan (Word kosong untuk Word, 0 untuk nomor HP, true untuk public, dan simbol * merah untuk foto profil)
-   Word kosong adalah word dengan TabWord "" dan length==0*/
+   List kosong: semua user berisi nilai bawaan (Word kosong untuk Word, 0 untuk
+   nomor HP, true untuk public, dan simbol * merah untuk foto profil) Word
+   kosong adalah word dengan TabWord "" dan length==0*/
 
 extern ListStatikUser userList; /*men-global-kan userList*/
 
@@ -43,9 +45,6 @@ IdxType getLastIdx();
 /* Prekondisi : userList tidak kosong */
 /* Mengirimkan indeks elemen userList terakhir */
 
-/* ********** Test Indeks yang valid ********** */
-boolean isIdxEff(IdxType i);
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk userList */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
@@ -64,6 +63,11 @@ int userIndex(Word val);
 /* ********** MENAMBAH ELEMEN ********** */
 void addUser(Word N, Word P);
 /* I.S. l terdefinisi dan tidak penuh, n dan p dipastikan valid*/
-/* F.S. Ditambahkan 1 user dengan nama dan password terisi, sedangkan sisanya value bawaan*/
+/* F.S. Ditambahkan 1 user dengan nama dan password terisi, sedangkan sisanya
+ * value bawaan*/
+
+void loadUser(Word N, Word P, Word B, Word HP, Word Weton, boolean Public,
+              PhotoMat Foto);
+void displayAllUsers();
 
 #endif
