@@ -9,7 +9,6 @@
 
 #include "../function/friend/friend.h"
 #include "../function/tweet/tweet.h"
-#include "../function/user/user.h"
 #include "boolean.h"
 #include "graph.h"
 #include "liststatikuser.h"

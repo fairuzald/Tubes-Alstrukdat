@@ -137,22 +137,23 @@ void deleteNewDraft() {
 void saveNewDraft(ListStackDraft *listStackDraft, User user, Word newText) {
   /* Menyimpan draft yang baru dibuat */
 
-  int indexUser = indexOfAuthorDraft(*listStackDraft, NAMA(user));
+  int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
 
   // Cek apakah ada StackDraft untuk user
   // Jika belum, buat StackDraft baru
   if (IDX_UNDEF_LISTSTACKDRAFT == indexUser) {
     StackDraft newStackDraft;
     const INITIAL_CAPACITY = 10;
-    CreateEmptyStackDraft(&newStackDraft, INITIAL_CAPACITY, NAMA(user));
+    CreateEmptyStackDraft(&newStackDraft, INITIAL_CAPACITY, user.nama);
     insertLastListStackDraft(listStackDraft, newStackDraft);
-    indexUser = NEFF_LISTSTACKDRAFT(listStackDraft) - 1;
+    indexUser = NEFF_LISTSTACKDRAFT(*listStackDraft) - 1;
   }
 
   // Cek apakah StackDraft user sudah penuh
   // Jika sudah penuh, tambah kapasitasnya
   if (IsFullStackDraft(ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser))) {
-    expandStackDraft(&ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser));
+    expandStackDraft(&ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser),
+                     NEFF_LISTSTACKDRAFT(*listStackDraft));
   }
 
   // Memasukkan informasi ke dalam Draft
@@ -170,7 +171,7 @@ void publishNewDraft(ListDinTweet *listTweet, User user, Word newText) {
   /* Menerbitkan draft yang baru dibuat */
 
   // Memasukkan semua informasi yang dibutuhkan ke dalam Tweet
-  Word author = NAMA(user);
+  Word author = user.nama;
   DATETIME timeCreated = getCurrentDateTime();
   long idTweet = NEFF_LISTDINTWEET(*listTweet) + 1;
   long idReply = 0;
@@ -205,7 +206,7 @@ void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
   /* Kemudian, user dapat memilih untuk menghapus, mengubah, atau menerbitkan
    * draft */
 
-  int indexUser = indexOfAuthorDraft(*listStackDraft, NAMA(user));
+  int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
 
   if (IDX_UNDEF_LISTSTACKDRAFT == indexUser) {
     printf("Yah, anda belum memiliki draf apapun! Buat dulu ya :D\n");
@@ -238,7 +239,7 @@ void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
 void deleteUserDraft(ListStackDraft *listStackDraft, User user) {
   /* Menghapus draft terakhir milik user */
 
-  int indexUser = indexOfAuthorDraft(*listStackDraft, NAMA(user));
+  int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
   Draft deletedDraft;
   Pop(&ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser), &deletedDraft);
 }
@@ -254,12 +255,12 @@ void publishUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
                       User user) {
   /* Menerbitkan draft terakhir milik user */
 
-  int indexUser = indexOfAuthorDraft(*listStackDraft, NAMA(user));
+  int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
 
   // Memasukkan semua informasi yang dibutuhkan ke dalam Tweet
   Word newText =
       TextDraft(InfoTop(ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser)));
-  Word author = NAMA(user);
+  Word author = user.nama;
   DATETIME timeCreated = getCurrentDateTime();
   long idTweet = NEFF_LISTDINTWEET(*listTweet) + 1;
   long idReply = 0;

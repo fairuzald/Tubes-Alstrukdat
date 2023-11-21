@@ -18,7 +18,9 @@ void START() {
 
   /* Algoritma */
   pita = stdin;
-  if(currentChar==MARK) ADV(); /*untuk pemanggilan kedua dan selanjutnya, agar mark dari input sebelumnya terskip*/
+  if (currentChar == MARK)
+    ADV(); /*untuk pemanggilan kedua dan selanjutnya, agar mark dari input
+              sebelumnya terskip*/
   ADV(); /*untuk pemanggilan kedua, mengeskip '\n' dari input sebelumnya juga*/
 }
 
@@ -32,6 +34,8 @@ void ADV() {
 
   /* Algoritma */
   retval = fscanf(pita, "%c", &currentChar);
-  if (currentChar==MARK)EOP = true;
-  else EOP=false;
+  if (currentChar == MARK)
+    EOP = true;
+  else
+    EOP = false;
 }
