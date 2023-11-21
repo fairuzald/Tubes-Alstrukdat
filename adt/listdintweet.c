@@ -110,9 +110,9 @@ void inputNewTweet(ListDinTweet *listTweet, User user) {
     long idUtas = 0;
     long like = 0;
     long depth = 0;
-    Tweet *reply1 = NULL;
-    Tweet *reply2 = NULL;
-    Tweet *utas = NULL;
+    AddressTweet reply1 = NULL;
+    AddressTweet reply2 = NULL;
+    AddressTweet utas = NULL;
 
     // Memasukkan semua informasi ke dalam Tweet
     AddressTweet pNewTweet =
