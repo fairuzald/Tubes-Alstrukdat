@@ -46,8 +46,8 @@ extern ListDinTweet listTweetMain;
 /* ********** SELEKTOR ********** */
 
 #define BUFFER(l) (l).buffer
-#define ELMT(l, i) (l).buffer[i]
-#define NEFF(l) (l).nEff
+#define ELMT_LISTDINTWEET(l, i) (l).buffer[(i)]
+#define NEFF_LISTDINTWEET(l) (l).nEff
 #define CAPACITY(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */
@@ -60,7 +60,7 @@ void CreateListDinTweet(ListDinTweet *l, long capacity);
 
 void dealocateListDinTweet(ListDinTweet *l);
 /* I.S. l terdefinisi; */
-/* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
+/* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF_LISTDINTWEET(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 
@@ -101,7 +101,7 @@ void expandListTweet(ListDinTweet *l, int num);
 
 /* Fitur-Fitur Utama */
 
-void inputTweet(ListDinTweet *listTweet, User currentUser);
+void inputNewTweet(ListDinTweet *listTweet, User currentUser);
 /* Bagian dari fitur utama kicauan */
 /* Membuat tweet baru berdasarkan masukan dari pengguna dan memasukannya ke
  * dalam list */
@@ -129,7 +129,7 @@ boolean isOnlySpace(Word text);
 
 boolean isIdExist(ListDinTweet listTweet, long id);
 /* Mengirimkan true jika tweet dengan id tersebut berada di dalam list */
-/* yaitu antara 1..NEFF(listTweet) */
+/* yaitu antara 1..NEFF_LISTDINTWEET(listTweet) */
 
 boolean isTweetAuthor(AddressTweet ptweet, User user);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */

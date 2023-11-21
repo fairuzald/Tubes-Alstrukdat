@@ -7,7 +7,7 @@
 
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmpty(StackDraft* S, long capacity, Word authorDraft) {
+void CreateEmptyStackDraft(StackDraft* S, long capacity, Word authorDraft) {
   /* I.S. sembarang; */
   /* F.S. Membuat sebuah stack S yang kosong berkapasitas capacity */
   /* jadi indeksnya antara 0.. capacity */
@@ -18,7 +18,7 @@ void CreateEmpty(StackDraft* S, long capacity, Word authorDraft) {
   AuthorDraft(*S) = authorDraft;
 }
 
-void dealocateStack(StackDraft* s) {
+void dealocateStackDraft(StackDraft* s) {
   /* I.S. s terdefinisi; */
   /* F.S. (s) dikembalikan ke system, Top(s)=Nil; Capacity(s)=0 */
   free(Table(*s));
@@ -29,12 +29,12 @@ void dealocateStack(StackDraft* s) {
 
 /* ************ Predikat untuk test keadaan KOLEKSI ************ */
 
-boolean IsEmpty(StackDraft S) {
+boolean IsEmptyStackDraft(StackDraft S) {
   /* Mengirim true jika Stack kosong: lihat definisi di atas */
   return Nil == Top(S);
 }
 
-boolean IsFull(StackDraft S) {
+boolean IsFullStackDraft(StackDraft S) {
   /* Mengirim true jika tabel penampung nilai elemen stack penuh */
   return Top(S) == Capacity(S) - 1;
 }
@@ -70,7 +70,7 @@ void Pop(StackDraft* S, infotype* X) {
 
 /* ********* Mengubah Ukuran Stack ********* */
 
-void expandStack(StackDraft* s, long num) {
+void expandStackDraft(StackDraft* s, long num) {
   /* Proses : Menambahkan capacity s sebanyak num */
   /* I.S. Stack sudah terdefinisi */
   /* F.S. Ukuran Stack bertambah sebanyak num */
@@ -79,7 +79,7 @@ void expandStack(StackDraft* s, long num) {
   Capacity(*s) += num;
 }
 
-void shrinkStack(StackDraft* s, long num) {
+void shrinkStackDraft(StackDraft* s, long num) {
   /* Proses : Mengurangi capacity s sebanyak num */
   /* I.S. Stack sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
    * num. */
