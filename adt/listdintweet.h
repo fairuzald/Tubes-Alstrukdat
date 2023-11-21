@@ -48,7 +48,7 @@ extern ListDinTweet listTweetMain;
 #define BUFFER(l) (l).buffer
 #define ELMT_LISTDINTWEET(l, i) (l).buffer[(i)]
 #define NEFF_LISTDINTWEET(l) (l).nEff
-#define CAPACITY(l) (l).capacity
+#define CAPACITY_LISTDINTWEET(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */
 
