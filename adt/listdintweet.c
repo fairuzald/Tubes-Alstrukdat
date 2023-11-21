@@ -19,7 +19,8 @@ void CreateListDinTweet(ListDinTweet *l, long capacity) {
 
 void dealocateListDinTweet(ListDinTweet *l) {
   /* I.S. l terdefinisi; */
-  /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF_LISTDINTWEET(l)=0 */
+  /* F.S. (l) dikembalikan ke system, CAPACITY_LISTDINTWEET(l)=0;
+   * NEFF_LISTDINTWEET(l)=0 */
   free(BUFFER(*l));
   NEFF_LISTDINTWEET(*l) = 0;
   CAPACITY_LISTDINTWEET(*l) = 0;

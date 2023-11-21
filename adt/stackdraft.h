@@ -36,7 +36,7 @@ typedef struct {
 #define Table(S) (S).T
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
-#define Capacity(S) (S).capacity
+#define CapacityStackDraft(S) (S).capacity
 #define AuthorDraft(S) (S).authorDraft
 
 /* ************ Prototype ************ */
@@ -51,7 +51,7 @@ void CreateEmptyStackDraft(StackDraft* S, long capacity, Word authorDraft);
 
 void dealocateStackDraft(StackDraft* s);
 /* I.S. s terdefinisi; */
-/* F.S. (s) dikembalikan ke system, Top(s)=Nil; Capacity(s)=0 */
+/* F.S. (s) dikembalikan ke system, Top(s)=Nil; CapacityStackDraft(s)=0 */
 
 /* ************ Predikat untuk test keadaan KOLEKSI ************ */
 

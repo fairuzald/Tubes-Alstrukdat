@@ -14,16 +14,16 @@ void CreateEmptyStackDraft(StackDraft* S, long capacity, Word authorDraft) {
   /* Ciri stack kosong : TOP bernilai Nil */
   Table(*S) = (infotype*)malloc(capacity * sizeof(infotype));
   Top(*S) = Nil;
-  Capacity(*S) = capacity;
+  CapacityStackDraft(*S) = capacity;
   AuthorDraft(*S) = authorDraft;
 }
 
 void dealocateStackDraft(StackDraft* s) {
   /* I.S. s terdefinisi; */
-  /* F.S. (s) dikembalikan ke system, Top(s)=Nil; Capacity(s)=0 */
+  /* F.S. (s) dikembalikan ke system, Top(s)=Nil; CapacityStackDraft(s)=0 */
   free(Table(*s));
   Top(*s) = Nil;
-  Capacity(*s) = 0;
+  CapacityStackDraft(*s) = 0;
   AuthorDraft(*s).Length = 0;
 }
 
@@ -36,7 +36,7 @@ boolean IsEmptyStackDraft(StackDraft S) {
 
 boolean IsFullStackDraft(StackDraft S) {
   /* Mengirim true jika tabel penampung nilai elemen stack penuh */
-  return Top(S) == Capacity(S) - 1;
+  return Top(S) == CapacityStackDraft(S) - 1;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
@@ -74,9 +74,9 @@ void expandStackDraft(StackDraft* s, long num) {
   /* Proses : Menambahkan capacity s sebanyak num */
   /* I.S. Stack sudah terdefinisi */
   /* F.S. Ukuran Stack bertambah sebanyak num */
-  Table(*s) =
-      (infotype*)realloc(Table(*s), (Capacity(*s) + num) * sizeof(infotype));
-  Capacity(*s) += num;
+  Table(*s) = (infotype*)realloc(
+      Table(*s), (CapacityStackDraft(*s) + num) * sizeof(infotype));
+  CapacityStackDraft(*s) += num;
 }
 
 void shrinkStackDraft(StackDraft* s, long num) {
@@ -84,7 +84,7 @@ void shrinkStackDraft(StackDraft* s, long num) {
   /* I.S. Stack sudah terdefinisi, ukuran capacity > num, dan nEff < capacity -
    * num. */
   /* F.S. Ukuran stack berkurang sebanyak num. */
-  Table(*s) =
-      (infotype*)realloc(Table(*s), (Capacity(*s) - num) * sizeof(infotype));
-  Capacity(*s) -= num;
+  Table(*s) = (infotype*)realloc(
+      Table(*s), (CapacityStackDraft(*s) - num) * sizeof(infotype));
+  CapacityStackDraft(*s) -= num;
 }
