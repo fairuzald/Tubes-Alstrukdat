@@ -150,6 +150,28 @@ void CropWord(Word *word, int maxLength) {
   }
 }
 
+void CropWordFront(Word *word, int croppedLength) {
+  /* Memotong panjang kata sesuai dengan maxLength
+     I.S. : word terdefinisi, maxLength merupakan panjang maksimum yang
+     diinginkan F.S. : Jika panjang kata lebih dari maxLength, maka kata
+     dipotong menjadi maxLength; Jika panjang kata kurang dari atau sama dengan
+     maxLength, tidak ada perubahan. */
+
+  if (word->Length > croppedLength) {
+    int startIdx = word->Length - croppedLength;
+    int i, j;
+
+    // Geser karakter ke depan untuk memotong dari belakang
+    for (i = 0, j = startIdx; j < word->Length; ++i, ++j) {
+      word->TabWord[i] = word->TabWord[j];
+    }
+
+    word->Length -= croppedLength;
+    word->TabWord[word->Length] =
+        '\0';  // Pastikan string berakhir dengan null terminator
+  }
+}
+
 void LowerCaseFile() {
   /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
   /* F.S. currentword menjadi lowercase di setiap karakternya */
