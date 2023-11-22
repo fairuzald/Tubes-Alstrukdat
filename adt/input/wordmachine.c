@@ -146,17 +146,26 @@ void printWord(Word w) {
 }
 
 int wordToInt(Word w) {
-  /*mengubah word menjadi integer*/
-  /*KAMUS LOKAL*/
-  int i, hasil;
+  /* mengubah word menjadi integer */
+  /* KAMUS LOKAL */
+  int i, hasil, sign;
 
-  /*ALGORITMA*/
+  /* ALGORITMA */
   hasil = 0;
-  for (i = 0; i < w.Length; i++) {
-    hasil = hasil * 10 + (w.TabWord[i] - '0');
+  sign = 1;  // Default sign is positive
+
+  // Check if the first character is a minus sign
+  if (w.Length > 0 && w.TabWord[0] == '-') {
+    sign = -1;  // Set sign to negative
+    i = 1;      // Start from the second character
+  } else {
+    i = 0;  // Start from the first character
   }
 
-  return hasil;
+  for (; i < w.Length; i++) {
+    hasil = hasil * 10 + (w.TabWord[i] - '0');
+  }
+  return sign * hasil;
 }
 
 Word stringToWord(char *st) {

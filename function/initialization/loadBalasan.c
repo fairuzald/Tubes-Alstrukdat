@@ -5,7 +5,6 @@ void readDateTime(Word time, Word date, DATETIME *output) {
   splitTime(time, &hh, &mm, &ss);
   *output = splitDate(date, hh, mm, ss);
 }
-
 void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   /* Mengambil kata setelah tanda '-' pada inputWord dan menyimpannya di
      outputWord I.S. : inputWord terdefinisi F.S. : outputWord berisi kata
@@ -42,56 +41,65 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   }
 }
 
-void readUtasConfig() {
-  STARTWORDFILE("utas.config");
+void readBalasanConfig() {
+  STARTWORDFILE("balasan.config");
 
   int countKicauan;
 
   countKicauan = wordToInt(currentWordFile);
   ADVWORDFILE();
-  Word idWord, text, idUtasWord, date, time, utasCountWord;
-  int id, idUtas, utasCount;
+  Word idWord, text, idParentWord, idReplierWord, date, time, replyCountWord,
+      replyAuthor;
+  int id, idUtas, replyCount, idParent, idReplier;
   DATETIME dt;
   for (int i = 0; i < countKicauan; i++) {
+    // ID kicauan
     CopyWordwWord(&idWord, &currentWordFile);
     id = wordToInt(idWord);
     // printf("%d\n", id);
     ADVWORDFILE();
 
-    // UTAS COUNT
-    CopyWordwWord(&utasCountWord, &currentWordFile);
-    utasCount = wordToInt(utasCountWord);
-    // printf("counter: %d\n", utasCount);
-    ADVWORDFILE();
+    // Reply COUNT
+    CopyWordwWord(&replyCountWord, &currentWordFile);
+    replyCount = wordToInt(replyCountWord);
+    ADVWORDFILEnoBLANK();
 
-    for (int j = 0; j < utasCount; j++) {
-      // ID UTAS
-      CopyWordwWord(&idUtasWord, &currentWordFile);
-      ExtractWordAfterDash(&idUtasWord, &idUtasWord);
-      idUtas = wordToInt(idUtasWord);
-      // printWord(idUtasWord);
+    for (int j = 0; j < replyCount; j++) {
+      // ID Parent
+      CopyWordwWord(&idParentWord, &currentWordFile);
+      ExtractWordAfterDash(&idParentWord, &idReplierWord);
+      idParent = wordToInt(idParentWord);
+      // printf("id: %d", idParent);
+      // printf("\n");
+      ADVWORDFILEnoBLANK();
+
+      // ID Replier
+      CopyWordwWord(&idReplierWord, &currentWordFile);
+      idReplier = wordToInt(idReplierWord);
+      // printf("id: %d", idReplier);
       // printf("\n");
       ADVWORDFILE();
 
       // Text
       CopyWordwWord(&text, &currentWordFile);
-      // printWord(text);
+      printWord(text);
       // printf("\n");
+      ADVWORDFILE();
+
+      // Author
+      CopyWordwWord(&replyAuthor, &currentWordFile);
+      printWord(replyAuthor);
+      // printf("\n");
+      ADVWORDFILEnoBLANK();
 
       // Datetime
-      ADVWORDFILEnoBLANK();
       CopyWordwWord(&date, &currentWordFile);
       ADVWORDFILEnoBLANK();
       CopyWordwWord(&time, &currentWordFile);
       readDateTime(time, date, &dt);
       // TulisDATETIME(dt);
       // printf("\n");
-      ADVWORDFILE();
+      ADVWORDFILEnoBLANK();
     }
   }
-}
-
-int main() {
-  readUtasConfig();
-  return 0;
 }
