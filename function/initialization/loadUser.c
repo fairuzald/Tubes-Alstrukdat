@@ -32,53 +32,29 @@ void readUserConfig() {
   for (int i = 0; i < countUser; i++) {
     CopyWordwWord(&nama, &currentWordFile);
     CropWord(&nama, 20);
-    // printf("Nama: ");
-    // printWord(nama);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&pass, &currentWordFile);
     CropWord(&pass, 20);
-    // printf("Pass: ");
-    // printWord(pass);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&bio, &currentWordFile);
     CropWord(&bio, 135);
-    // printf("Bio: ");
-    // printWord(bio);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&numberHP, &currentWordFile);
-    // printf("Number HP: ");
-    // printWord(numberHP);
-    // printf("\n");
     ADVWORDFILE();
+
     CopyWordwWord(&weton, &currentWordFile);
-    // printf("Weton: ");
-    // printWord(weton);
-    // printf("\n");
     ADVWORDFILE();
 
     boolean isPublic = compareWordwString(status, "PUBLIC");
     CopyWordwWord(&status, &currentWordFile);
-    // printf("Status: ");
-    // printWord(status);
-    // printf("\n");
+
     ADVWORDFILE();
 
     readMatrix(&pp, 5, 5);
-    // displayMatrix(pp);
     loadUser(nama, pass, bio, numberHP, weton, isPublic, pp);
-    // nunggu matrix pertemanan
   }
-  // displayAllUsers();
-}
-
-int main() {
-  readUserConfig();
-
-  return 0;
+  displayAllUsers();
 }
