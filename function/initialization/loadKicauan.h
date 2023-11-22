@@ -7,14 +7,12 @@
 #include "../../adt/input/charmachinefile.h"
 #include "../../adt/input/wordmachine.h"
 #include "../../adt/input/wordmachinefile.h"
-#include "../../adt/liststackdraft.h"
-#include "../../adt/stackdraft.h"
+#include "../../adt/listdintweet.h"
 #include "../../adt/time.h"
-#include "../tweet_draft/tweet_draft.h"
-// Fungsi untuk membaca waktu dan tanggal
-void readDateTime(Word time, Word date, DATETIME *output);
-
-// Fungsi untuk membaca konfigurasi draf
+#include "../tweet/tweet.h"
+// Function prototypes
+// Fungsi untuk memisahkan waktu
 void readDrafConfig();
+void readDateTime(Word time, Word date, DATETIME *output);
 
 #endif /* LOA */

@@ -5,6 +5,7 @@
 #define __MESINKATAFILE_H__
 
 #include "../boolean.h"
+#include "../datetime.h"
 #include "charmachinefile.h"
 #include "wordmachine.h"
 
@@ -41,5 +42,9 @@ void CopyWordFile();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 void STARTWORDFilenoIgnore(int maxChar);
 void copyIntegerFromWordMachine(int *num, Word word);
+
+void splitTime(Word time, int *inthh, int *intmm, int *intss);
+// Fungsi untuk memisahkan tanggal
+DATETIME splitDate(Word date, int hh, int mm, int ss);
 
 #endif
