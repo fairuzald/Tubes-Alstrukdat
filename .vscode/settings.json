@@ -15,5 +15,6 @@
   },
   "C_Cpp.formatting": "clangFormat",
   "C_Cpp.clang_format_sortIncludes": true,
-  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 2 }"
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 2 }",
+  "C_Cpp.errorSquiggles": "enabled"
 }
