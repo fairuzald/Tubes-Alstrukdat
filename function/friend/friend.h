@@ -36,7 +36,7 @@ typedef struct {
 #define User(x) users->users[x].name
 #define Name(x) x->name
 #define UserPopularity(x) x->popularity
-
+extern FriendshipMatrix mFriend;
 int findIdx(UserList *users, Word username);
 
 void DaftarTeman(FriendshipMatrix *friendshipMatrix, UserList *users,
