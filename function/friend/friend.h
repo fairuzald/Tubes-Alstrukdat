@@ -12,6 +12,8 @@ typedef struct {
   Graph Friendship;  // Matriks adjacency untuk merepresentasikan pertemanan
 } FriendshipMatrix;
 
+extern FriendshipMatrix mFriendship; /*men-global-kan userList*/
+
 typedef struct {
   int senderID;           // ID pengguna yang meminta pertemanan
   int receiverID;         // ID pengguna yang diminta pertemanan
