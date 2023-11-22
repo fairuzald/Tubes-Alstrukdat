@@ -117,3 +117,43 @@ void saveTweet(ListDinTweet *l, char folderName[]) {
 
   fclose(file);
 }
+
+void saveDraft(ListStackDraft *l, char folderName[]) {
+  // Mengecek apakah direktori sudah ada
+  struct stat st = {0};
+  if (stat(folderName, &st) == -1) {
+    mkdir(folderName, 0700);
+  }
+
+  char folderPath[200];
+  concat(folderName, "/draf.config", folderPath);
+
+  FILE *file = fopen(folderPath, "w");
+  if (file == NULL) {
+    printf("Tidak bisa membuat file draf.config\n");
+    return;
+  }
+
+  // Menulis jumlah pengguna yang punya draft
+  fprintf(file, "%d\n", NEFF_LISTSTACKDRAFT(*l));
+
+  // Menulis data setiap draft
+  for (int i = 0; i < NEFF_LISTSTACKDRAFT(*l); i++) {
+    StackDraft draft = ELMT_LISTSTACKDRAFT(*l, i);
+
+    fprintf(file, "%s %ld\n", AuthorDraft(draft).TabWord,
+            draft.TOP + 1);  // username pengguna dan banyak draft
+
+    for (int j = 0; j <= draft.TOP; j++) {
+      fprintf(file, "%s\n", TextDraft(draft.T[j]).TabWord);
+      fprintf(
+          file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
+          TimeCreatedDraft(draft.T[j]).DD, TimeCreatedDraft(draft.T[j]).MM,
+          TimeCreatedDraft(draft.T[j]).YYYY, TimeCreatedDraft(draft.T[j]).T.HH,
+          TimeCreatedDraft(draft.T[j]).T.MM, TimeCreatedDraft(draft.T[j]).T.SS);
+      // isi draft dan tanggal pembuatan draf terakhir
+    }
+  }
+
+  fclose(file);
+}
