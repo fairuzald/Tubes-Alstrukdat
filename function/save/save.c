@@ -81,3 +81,39 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   // }
   fclose(file);
 }
+
+void saveTweet(ListDinTweet *l, char folderName[]) {
+  // Mengecek apakah direktori sudah ada
+  struct stat st = {0};
+  if (stat(folderName, &st) == -1) {
+    mkdir(folderName, 0700);
+  }
+
+  char folderPath[200];
+  concat(folderName, "/kicauan.config", folderPath);
+
+  FILE *file = fopen(folderPath, "w");
+  if (file == NULL) {
+    printf("Tidak bisa membuat file kicauan.config\n");
+    return;
+  }
+
+  // Menulis jumlah kicauan
+  fprintf(file, "%ld\n", NEFF_LISTDINTWEET(*l));
+
+  // Menulis data setiap kicauan
+  for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
+    AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
+
+    fprintf(file, "%ld\n", IdTweet(tweet));             // ID kicauan
+    fprintf(file, "%s\n", TextTweet(tweet).TabWord);    // Text
+    fprintf(file, "%ld\n", Like(tweet));                // Like
+    fprintf(file, "%s\n", AuthorTweet(tweet).TabWord);  // Author
+    fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
+            TimeCreatedTweet(tweet).DD, TimeCreatedTweet(tweet).MM,
+            TimeCreatedTweet(tweet).YYYY, TimeCreatedTweet(tweet).T.HH,
+            TimeCreatedTweet(tweet).T.MM, TimeCreatedTweet(tweet).T.SS);
+  }
+
+  fclose(file);
+}
