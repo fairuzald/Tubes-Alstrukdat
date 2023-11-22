@@ -1,4 +1,4 @@
-#include "loadKicauan.h"
+#include "initialization.h"
 
 void readDateTime(Word time, Word date, DATETIME *output) {
   int hh, mm, ss;
@@ -6,8 +6,10 @@ void readDateTime(Word time, Word date, DATETIME *output) {
   *output = splitDate(date, hh, mm, ss);
 }
 
-void readDrafConfig() {
-  STARTWORDFILE("kicauan.config");
+void readKicauanConfig(char filePath[]) {
+  char fullPath[1000];
+  concat(filePath, "/kicauan.config", fullPath);
+  STARTWORDFILE(fullPath);
   CreateListDinTweet(&listTweetMain, 100);
 
   int countKicauan;
@@ -51,9 +53,4 @@ void readDrafConfig() {
     // TulisDATETIME(dt);
     ADVWORDFILE();
   }
-}
-
-int main() {
-  readDrafConfig();
-  return 0;
 }

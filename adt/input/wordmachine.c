@@ -28,6 +28,20 @@ void STARTWORD() {
     CopyWord();
   }
 }
+void STARTWORDBLANK() {
+  /* I.S. : currentChar sembarang
+  F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+  START();
+  IgnoreBlanks();
+  if (currentChar == MARK) {
+    endWord = true;
+  } else {
+    endWord = false;
+    CopyWordBlank();
+  }
+}
 
 void STARTWORDnoIgnore(int maxChar) {
   /* I.S. : currentChar sembarang
@@ -82,6 +96,28 @@ void CopyWord() {
      diakuisisi. Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
   int i = 0;
   while (currentChar != MARK && currentChar != BLANK) {
+    if (i < NMax) {
+      currentWord.TabWord[i] = currentChar;
+    }
+    ADV();
+    i++;
+  }
+  if (i < NMax) {
+    currentWord.Length = i;
+  } else {
+    currentWord.Length = NMax;
+  }
+}
+
+void CopyWordBlank() {
+  /* Mengakuisisi kata, menyimpan dalam currentWord
+     I.S. : currentChar adalah karakter pertama dari kata
+     F.S. : currentWord berisi kata yang sudah diakuisisi;
+            currentChar = BLANK atau currentChar = MARK;
+            currentChar adalah karakter sesudah karakter terakhir yang
+     diakuisisi. Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+  int i = 0;
+  while (currentChar != MARK) {
     if (i < NMax) {
       currentWord.TabWord[i] = currentChar;
     }

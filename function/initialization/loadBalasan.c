@@ -1,4 +1,4 @@
-#include "loadUtas.h"
+#include "initialization.h"
 
 void readDateTime(Word time, Word date, DATETIME *output) {
   int hh, mm, ss;
@@ -41,8 +41,10 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   }
 }
 
-void readBalasanConfig() {
-  STARTWORDFILE("balasan.config");
+void readBalasanConfig(char filePath[]) {
+  char fullPath[1000];
+  concat(filePath, "/balasan.config", fullPath);
+  STARTWORDFILE(fullPath);
 
   int countKicauan;
 

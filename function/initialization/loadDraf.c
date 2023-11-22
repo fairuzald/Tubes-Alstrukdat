@@ -1,4 +1,4 @@
-#include "loadDraf.h"
+#include "initialization.h"
 
 void readDateTime(Word time, Word date, DATETIME *output) {
   int hh, mm, ss;
@@ -6,8 +6,10 @@ void readDateTime(Word time, Word date, DATETIME *output) {
   *output = splitDate(date, hh, mm, ss);
 }
 
-void readDrafConfig() {
-  STARTWORDFILE("draf.config");
+void readDrafConfig(char filePath[]) {
+  char fullPath[1000];
+  concat(filePath, "/draf.config", fullPath);
+  STARTWORDFILE(fullPath);
   CreateListStackDraft(&listStackDraftMain);
 
   int countUser;

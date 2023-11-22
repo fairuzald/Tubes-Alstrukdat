@@ -1,4 +1,4 @@
-#include "loadUtas.h"
+#include "initialization.h"
 
 void readDateTime(Word time, Word date, DATETIME *output) {
   int hh, mm, ss;
@@ -42,8 +42,10 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   }
 }
 
-void readUtasConfig() {
-  STARTWORDFILE("utas.config");
+void readUtasConfig(char filePath[]) {
+  char fullPath[1000];
+  concat(filePath, "/utas.config", fullPath);
+  STARTWORDFILE(fullPath);
 
   int countKicauan;
 
@@ -55,13 +57,13 @@ void readUtasConfig() {
   for (int i = 0; i < countKicauan; i++) {
     CopyWordwWord(&idWord, &currentWordFile);
     id = wordToInt(idWord);
-    // printf("%d\n", id);
+    printf("%d\n", id);
     ADVWORDFILE();
 
     // UTAS COUNT
     CopyWordwWord(&utasCountWord, &currentWordFile);
     utasCount = wordToInt(utasCountWord);
-    // printf("counter: %d\n", utasCount);
+    printf("counter: %d\n", utasCount);
     ADVWORDFILE();
 
     for (int j = 0; j < utasCount; j++) {
@@ -69,14 +71,14 @@ void readUtasConfig() {
       CopyWordwWord(&idUtasWord, &currentWordFile);
       ExtractWordAfterDash(&idUtasWord, &idUtasWord);
       idUtas = wordToInt(idUtasWord);
-      // printWord(idUtasWord);
-      // printf("\n");
+      printWord(idUtasWord);
+      printf("\n");
       ADVWORDFILE();
 
       // Text
       CopyWordwWord(&text, &currentWordFile);
-      // printWord(text);
-      // printf("\n");
+      printWord(text);
+      printf("\n");
 
       // Datetime
       ADVWORDFILEnoBLANK();
@@ -85,13 +87,8 @@ void readUtasConfig() {
       CopyWordwWord(&time, &currentWordFile);
       readDateTime(time, date, &dt);
       // TulisDATETIME(dt);
-      // printf("\n");
+      printf("\n");
       ADVWORDFILE();
     }
   }
-}
-
-int main() {
-  readUtasConfig();
-  return 0;
 }

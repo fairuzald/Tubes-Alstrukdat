@@ -1,4 +1,4 @@
-#include "loadUser.h"
+#include "initialization.h"
 
 void readMatrix(PhotoMat *m, int nRow, int nCol) {
   /* I.S. isIdxValid(nRow,nCol) */
@@ -17,10 +17,11 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
   }
 }
 
-void readUserConfig() {
+void readUserConfig(char filePath[]) {
   CreateuserList();
-  STARTWORDFILE("pengguna.config");
-  ADVFILE();
+  char fullPath[1000];
+  concat(filePath, "/user.config", fullPath);
+  STARTWORDFILE(fullPath);
 
   int countUser;
 
