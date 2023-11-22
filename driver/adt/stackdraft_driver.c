@@ -31,7 +31,7 @@ int main() {
 
   // Membuat StackDraft kosong
   StackDraft myStackDraft;
-  int capacity = 2;
+  long capacity = 2;
   Word author = stringToWord("Maman Suraman");
   CreateEmptyStackDraft(&myStackDraft, capacity, author);
 
