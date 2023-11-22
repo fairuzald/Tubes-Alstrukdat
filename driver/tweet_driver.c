@@ -8,6 +8,8 @@ How to run:
 >> ./tweet_driver
 */
 
+#include <stdio.h>
+
 #include "../function/tweet/tweet.h"
 
 int main() {
