@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 
-#include "./adt/graph.h"
-#include "./adt/wordmachine.h"
+#include "../../adt/graph.h"
+#include "../../adt/input/wordmachine.h"
 
 int findIdx(UserList *users, Word username) {
   for (int i = 0; i < users->n; i++) {

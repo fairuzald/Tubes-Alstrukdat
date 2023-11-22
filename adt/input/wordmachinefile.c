@@ -60,6 +60,19 @@ void ADVWORDFILE() {
   }
 }
 
+void ADVTIME() {
+  IgnoreBlanksFile();
+  if (currentCharFile == '/') {
+    endWordFile = true;
+    ADVFILE();
+    CopyWordFile();
+  } else {
+    endWordFile = false;
+    CopyWordFile();
+    IgnoreBlanksFile();
+  }
+}
+
 void CopyWordFileNoBlank() {
   /* Mengakuisisi kata, menyimpan dalam currentWord
      I.S. : currentChar adalah karakter pertama dari kata

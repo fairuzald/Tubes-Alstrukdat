@@ -50,8 +50,10 @@ void STARTWORDnoIgnore(int maxChar) {
       ADV();
       ctr++;
     }
-    if (ctr < NMax) currentWord.Length = ctr; 
-    else currentWord.Length = maxChar;
+    if (ctr < NMax)
+      currentWord.Length = ctr;
+    else
+      currentWord.Length = maxChar;
   }
 }
 
@@ -124,8 +126,7 @@ boolean compareWordwWord(Word w1, Word w2) {
   /*ALGORITMA*/
   if (w1.Length != w2.Length) {
     sama = false;
-    }
-  else {
+  } else {
     i = 0;
     sama = true;
     while (i < w1.Length && sama) {
@@ -154,6 +155,8 @@ int wordToInt(Word w) {
   for (i = 0; i < w.Length; i++) {
     hasil = hasil * 10 + (w.TabWord[i] - '0');
   }
+
+  return hasil;
 }
 
 Word stringToWord(char *st) {
