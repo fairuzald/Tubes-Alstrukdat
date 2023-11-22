@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 
-#include "./adt/graph.h"
-#include "./adt/wordmachine.h"
+#include "../../adt/graph.h"
+#include "../../adt/input/wordmachine.h"
 
 #define MAX 100
 
