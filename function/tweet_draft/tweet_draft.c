@@ -30,6 +30,7 @@ void displayDraft(Draft draft) {
   }
 
   printf("\n");
+  printf("\n");
 }
 
 void editDraft(Draft *draft, Word newTextDraft, DATETIME newTimeCreatedDraft) {
