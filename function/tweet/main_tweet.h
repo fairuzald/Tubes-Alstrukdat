@@ -1,3 +1,6 @@
+#ifndef MAIN_TWEET_H
+#define MAIN_TWEET_H
+
 #include "../../adt/graph.h"
 #include "../../adt/listdintweet.h"
 #include "../../adt/liststatikuser.h"
@@ -50,3 +53,5 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
 boolean isFriend(ListStatikUser listUser, FriendshipMatrix friendshipMatrix,
                  Word username1, Word username2);
 /* Mengirimkan true jika akun username1 berteman dengan akun username2 */
+
+#endif

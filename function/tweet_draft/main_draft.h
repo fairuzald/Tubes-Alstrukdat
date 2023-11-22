@@ -1,3 +1,6 @@
+#ifndef MAIN_DRAFT_H
+#define MAIN_DRAFT_H
+
 #include "../../adt/listdintweet.h"
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
@@ -38,3 +41,5 @@ void modifyUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
 void publishUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
                       User user);
 /* Menerbitkan draft terakhir milik user */
+
+#endif
