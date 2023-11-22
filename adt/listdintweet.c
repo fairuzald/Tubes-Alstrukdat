@@ -12,7 +12,7 @@ ListDinTweet listTweetMain;
 void CreateListDinTweet(ListDinTweet *l, long capacity) {
   /* I.S. l sembarang, capacity > 0 */
   /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
-  BUFFER(*l) = (ElType *)malloc(capacity * sizeof(ElType));
+  BUFFER(*l) = (ElTypeListDin *)malloc(capacity * sizeof(ElTypeListDin));
   NEFF_LISTDINTWEET(*l) = 0;
   CAPACITY_LISTDINTWEET(*l) = capacity;
 }
@@ -56,7 +56,7 @@ boolean isFullListTweet(ListDinTweet l) {
 
 /* *** Menambahkan elemen terakhir *** */
 
-void insertLastListTweet(ListDinTweet *l, ElType val) {
+void insertLastListTweet(ListDinTweet *l, ElTypeListDin val) {
   /* Proses: Menambahkan val sebagai elemen terakhir list */
   /* I.S. List l boleh kosong, tetapi tidak penuh */
   /* F.S. val adalah elemen terakhir l yang baru */
@@ -70,8 +70,8 @@ void expandListTweet(ListDinTweet *l, int num) {
   /* Proses : Menambahkan capacity l sebanyak num */
   /* I.S. List sudah terdefinisi */
   /* F.S. Ukuran list bertambah sebanyak num */
-  BUFFER(*l) = (ElType *)realloc(
-      BUFFER(*l), (CAPACITY_LISTDINTWEET(*l) + num) * sizeof(ElType));
+  BUFFER(*l) = (ElTypeListDin *)realloc(
+      BUFFER(*l), (CAPACITY_LISTDINTWEET(*l) + num) * sizeof(ElTypeListDin));
   CAPACITY_LISTDINTWEET(*l) += num;
 }
 
