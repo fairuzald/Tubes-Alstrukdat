@@ -1,6 +1,7 @@
 #ifndef TWEET_H
 #define TWEET_H
 
+#include "../../adt/boolean.h"
 #include "../../adt/datetime.h"
 #include "../../adt/input/wordmachine.h"
 
@@ -15,14 +16,15 @@ typedef struct tweet {
   Word textTweet;
   Word authorTweet;
   DATETIME timeCreatedTweet;
-  long idTweet;
-  long idReply;
-  long idUtas;
-  long like;
-  long depth;
+  int idTweet;
+  int idReply;
+  int idUtas;
+  int like;
+  int depth;
   AddressTweet reply1;  // ke depth yang sama
   AddressTweet reply2;  // ke children
   AddressTweet utas;
+  boolean kicauanUtama;
 } Tweet;
 
 /* Selector Tweet */
@@ -38,14 +40,15 @@ typedef struct tweet {
 #define Reply1(pTweet) (pTweet)->reply1
 #define Reply2(pTweet) (pTweet)->reply2
 #define Utas(pTweet) (pTweet)->utas
+#define KicauanUtama(pTweet) (pTweet)->kicauanUtama
 
 /* Constructor Tweet */
 
 AddressTweet CreateTweet(Word textTweet, Word authorTweet,
-                         DATETIME timeCreatedTweet, long idTweet, long idReply,
-                         long idUtas, long like, long depth,
-                         AddressTweet reply1, AddressTweet reply2,
-                         AddressTweet utas);
+                         DATETIME timeCreatedTweet, int idTweet, int idReply,
+                         int idUtas, int like, int depth, AddressTweet reply1,
+                         AddressTweet reply2, AddressTweet utas,
+                         boolean kicauanUtama);
 /* Membentuk tweet baru dan memasukkan semua informasi ke dalam tweet tersebut
  */
 /* Mengirimkan address hasil alokasi semua informasi tweet */
