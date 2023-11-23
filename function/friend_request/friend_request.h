@@ -7,7 +7,7 @@
 #include "./../adt/graph.h"
 #include "./../adt/liststatikuser.h"
 
-#define MAX_CAP 20 * 19 // (?) bener ga sih?
+#define MAX_CAP 20*19 // (?) bener ga sih?
 #define IDX_UNDEF -1
 
 typedef struct {
@@ -32,6 +32,8 @@ typedef struct {
 extern FriendRequestQueue friendRequestQueue;
 
 void CreateQueue(FriendRequestQueue * friendRequestQueue);
+
+void CreateFriendRequestQueue(FriendRequestQueue * friendRequestQueue, int row, int senderID, int receiverID, int senderFriendCount);
 
 boolean isEmpty(FriendRequestQueue friendRequestQueue);
 
