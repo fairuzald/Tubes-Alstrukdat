@@ -14,6 +14,7 @@ int main() {
   CreateuserList();
   sudahMasuk = false;
   Word command;
+  initialization(&command);
 
   /*contoh main, buat testing- belum final*/
   printf("\nSilakan masukkan command: \n");

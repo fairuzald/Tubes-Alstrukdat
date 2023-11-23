@@ -14,6 +14,8 @@
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
 #include "../../adt/stackdraft.h"
+#include "../friend/friend.h"
+#include "../friend_request/friend_request.h"
 #include "../input/input.h"
 #include "../profile/profile.h"
 #include "../tweet/main_tweet.h"

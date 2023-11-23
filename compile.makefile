@@ -10,22 +10,44 @@ main.o: main.c
 
 # List object files
 OBJECT_FILES = main.o \
-               function/friend/friend.o \
-               function/initialization/initialization.o \
-               function/user/user.o \
-               function/input/input.o \
-               function/save_load/save_load.o \
-               function/utas/utas.o \
-               function/tweet_draft/tweet_draft.o \
-               function/reply/reply.o \
-               function/tweet/tweet.o \
-               function/friend_request/friend_request.o \
-               function/profile/profile.o \
-               function/pcolor/pcolor.o \
                function/error/error.o \
-               adt/input/wordmachine.o \
+               function/friend/friend.o \
+               function/friend_request/friend_request.o \
+               function/initialization/initialization.o \
+               function/initialization/loadBalasan.o \
+               function/initialization/loadDraf.o \
+               function/initialization/loadKicauan.o \
+               function/initialization/loadUser.o \
+               function/initialization/loadUtas.o \
+               function/input/input.o \
+               function/pcolor/pcolor.o \
+               function/profile/profile.o \
+               function/reply/reply.o \
+               function/save/save.o \
+               function/tweet/tweet.o \
+               function/tweet/main_tweet.o \
+               function/tweet_draft/tweet_draft.o \
+               function/tweet_draft/main_draft.o \
+               function/user/user.o \
+               function/utas/utas.o \
                adt/input/charmachine.o \
+               adt/input/wordmachine.o \
+               adt/input/charmachinefile.o \
+               adt/input/wordmachinefile.o \
+               adt/matrix/matrix.o \
+							 adt/bintreetweet.o \
+							 adt/datetime.o \
+							 adt/graph.o \
+							 adt/listdintweet.o \
+							 adt/liststackdraft.o \
+							 adt/liststatikuser.o \
+							 adt/queue.o \
+							 adt/stackdraft.o \
+							 adt/time.o \
                procedure/splashscreen.o
+							 procedure/globalFeature/globalFeature.o \
+							 procedure/loginFeature/loginFeature.o \
+							 procedure/logoutFeature/logoutFeature.o \
 
 # Build main.exe from object files
 main.exe: $(OBJECT_FILES)
