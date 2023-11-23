@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "reply.h"
 
 void CreateReply(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
