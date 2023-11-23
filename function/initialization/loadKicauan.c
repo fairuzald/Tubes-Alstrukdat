@@ -40,8 +40,8 @@ void readKicauanConfig(char filePath[]) {
     ADVWORDFILEnoBLANK();
     CopyWordwWord(&time, &currentWordFile);
     readDateTime(time, date, &dt);
-    tweet =
-        CreateTweet(text, author, dt, id, 0, 0, likeCount, 0, NULL, NULL, NULL);
+    tweet = CreateTweet(text, author, dt, id, 0, 0, likeCount, 0, NULL, NULL,
+                        NULL, false);
     displayTweet(tweet);
     insertLastListTweet(&listTweetMain, tweet);
     // TulisDATETIME(dt);

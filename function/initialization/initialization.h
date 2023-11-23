@@ -16,6 +16,9 @@
 #include "../../adt/stackdraft.h"
 #include "../input/input.h"
 #include "../profile/profile.h"
+#include "../tweet/main_tweet.h"
+#include "../tweet/tweet.h"
+#include "../tweet_draft/main_draft.h"
 #include "../user/user.h"
 
 void concat(char *str1, char *str2, char *output);
