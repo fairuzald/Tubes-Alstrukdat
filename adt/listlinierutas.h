@@ -4,9 +4,9 @@
 #include "../tweet/tweet.h"
 #include "boolean.h"
 
-void insertUtas(ListDinTweet *listTweetMain, AddressTweet sambungan, int index);
+void insertUtas(AddressTweet *kicauanUtama, AddressTweet sambungan, int index);
 
-int lengthUtas(Tweet pTweet);
+int lengthUtas(AddressTweet *kicauanUtama);
 // kicauan utama ikut dihitung
 
 int maxIDUtas(ListDinTweet *listTweetMain);

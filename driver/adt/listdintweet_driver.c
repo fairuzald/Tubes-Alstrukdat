@@ -28,7 +28,7 @@ int main() {
   AddressTweet reply2A = NULL;
   AddressTweet utasA = NULL;
   boolean kicauanUtamaA = false;
-  AddressTweet pTweetA =
+  AddressTweet *kicauanUtamaA =
       CreateTweet(textA, authorA, timeA, idTweetA, idReplyA, idUtasA, likeA,
                   depthA, reply1A, reply2A, utasA, kicauanUtamaA);
 
@@ -44,7 +44,7 @@ int main() {
   AddressTweet reply2B = NULL;
   AddressTweet utasB = NULL;
   boolean kicauanUtamaB = false;
-  AddressTweet pTweetB =
+  AddressTweet *kicauanUtamaB =
       CreateTweet(textB, authorB, timeB, idTweetB, idReplyB, idUtasB, likeB,
                   depthB, reply1B, reply2B, utasB, kicauanUtamaB);
 
@@ -60,7 +60,7 @@ int main() {
   AddressTweet reply2C = NULL;
   AddressTweet utasC = NULL;
   boolean kicauanUtamaC = false;
-  AddressTweet pTweetC =
+  AddressTweet *kicauanUtamaC =
       CreateTweet(textC, authorC, timeC, idTweetC, idReplyC, idUtasC, likeC,
                   depthC, reply1C, reply2C, utasC, kicauanUtamaC);
 
@@ -79,13 +79,13 @@ int main() {
   printf("Full? (0/1): %d\n", isFullListTweet(myListTweet));
 
   // Memasukkan elemen ke dalam list
-  insertLastListTweet(&myListTweet, pTweetA);
+  insertLastListTweet(&myListTweet, *kicauanUtamaA);
   displayTweet(ELMT_LISTDINTWEET(myListTweet, 0));
   printf("Banyak elemen: %d\n", listTweetLength(myListTweet));
   printf("Empty? (0/1): %d\n", isEmptyListTweet(myListTweet));
   printf("Full? (0/1): %d\n", isFullListTweet(myListTweet));
 
-  insertLastListTweet(&myListTweet, pTweetB);
+  insertLastListTweet(&myListTweet, *kicauanUtamaB);
   displayTweet(ELMT_LISTDINTWEET(myListTweet, 1));
   printf("Banyak elemen: %d\n", listTweetLength(myListTweet));
   printf("Empty? (0/1): %d\n", isEmptyListTweet(myListTweet));
@@ -96,7 +96,7 @@ int main() {
   printf("Banyak elemen: %d\n", listTweetLength(myListTweet));
   printf("Empty? (0/1): %d\n", isEmptyListTweet(myListTweet));
   printf("Full? (0/1): %d\n", isFullListTweet(myListTweet));
-  insertLastListTweet(&myListTweet, pTweetC);
+  insertLastListTweet(&myListTweet, *kicauanUtamaC);
   displayTweet(ELMT_LISTDINTWEET(myListTweet, 2));
   printf("Banyak elemen: %d\n", listTweetLength(myListTweet));
   printf("Empty? (0/1): %d\n", isEmptyListTweet(myListTweet));

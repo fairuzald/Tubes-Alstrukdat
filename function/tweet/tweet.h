@@ -29,18 +29,18 @@ typedef struct tweet {
 
 /* Selector Tweet */
 
-#define TextTweet(pTweet) (pTweet)->textTweet
-#define AuthorTweet(pTweet) (pTweet)->authorTweet
-#define TimeCreatedTweet(pTweet) (pTweet)->timeCreatedTweet
-#define IdTweet(pTweet) (pTweet)->idTweet
-#define IdReply(pTweet) (pTweet)->idReply
-#define IdUtas(pTweet) (pTweet)->idUtas
-#define Like(pTweet) (pTweet)->like
-#define Depth(pTweet) (pTweet)->depth
-#define Reply1(pTweet) (pTweet)->reply1
-#define Reply2(pTweet) (pTweet)->reply2
-#define Utas(pTweet) (pTweet)->utas
-#define KicauanUtama(pTweet) (pTweet)->kicauanUtama
+#define TextTweet(*kicauanUtama) (*kicauanUtama)->textTweet
+#define AuthorTweet(*kicauanUtama) (*kicauanUtama)->authorTweet
+#define TimeCreatedTweet(*kicauanUtama) (*kicauanUtama)->timeCreatedTweet
+#define IdTweet(*kicauanUtama) (*kicauanUtama)->idTweet
+#define IdReply(*kicauanUtama) (*kicauanUtama)->idReply
+#define IdUtas(*kicauanUtama) (*kicauanUtama)->idUtas
+#define Like(*kicauanUtama) (*kicauanUtama)->like
+#define Depth(*kicauanUtama) (*kicauanUtama)->depth
+#define Reply1(*kicauanUtama) (*kicauanUtama)->reply1
+#define Reply2(*kicauanUtama) (*kicauanUtama)->reply2
+#define Utas(*kicauanUtama) (*kicauanUtama)->utas
+#define KicauanUtama(*kicauanUtama) (*kicauanUtama)->kicauanUtama
 
 /* Constructor Tweet */
 
@@ -54,20 +54,20 @@ AddressTweet CreateTweet(Word textTweet, Word authorTweet,
 /* Mengirimkan address hasil alokasi semua informasi tweet */
 /* Jika alokasi gagal, mengirimkan NULL */
 
-void deallocateTweet(AddressTweet pTweet);
-/* I.S. pTweet terdefinisi
-   F.S. pTweet dikembalikan ke sistem
-   Melakukan dealokasi/pengembalian address pTweet */
+void deallocateTweet(AddressTweet *kicauanUtama);
+/* I.S. *kicauanUtama terdefinisi
+   F.S. *kicauanUtama dikembalikan ke sistem
+   Melakukan dealokasi/pengembalian address *kicauanUtama */
 
 /* Fungsi/prosedur Lain */
 
-void displayTweet(AddressTweet pTweet);
+void displayTweet(AddressTweet *kicauanUtama);
 /* Menampilkan ID, author, timeCreated, text, dan like dari suatu tweet */
 
-void likeTweet(AddressTweet ptweet);
+void likeTweet(AddressTweet *kicauanUtama);
 /* Menambah jumlah like dari suatu tweet */
 
-void editTweet(AddressTweet ptweet, Word newText);
+void editTweet(AddressTweet *kicauanUtama, Word newText);
 /* Mengganti text dari suatu tweet */
 
 #endif

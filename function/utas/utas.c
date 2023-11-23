@@ -2,16 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void CreateUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser){
+void CreateUtas(ListDinTweet *listTweetMain, int idKicau, Word textTweet, Word authorTweet, DATETIME timeCreatedTweet){
+    AddressTweet temp = CreateTweet(textTweet, authorTweet, timeCreatedTweet, 0, 0, 0, 0, 0, NULL, NULL, NULL, false);
+
+    // memasukkan node ke utas
+    insertUtas(&ELMT_LISTDINTWEET(*listTweetMain, idKicau-1), temp, lengthUtas(ELMT_LISTDINTWEET(*listTweetMain, idKicau - 1)));
+}
+
+void initUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser){
     // cari apakah ada id di list tweet
     // tweet tersebut milik current user atau tidak
     // apakah sudah dijadikan utas atau belum
     if(idKicau > listTweetLength(*listTweetMain) || idKicau <= 0){
         printf("\nKicauan tidak ditemukan\n");
-    }else if(AuthorTweet(ELMT_LISTDINTWEET(*listTweetMain, idKicau)) != currentUser.nama){
+    }else if(AuthorTweet(ELMT_LISTDINTWEET(*listTweetMain, idKicau-1)) != currentUser.nama){
         // id ada, tetapi utas bukan milik current user
         printf("\nUtas ini bukan milik anda!\n");
-    }else if(KicauanUtama(ELMT_LISTDINTWEET(*listTweetMain, idKicau))){
+    }else if(KicauanUtama(ELMT_LISTDINTWEET(*listTweetMain, idKicau-1))){
         // sudah menjadi kicauan utama pada sebuah utas
         printf("\nKicauan ini sudah memiliki utas\n");
     }else{
@@ -19,17 +26,18 @@ void CreateUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser){
         boolean lanjutUtas = true;
         printf("\nUtas berhasil dibuat!\n");
         // ubah id utas
-        IdUtas(ELMT_LISTDINTWEET(*listTweetMain, idKicau)) = maxIDUtas(*listTweetMain) + 1;
+        IdUtas(ELMT_LISTDINTWEET(*listTweetMain, idKicau-1)) = maxIDUtas(*listTweetMain) + 1;
         do{
             // mengambil input kicauan
             printf("\nMasukkan kicauan:\n");
             STARTWORDNOIGNORE(280);
             
-            // membuat node tweet baru
-            AddressTweet temp = CreateTweet(currentWord, currentUser.nama, getCurrentDateTime(), 0, 0, 0, 0, 0, NULL, NULL, NULL, false);
+            CreateUtas(listTweetMain, idKicau, currentWord, currentUser.nama, getCurrentDateTime());
+            // // membuat node tweet baru
+            // AddressTweet temp = CreateTweet(currentWord, currentUser.nama, getCurrentDateTime(), 0, 0, 0, 0, 0, NULL, NULL, NULL, false);
 
-            // memasukkan node ke utas
-            insertUtas(&ELMT_LISTDINTWEET(*listTweetMain, idKicau), temp, lengthUtas(ELMT_LISTDINTWEET(*listTweetMain, idKicau)));
+            // // memasukkan node ke utas
+            // insertUtas(&ELMT_LISTDINTWEET(*listTweetMain, idKicau-1), temp, lengthUtas(ELMT_LISTDINTWEET(*listTweetMain, idKicau - 1)));
 
             do{
                 printf("\nApakah Anda ingin melanjutkan utas ini? (YA/TIDAK)  ");
@@ -53,12 +61,12 @@ void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index, User curren
     }else{
         // cari id utas
         int i = 0;
-        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i)) && i < listTweetLength(*listTweetMain)){
+        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i-1)) && i < listTweetLength(*listTweetMain)){
             i++;
         }
 
         // tweet yang memiliki idUtas ketemu
-        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i);
+        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i-1);
 
         if(AuthorTweet(current) != currentUser.nama){
             // utas bukan milik current user
@@ -80,7 +88,7 @@ void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index, User curren
                 AddressTweet temp = CreateTweet(currentWord, currentUser.nama, getCurrentDateTime(), 0, 0, 0, 0, 0, NULL, NULL, NULL, false);
 
                 // memasukkan node ke utas
-                insertUtas(&ELMT_LISTDINTWEET(*listTweetMain, idKicau), temp, index);
+                insertUtas(&ELMT_LISTDINTWEET(*listTweetMain, idKicau-1), temp, index);
             }
         }
     }
@@ -93,12 +101,12 @@ void deleteUtas(ListDinTweet *listTweetMain, int idUtas, int idKicau, User curre
     }else{
         // cari id utas
         int i = 0;
-        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i)) && i < listTweetLength(*listTweetMain)){
+        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i-1)) && i < listTweetLength(*listTweetMain)){
             i++;
         }
 
         // tweet yang memiliki idUtas ketemu
-        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i);
+        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i-1);
 
         if(AuthorTweet(current) != currentUser.nama){
             // utas bukan milik current user
@@ -137,12 +145,12 @@ void displayUtas(ListDinTweet *listTweetMain, int idUtas, User currentUser, Grap
     }else{
         // cari id utas
         int i = 0;
-        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i)) && i < listTweetLength(*listTweetMain)){
+        while(idUtas != IdUtas(ELMT_LISTDINTWEET(*listTweetMain, i-1)) && i < listTweetLength(*listTweetMain)){
             i++;
         }
 
         // tweet yang memiliki idUtas ketemu
-        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i);
+        AddressTweet current = ELMT_LISTDINTWEET(*listTweetMain, i-1);
 
         boolean priv = false;
         // penulisnya bukan dirinya sendiri

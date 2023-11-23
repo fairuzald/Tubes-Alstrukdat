@@ -34,58 +34,58 @@ AddressTweet CreateTweet(Word textTweet, Word authorTweet,
   return pNew;
 }
 
-void deallocateTweet(AddressTweet pTweet) {
-  /* I.S. pTweet terdefinisi
-     F.S. pTweet dikembalikan ke sistem
-     Melakukan dealokasi/pengembalian address pTweet */
+void deallocateTweet(AddressTweet *kicauanUtama) {
+  /* I.S. *kicauanUtama terdefinisi
+     F.S. *kicauanUtama dikembalikan ke sistem
+     Melakukan dealokasi/pengembalian address *kicauanUtama */
 
-  free(pTweet);
+  free(*kicauanUtama);
 }
 
 /* Fungsi/prosedur lain */
 
-void displayTweet(AddressTweet pTweet) {
+void displayTweet(AddressTweet *kicauanUtama) {
   /* Menampilkan ID, author, timeCreated, text, dan like dari suatu tweet */
 
   // display ID
-  printf("| ID = %d\n", IdTweet(pTweet));
+  printf("| ID = %d\n", IdTweet(*kicauanUtama));
 
   // display author
   printf("| ");
   int i;
-  for (i = 0; i < AuthorTweet(pTweet).Length; i++) {
-    printf("%c", AuthorTweet(pTweet).TabWord[i]);
+  for (i = 0; i < AuthorTweet(*kicauanUtama).Length; i++) {
+    printf("%c", AuthorTweet(*kicauanUtama).TabWord[i]);
   }
 
   printf("\n");
 
   // display timeCreated
   printf("| ");
-  TulisDATETIME(TimeCreatedTweet(pTweet));
+  TulisDATETIME(TimeCreatedTweet(*kicauanUtama));
   printf("\n");
 
   // display text
   printf("| ");
-  for (i = 0; i < TextTweet(pTweet).Length; i++) {
-    printf("%c", TextTweet(pTweet).TabWord[i]);
+  for (i = 0; i < TextTweet(*kicauanUtama).Length; i++) {
+    printf("%c", TextTweet(*kicauanUtama).TabWord[i]);
   }
 
   printf("\n");
 
   // display like
-  printf("| Disukai: %d\n", Like(pTweet));
+  printf("| Disukai: %d\n", Like(*kicauanUtama));
 
   printf("\n");
 }
 
-void likeTweet(AddressTweet ptweet) {
+void likeTweet(AddressTweet *kicauanUtama) {
   /* Menambah jumlah like dari suatu tweet */
 
-  Like(ptweet)++;
+  Like(*kicauanUtama)++;
 }
 
-void editTweet(AddressTweet ptweet, Word newText) {
+void editTweet(AddressTweet *kicauanUtama, Word newText) {
   /* Mengganti text dari suatu tweet */
 
-  TextTweet(ptweet) = newText;
+  TextTweet(*kicauanUtama) = newText;
 }

@@ -19,9 +19,9 @@ void insertUtas(AddressTweet *kicauanUtama, AddressTweet sambungan, int index){
 	}
 }
 
-int lengthUtas(AddressTweet pTweet){
+int lengthUtas(AddressTweet *kicauanUtama){
 	int ans = 1;
-	AddressTweet loc = Utas(pTweet);
+	AddressTweet loc = Utas(*kicauanUtama);
 	while(loc != NULL){
 		ans++;
 		loc = Utas(loc);

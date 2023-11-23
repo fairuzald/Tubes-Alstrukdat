@@ -74,10 +74,10 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
   } else {
     int i;
     for (i = 0; i < listTweetLength(listTweet); i++) {
-      AddressTweet pTweet = ELMT_LISTDINTWEET(listTweet, i);
-      if (isTweetAuthor(pTweet, user) ||
-          isTeman(friendship, AuthorTweet(pTweet), user.nama)) {
-        displayTweet(pTweet);
+      AddressTweet *kicauanUtama = ELMT_LISTDINTWEET(listTweet, i);
+      if (isTweetAuthor(*kicauanUtama, user) ||
+          isTeman(friendship, AuthorTweet(*kicauanUtama), user.nama)) {
+        displayTweet(*kicauanUtama);
       }
     }
   }
@@ -170,21 +170,21 @@ boolean isIdExist(ListDinTweet listTweet, long id) {
   return 1 <= id && id <= NEFF_LISTDINTWEET(listTweet);
 }
 
-boolean isTweetAuthor(AddressTweet pTweet, User user) {
+boolean isTweetAuthor(AddressTweet *kicauanUtama, User user) {
   /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
 
-  return compareWordwWord(AuthorTweet(pTweet), user.nama);
+  return compareWordwWord(AuthorTweet(*kicauanUtama), user.nama);
 }
 
 boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
-                                    AddressTweet pTweet) {
+                                    AddressTweet *kicauanUtama) {
   /* Mengirimkan true jika tweet tersebut dibuat oleh user yang akunnya private
    */
   /* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
    * listUser*/
 
   int i = 0;
-  while (!isTweetAuthor(pTweet, listUser.contents[i])) {
+  while (!isTweetAuthor(*kicauanUtama, listUser.contents[i])) {
     i++;
   }
 

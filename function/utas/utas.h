@@ -10,7 +10,9 @@
 #include "./../adt/listlinierutas.h"
 #include "./../adt/boolean.h"
 
-void CreateUtas(ListDinTweet *listTweetMain, int idKicau);
+void CreateUtas(ListDinTweet *listTweetMain, int idKicau, Word textTweet, Word authorTweet, DATETIME timeCreatedTweet);
+
+void initUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser);
 
 void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index);
 

@@ -41,11 +41,11 @@ boolean isIdExist(ListDinTweet listTweet, long id);
 /* Mengirimkan true jika tweet dengan id tersebut berada di dalam list */
 /* yaitu antara 1..NEFF_LISTDINTWEET(listTweet) */
 
-boolean isTweetAuthor(AddressTweet ptweet, User user);
+boolean isTweetAuthor(AddressTweet *kicauanUtama, User user);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user tersebut */
 
 boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
-                                    AddressTweet pTweet);
+                                    AddressTweet *kicauanUtama);
 /* Mengirimkan true jika tweet tersebut dibuat oleh user yang akunnya private */
 /* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
  * listUser*/

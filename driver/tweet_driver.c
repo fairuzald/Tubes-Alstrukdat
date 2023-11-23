@@ -27,24 +27,24 @@ int main() {
   boolean kicauanUtamaA = false;
 
   // Membuat Tweet
-  AddressTweet pTweetA =
+  AddressTweet *kicauanUtamaA =
       CreateTweet(textA, authorA, timeA, idTweetA, idReplyA, idUtasA, likeA,
                   depthA, reply1A, reply2A, utasA, kicauanUtamaA);
 
   // Menampilkan Tweet
-  displayTweet(pTweetA);
+  displayTweet(*kicauanUtamaA);
 
   // Menampilkan Tweet
-  likeTweet(pTweetA);
-  displayTweet(pTweetA);
+  likeTweet(*kicauanUtamaA);
+  displayTweet(*kicauanUtamaA);
 
   // Mengganti isi Tweet
   Word textARevision = stringToWord("Revisi tweet pertama    aadawda71987&^&*");
-  editTweet(pTweetA, textARevision);
-  displayTweet(pTweetA);
+  editTweet(*kicauanUtamaA, textARevision);
+  displayTweet(*kicauanUtamaA);
 
   // Dealokasi Tweet
-  deallocateTweet(pTweetA);
+  deallocateTweet(*kicauanUtamaA);
 
   return 0;
 }
