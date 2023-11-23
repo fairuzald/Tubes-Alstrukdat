@@ -42,7 +42,7 @@ F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
         currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
         Jika currentChar = MARK, EndWord = true.
 Proses : Akuisisi kata menggunakan procedure SalinWord */
-
+void concat(char *str1, char *str2, char *output);
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata

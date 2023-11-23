@@ -1,5 +1,5 @@
 #include "globalFeature.h"
-void loginFeatureSave(Word *command) {
+void globalFeature(Word *command) {
   if (compareWordwString(*command, "SIMPAN")) {
     ADV();
     simpan();

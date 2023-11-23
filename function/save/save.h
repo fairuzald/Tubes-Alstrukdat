@@ -19,7 +19,6 @@
 #include <sys/stat.h>  // Untuk fungsi mkdir dan struct stat
 
 #include "save.h"
-void concat(char *str1, char *str2, char *output);
 void saveUser(ListStatikUser *l, char folderName[]);
 void saveTweet(ListDinTweet *l, char folderName[]);
 void saveUtas(ListDinTweet *l, char folderName[]);

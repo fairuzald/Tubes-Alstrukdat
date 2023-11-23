@@ -13,7 +13,7 @@ int findID(ListStatikUser userList, Word username) {
     if (compareWordwWord(userList.contents[i].nama, username)) {
       return i;
     } else {
-      return IDX_UNDEF;
+      return IDX_UNDEF_U;
     }
   }
 }

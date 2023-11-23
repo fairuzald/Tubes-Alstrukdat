@@ -92,7 +92,7 @@ void lihat_profil(Word Username) {
 
   /*ALGORITMA*/
   i = userIndex(Username);
-  if (i != IDX_UNDEF) {
+  if (i != IDX_UNDEF_U) {
     if (PUBLIC(i)) {
       printf("\n| Nama: ");
       printWord(NAMA(i));

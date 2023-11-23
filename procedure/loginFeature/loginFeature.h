@@ -17,7 +17,6 @@ void loginFeatureUser(Word *command);
 void loginFeatureTeman(Word *command, boolean sudahMasuk);
 void loginFeatureTemanReq(Word *command);
 void loginFeatureTweet(Word *command);
-void loginFeatureSave(Word *command);
 void loginFeature(Word *command, boolean sudahMasuk);
 
 #endif  // LOGIN_FEATURE_H

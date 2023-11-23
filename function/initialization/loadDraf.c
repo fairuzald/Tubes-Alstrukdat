@@ -1,11 +1,5 @@
 #include "initialization.h"
 
-void readDateTime(Word time, Word date, DATETIME *output) {
-  int hh, mm, ss;
-  splitTime(time, &hh, &mm, &ss);
-  *output = splitDate(date, hh, mm, ss);
-}
-
 void readDrafConfig(char filePath[]) {
   char fullPath[1000];
   concat(filePath, "/draf.config", fullPath);

@@ -117,7 +117,7 @@ void addUser(Word N, Word P) {
 void loadUser(Word N, Word P, Word B, Word HP, Word Weton, boolean Public,
               PhotoMat Foto) {
   if (!userFull()) {
-    int idx = getLastIdx() + 1;
+    int idx = getLastUserId() + 1;
     NAMA(idx) = N;
     PASS(idx) = P;
     BIO(idx) = B;
@@ -135,7 +135,7 @@ void displayAllUsers() {
     printf("List of Users:\n");
     printf("=====================\n");
 
-    for (int i = 0; i <= getLastIdx(); i++) {
+    for (int i = 0; i <= getLastUserId(); i++) {
       printf("Index: %d\n", i);
       printf("Name: ");
       printWord(NAMA(i));
