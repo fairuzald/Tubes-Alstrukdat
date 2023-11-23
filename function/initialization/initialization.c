@@ -75,15 +75,11 @@ boolean searchConfigFolder(char path[1000]) {
   }
 }
 
-void initialization(Word *command) {
-  printf("Silakan masukan folder konfigurasi untuk dimuat: ");
-  readInputNoIgnore(command);
+void loadSemuaConfig(Word *folderName) {
   Word configFolder;
-  CopyWordwWord(&configFolder, &currentWord);
-  printWord(configFolder);
+  CopyWordwWord(&configFolder, &folderName);
   char path[200];
   configFolder.TabWord[configFolder.Length] = '\0';
-  printWord(configFolder);
   if (!searchConfigFolder(path)) {
     return;
   }
@@ -93,13 +89,10 @@ void initialization(Word *command) {
   readDrafConfig(path);
   readKicauanConfig(path);
   readBalasanConfig(path);
-
-  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }
-
-int main() {
-  Word command;
-  initialization(&command);
-
-  return 0;
+void initialization(Word *command) {
+  printf("Silakan masukan folder konfigurasi untuk dimuat: ");
+  readInputNoIgnore(command);
+  loadSemuaConfig(command);
+  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }

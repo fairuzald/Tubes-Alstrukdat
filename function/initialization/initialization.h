@@ -26,7 +26,7 @@ boolean searchConfigFolder(char path[1000]);
 void initialization(Word *command);
 
 void readDateTime(Word time, Word date, DATETIME *output);
-
+void concat(char *str1, char *str2, char *output);
 void ExtractWordAfterDash(const Word *inputWord, Word *outputWord);
 void readUtasConfig(char filePath[]);
 void readUserConfig(char filePath[]);
@@ -35,5 +35,8 @@ void readKicauanConfig(char filePath[]);
 void readBalasanConfig(char filePath[]);
 void readMatrix(PhotoMat *m, int nRow, int nCol);
 void readDateTime(Word time, Word date, DATETIME *output);
+boolean searchConfigFolder(char path[1000]);
+void loadSemuaConfig(Word *folderName);
+void initialization(Word *command);
 
 #endif  // LOAD_USER_H

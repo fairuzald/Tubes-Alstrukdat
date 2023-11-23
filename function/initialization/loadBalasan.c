@@ -21,7 +21,7 @@ void readBalasanConfig(char filePath[]) {
     // printf("%d\n", id);
     ADVWORDFILE();
 
-    // Reply COUNT
+    // Reply COUNTor
     CopyWordwWord(&replyCountWord, &currentWordFile);
     replyCount = wordToInt(replyCountWord);
     ADVWORDFILEnoBLANK();
@@ -62,7 +62,7 @@ void readBalasanConfig(char filePath[]) {
       // TulisDATETIME(dt);
       // printf("\n");
       ADVWORDFILEnoBLANK();
-      CreateReply(text, replyAuthor, dt, idParent, idReplier);
+      // CreateReply(text, replyAuthor, dt, idParent, idReplier);
     }
   }
 }

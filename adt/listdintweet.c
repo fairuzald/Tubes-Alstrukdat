@@ -146,8 +146,7 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
     for (i = 0; i < listTweetLength(listTweet); i++) {
       AddressTweet pTweet = ELMT_LISTDINTWEET(listTweet, i);
       if (isTweetAuthor(pTweet, user) ||
-          isFriend(listUser, grafPertemanan, user.nama,
-                   AuthorTweet(pTweet))) {
+          isFriend(listUser, grafPertemanan, user.nama, AuthorTweet(pTweet))) {
         displayTweet(pTweet);
       }
     }
@@ -262,8 +261,8 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
   return !listUser.contents[i].public;
 }
 
-boolean isFriend(ListStatikUser listUser, Graph grafPertemanan,
-                 Word username1, Word username2) {
+boolean isFriend(ListStatikUser listUser, Graph grafPertemanan, Word username1,
+                 Word username2) {
   /* Mengirimkan true jika akun username1 berteman dengan akun username2 */
 
   int user1Index = findIdx(&listUser, username1);
