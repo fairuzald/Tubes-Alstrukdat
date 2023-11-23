@@ -209,12 +209,12 @@ void inputNewTweet(ListDinTweet *listTweet, User user);
  * dalam list */
 
 void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
-                      FriendshipMatrix friendshipMatrix, User user);
+                      Graph grafPertemanan, User user);
 /* Bagian dari fitur utama kicauan */
 /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
 void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
-          FriendshipMatrix friendshipMatrix, User user);
+          Graph grafPertemanan, User user);
 /* Bagian dari fitur utama kicauan */
 /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
  * pada tweet tersebut */
@@ -242,7 +242,7 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
 /* listUser tidak kosong dan informasi author dari tweet pasti ada di dalam
  * listUser*/
 
-boolean isFriend(ListStatikUser listUser, FriendshipMatrix friendshipMatrix,
+boolean isFriend(ListStatikUser listUser, Graph grafPertemanan,
                  Word username1, Word username2);
 /* Mengirimkan true jika akun username1 berteman dengan akun username2 */
 
