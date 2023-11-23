@@ -2,46 +2,20 @@
 #define FRIEND_H
 
 #include <stdio.h>
+#include "./../adt/graph.h"
+#include "./../adt/liststatikuser.h"
+#include "./../adt/input/wordmachine.h"
 
-#include "../../adt/graph.h"
-#include "../../adt/input/wordmachine.h"
+extern Graph grafPertemanan;
 
-#define MAX 100
+int findID(ListStatikUser users, Word username);
 
-typedef struct {
-  Graph Friendship;  // Matriks adjacency untuk merepresentasikan pertemanan
-} FriendshipMatrix;
+int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username);
 
-typedef struct {
-  int senderID;           // ID pengguna yang meminta pertemanan
-  int receiverID;         // ID pengguna yang diminta pertemanan
-  int senderFriendCount;  // Jumlah teman saat pengguna meminta pertemanan
-} FriendRequest;
+void DaftarTeman(Graph grafPertemanan, ListStatikUser userList, Word currentUser, boolean sudahMasuk);
 
-typedef struct {
-  User users[MAX];  // Array of users
-  int n;            // Jumlah pengguna dalam daftar
-} UserList;
+boolean isTeman(Graph grafPertemanan, Word userFriend, Word currentUser);
 
-typedef struct {
-  User friends[MAX];  // Array of user IDs
-  int n;              // Jumlah teman dalam daftar
-} FriendList;
-
-typedef struct {
-  Word name;       // Nama Pengguna
-  int popularity;  // Jumlah Popularitas
-} User;
-
-#define User(x) users->users[x].name
-#define Name(x) x->name
-#define UserPopularity(x) x->popularity
-
-int findIdx(UserList *users, Word username);
-
-void DaftarTeman(FriendshipMatrix *friendshipMatrix, UserList *users,
-                 Word currentUser, FriendList *friendList);
-
-void HapusTeman(Graph *G, UserList *users, Word username, Word CurrentUser);
+void HapusTeman(Graph * G, ListStatikUser * userList, Word CurrentUser);
 
 #endif
