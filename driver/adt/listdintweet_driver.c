@@ -27,9 +27,10 @@ int main() {
   AddressTweet reply1A = NULL;
   AddressTweet reply2A = NULL;
   AddressTweet utasA = NULL;
+  boolean kicauanUtamaA = false;
   AddressTweet pTweetA =
       CreateTweet(textA, authorA, timeA, idTweetA, idReplyA, idUtasA, likeA,
-                  depthA, reply1A, reply2A, utasA);
+                  depthA, reply1A, reply2A, utasA, kicauanUtamaA);
 
   Word textB = stringToWord("Tweet kedua saya!");
   Word authorB = stringToWord("Dudung Surudung");
@@ -42,9 +43,10 @@ int main() {
   AddressTweet reply1B = NULL;
   AddressTweet reply2B = NULL;
   AddressTweet utasB = NULL;
+  boolean kicauanUtamaB = false;
   AddressTweet pTweetB =
       CreateTweet(textB, authorB, timeB, idTweetB, idReplyB, idUtasB, likeB,
-                  depthB, reply1B, reply2B, utasB);
+                  depthB, reply1B, reply2B, utasB, kicauanUtamaB);
 
   Word textC = stringToWord("Tweet ketiga saya!");
   Word authorC = stringToWord("Heri Suheri");
@@ -57,9 +59,10 @@ int main() {
   AddressTweet reply1C = NULL;
   AddressTweet reply2C = NULL;
   AddressTweet utasC = NULL;
+  boolean kicauanUtamaC = false;
   AddressTweet pTweetC =
       CreateTweet(textC, authorC, timeC, idTweetC, idReplyC, idUtasC, likeC,
-                  depthC, reply1C, reply2C, utasC);
+                  depthC, reply1C, reply2C, utasC, kicauanUtamaC);
 
   // Membuat ListDinTweet
   ListDinTweet myListTweet;
