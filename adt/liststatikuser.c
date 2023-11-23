@@ -5,9 +5,10 @@
 ListStatikUser userList;
 
 /* ********** KONSTRUKTOR ********** */
-void initPP(PhotoMat P) {
+PhotoMat initPP() {
   /* Menginitialisasi foto profil */
   /*KAMUS LOKAL*/
+  PhotoMat P;
   int i, j;
 
   /*ALGORITMA*/
@@ -17,6 +18,7 @@ void initPP(PhotoMat P) {
       COLOR(P, i, j) = 'R';
     }
   }
+  return P;
 }
 
 void CreateuserList() {
@@ -39,7 +41,7 @@ void CreateuserList() {
     HP(i) = emptyWord;
     WETON(i) = emptyWord;
     PUBLIC(i) = true;
-    initPP(FOTO(i));
+    FOTO(i)=initPP();
   }
 }
 

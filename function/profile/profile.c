@@ -18,15 +18,15 @@ void displayPhoto(PhotoMat m) {
 
   for (i = 0; i < 5; i++) {
     for (j = 0; j < 5; j++) {
-      if (j == 4) {
-        printf("\n");
-      }
       if (COLOR(m, i, j) == 'R') {
         print_red(CONTENT(m, i, j));
       } else if (COLOR(m, i, j) == 'G') {
         print_green(CONTENT(m, i, j));
       } else {
         print_blue(CONTENT(m, i, j));
+      }
+      if (j == 4) {
+        printf("\n");
       }
     }
   }
@@ -53,7 +53,7 @@ boolean numberCheck(Word w){
 void ganti_profil(){
 /*Digunakan untuk mengganti isi profil Currentuser (selain foto profil dan jenis akun)*/
   /*KAMUS LOKAL*/
-
+  int id;
   /*ALGORITMA*/
   printf("\n| Nama: "); printWord(currentUser.nama);
   printf("\n| Bio Akun: "); printWord(currentUser.bio);
@@ -82,6 +82,8 @@ void ganti_profil(){
     LowerCase();
   }
   currentUser.weton=currentWord;
+  id=userIndex(currentUser.nama);
+  USER(id)=currentUser;
   printf("\nProfil anda sudah berhasil diperbarui!\n");
 
 }
@@ -116,8 +118,8 @@ void lihat_profil(Word Username){
 
 void atur_jenis_akun(){
 /*Digunakan untuk mengganti jenis akun Currentuser*/
-  /*KAMUS LOKAL*/
-
+  /*KAMUS LOKAL*/ 
+  int id;
   /*ALGORITMA*/
   printf("\nSaat ini, akun Anda adalah akun ");
   if (currentUser.public) printf("Publik. Ingin mengubah ke akun Privat? (YA/TIDAK)\n");
@@ -136,6 +138,8 @@ void atur_jenis_akun(){
     currentUser.public=!currentUser.public;
     if (currentUser.public) printf("\nAkun anda sudah diubah menjadi akun Publik.\n");
     else printf("\nAkun anda sudah diubah menjadi akun Privat.\n");
+    id=userIndex(currentUser.nama);
+    USER(id)=currentUser;
   }
   else{
     printf("\nAkun anda tidak berubah.\n");
@@ -145,7 +149,7 @@ void atur_jenis_akun(){
 void ubah_foto_profil(){
 /*Digunakan untuk mengubah foto profil Currentuser*/
   /*KAMUS LOKAL*/
-  int i,j;
+  int i,j,k,id;
   /*ALGORITMA*/
   printf("\nFoto profil Anda saat ini adalah\n");
   displayPhoto(currentUser.fotoProfil);
@@ -155,17 +159,25 @@ void ubah_foto_profil(){
   i=0;
   j=0;
   while(currentChar!=MARK){
-    if (currentChar=='\n'){
-      i++;
-      j=0;
-    }
-    else{
-      COLOR(currentUser.fotoProfil,i,j)=currentChar;
-      ADVWORD();
-      CONTENT(currentUser.fotoProfil,i,j)=currentChar;
-      j++;
-      ADVWORD();
+    for (k=0;k<5;k++){
+      if (k==4){
+        COLOR(currentUser.fotoProfil,i,j)=currentWord.TabWord[0];
+        CONTENT(currentUser.fotoProfil,i,j)=currentChar;
+        ADV();
+        ADVWORD();
+        i++;
+        j=0;
+      }
+      else{
+        COLOR(currentUser.fotoProfil,i,j)=currentWord.TabWord[0];
+        ADVWORD();
+        CONTENT(currentUser.fotoProfil,i,j)=currentWord.TabWord[0];
+        j++;
+        ADVWORD();
+      }
     }
   }
+  id=userIndex(currentUser.nama);
+  USER(id)=currentUser;
   printf("\nFoto profil anda sudah berhasil diganti!\n");
 }
