@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 ListDinTweet listTweetMain;
+Graph grafPertemanan;
 
 /* ********** KONSTRUKTOR ********** */
 
@@ -134,7 +135,7 @@ void inputNewTweet(ListDinTweet *listTweet, User user) {
 }
 
 void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
-                      FriendshipMatrix friendshipMatrix, User user) {
+                      Graph grafPertemanan, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Menampilkan semua tweet milik pengguna dan teman-teman pengguna */
 
@@ -145,7 +146,7 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
     for (i = 0; i < listTweetLength(listTweet); i++) {
       AddressTweet pTweet = ELMT_LISTDINTWEET(listTweet, i);
       if (isTweetAuthor(pTweet, user) ||
-          isFriend(listUser, friendshipMatrix, user.nama,
+          isFriend(listUser, grafPertemanan, user.nama,
                    AuthorTweet(pTweet))) {
         displayTweet(pTweet);
       }
@@ -154,7 +155,7 @@ void displayListTweet(ListDinTweet listTweet, ListStatikUser listUser,
 }
 
 void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
-          FriendshipMatrix friendshipMatrix, User user) {
+          Graph grafPertemanan, User user) {
   /* Bagian dari fitur utama kicauan */
   /* Mencari tweet dengan id "id" di dalam list, kemudian menambah jumlah like
    * pada tweet tersebut */
@@ -163,7 +164,7 @@ void like(ListDinTweet *listTweet, long id, ListStatikUser listUser,
     printf("Tidak ditemukan kicauan dengan ID = %ld!\n", id);
   } else if (isTweetAuthorPrivateAccount(
                  listUser, ELMT_LISTDINTWEET(*listTweet, id - 1)) &&
-             !isFriend(listUser, friendshipMatrix, user.nama,
+             !isFriend(listUser, grafPertemanan, user.nama,
                        AuthorTweet(ELMT_LISTDINTWEET(*listTweet, id - 1)))) {
     printf(
         "Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu "
@@ -261,11 +262,11 @@ boolean isTweetAuthorPrivateAccount(ListStatikUser listUser,
   return !listUser.contents[i].public;
 }
 
-boolean isFriend(ListStatikUser listUser, FriendshipMatrix friendshipMatrix,
+boolean isFriend(ListStatikUser listUser, Graph grafPertemanan,
                  Word username1, Word username2) {
   /* Mengirimkan true jika akun username1 berteman dengan akun username2 */
 
   int user1Index = findIdx(&listUser, username1);
   int user2Index = findIdx(&listUser, username2);
-  return 1 == friendshipMatrix.Friendship.adjMatrix.mem[user1Index][user2Index];
+  return 1 == grafPertemanan.mem[user1Index][user2Index];
 }

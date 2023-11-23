@@ -11,8 +11,14 @@ int findID(ListStatikUser users, Word username) {
   for (i = 0; i < CAPACITY; i++) {
     if (compareWordwWord(users.contents[i].nama, username)) {
       return i;
+    } else {
+      return IDX_UNDEF;
     }
   }
+}
+
+Word findUser(ListStatikUser users, int userID) {
+  return (users.contents[userID].nama);
 }
 
 int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username) {
@@ -114,4 +120,15 @@ void removeFriend(Graph * grafPertemanan, Word userFriend, Word currentUser) {
 
   deleteEdge(grafPertemanan, userID, friendID);
   deleteEdge(grafPertemanan, friendID, userID);
+}
+
+// Menambah informasi pertemanan dari Adjacency Matrix
+void insertFriend(Graph * grafPertemanan, Word userFriend, Word currentUser) {
+  int userID, friendID;
+
+  userID = findID(userList, currentUser);
+  friendID = findID(userList, userFriend);
+
+  insertEdge(grafPertemanan, userID, friendID);
+  insertEdge(grafPertemanan, friendID, userID);
 }
