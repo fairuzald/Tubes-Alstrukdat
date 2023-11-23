@@ -4,18 +4,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-void concat(char *str1, char *str2, char *output) {
-  int i, j;
-  for (i = 0; str1[i] != '\0'; ++i) {
-    output[i] = str1[i];
-  }
-
-  for (j = 0; str2[j] != '\0'; ++j, ++i) {
-    output[i] = str2[j];
-  }
-
-  output[i] = '\0';
-}
 
 void saveUser(ListStatikUser *l, char folderName[]) {
   // Mengecek apakah direktori sudah ada
@@ -74,7 +62,7 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   //     } else {
   //       fprintf(file, "%c", isTeman(j, k) ? '1' : '0');
   //     }
-  //   }
+  //   }F
   //   fprintf(file, "\n");
   // }
 

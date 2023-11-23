@@ -12,11 +12,12 @@ void CreateQueue(FriendRequestQueue* friendRequestQueue) {
 
 void AppendQueue(FriendRequestQueue* friendRequestQueue, int senderID,
                  int receiverID, int senderFriendCount) {
-  friendRequestQueue->buffer[length(*friendRequestQueue)].senderID = senderID;
-  friendRequestQueue->buffer[length(*friendRequestQueue)].receiverID =
+  friendRequestQueue->buffer[lengthQueue(*friendRequestQueue)].senderID =
+      senderID;
+  friendRequestQueue->buffer[lengthQueue(*friendRequestQueue)].receiverID =
       receiverID;
-  friendRequestQueue->buffer[length(*friendRequestQueue)].senderFriendCount =
-      senderFriendCount;
+  friendRequestQueue->buffer[lengthQueue(*friendRequestQueue)]
+      .senderFriendCount = senderFriendCount;
   friendRequestQueue->idxTail++;
   friendRequestQueue->n++;
 }
