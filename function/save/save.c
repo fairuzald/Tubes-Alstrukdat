@@ -1,7 +1,9 @@
 #include "save.h"
 
 #include <stdio.h>
-#include <sys/stat.h>  // Untuk fungsi mkdir dan struct stat
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 void concat(char *str1, char *str2, char *output) {
   int i, j;
   for (i = 0; str1[i] != '\0'; ++i) {
@@ -17,10 +19,6 @@ void concat(char *str1, char *str2, char *output) {
 
 void saveUser(ListStatikUser *l, char folderName[]) {
   // Mengecek apakah direktori sudah ada
-  struct stat st = {0};
-  if (stat(folderName, &st) == -1) {
-    mkdir(folderName, 0700);
-  }
 
   char folderPath[200];
   concat(folderName, "/pengguna.config", folderPath);
@@ -72,16 +70,17 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   // for (int j = 0; j < userCount(); j++) {
   //   for (int k = 0; k < userCount(); k++) {
   //     if (k < userCount() - 1) {
-  //       fprintf(file, "%c ", mFriend.Friendship.adjMatrix.mem[j][k]);
+  //       fprintf(file, "%c ", isTeman(j, k) ? '1' : '0');
   //     } else {
-  //       fprintf(file, "%c", mFriend.Friendship.adjMatrix.mem[j][k]);
+  //       fprintf(file, "%c", isTeman(j, k) ? '1' : '0');
   //     }
   //   }
   //   fprintf(file, "\n");
   // }
+
   fclose(file);
 }
-saveTweet(ListDinTweet *l, char folderName[]) {
+void saveTweet(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/kicauan.config", folderPath);
   FILE *file = fopen(folderPath, "w");
@@ -201,7 +200,7 @@ void saveReply(ListDinTweet *l, char folderName[]) {
 
         reply = Reply1(reply);
       }
-      reply = Reply2(tweet);
+      reply = Reply1(tweet);
     }
   }
 
@@ -210,10 +209,6 @@ void saveReply(ListDinTweet *l, char folderName[]) {
 
 void saveTweetReplyUtas(ListDinTweet *l, char folderName[]) {
   /// Mengecek apakah direktori sudah ada
-  struct stat st = {0};
-  if (stat(folderName, &st) == -1) {
-    mkdir(folderName, 0700);
-  }
 
   saveTweet(l, folderName);
   saveUtas(l, folderName);
@@ -221,10 +216,6 @@ void saveTweetReplyUtas(ListDinTweet *l, char folderName[]) {
 
 void saveDraft(ListStackDraft *l, char folderName[]) {
   // Mengecek apakah direktori sudah ada
-  struct stat st = {0};
-  if (stat(folderName, &st) == -1) {
-    mkdir(folderName, 0700);
-  }
 
   char folderPath[200];
   concat(folderName, "/draf.config", folderPath);
@@ -257,4 +248,36 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   }
 
   fclose(file);
+}
+
+void createFolder(char *folderName) {}
+
+void saveToFolder(char *folderName) {
+  printf("Anda akan melakukan penyimpanan di %s.\n\n", folderName);
+  for (int i = 1; i <= 3; i++) {
+    printf("%d...\n", i);
+  }
+
+  // Masukin fungsi penyimpanan disini
+  printf("Penyimpanan telah berhasil dilakukan!\n\n");
+}
+
+void simpan() {
+  Word folderName;
+  struct stat st = {0};
+
+  printf("Masukkan nama folder penyimpanan\n");
+  readInput(&folderName);
+  if (stat(folderName.TabWord, &st) == -1) {
+    printf(
+        "Belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n\n",
+        folderName, folderName);
+    for (int i = 1; i <= 3; i++) {
+      printf("%d...\n", i);
+    }
+    createFolder(folderName.TabWord);
+    printf("%s sudah berhasil dibuat.\n\n", folderName.TabWord);
+  }
+
+  saveToFolder(folderName.TabWord);
 }

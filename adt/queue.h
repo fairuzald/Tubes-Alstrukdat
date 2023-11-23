@@ -1,31 +1,31 @@
 /* File : queue.h */
-/* Definisi ADT Queue versi 3 dengan representasi array secara eksplisit dan alokasi statik */
+/* Definisi ADT Queue versi 3 dengan representasi array secara eksplisit dan
+ * alokasi statik */
 
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "../function/friend/friend.h"
 #include "boolean.h"
-#include "friend.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
-
+#define CAPACITYQUEUE 100
 
 /* Definisi elemen dan address */
 typedef User ElType;
 
 typedef struct {
-	ElType buffer[CAPACITY]; 
-	int idxHead;
-	int idxTail;
+  ElType buffer[CAPACITYQUEUE];
+  int idxHead;
+  int idxTail;
 } Queue;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
 #define IDX_HEAD(q) (q).idxHead
 #define IDX_TAIL(q) (q).idxTail
-#define     HEAD(q) (q).buffer[(q).idxHead]
-#define     TAIL(q) (q).buffer[(q).idxTail]
+#define HEAD(q) (q).buffer[(q).idxHead]
+#define TAIL(q) (q).buffer[(q).idxTail]
 
 /* *** Kreator *** */
 void CreateQueue(Queue *q);
@@ -59,9 +59,10 @@ void dequeue(Queue *q, ElType *val);
 
 /* *** Display Queue *** */
 void displayQueue(Queue q);
-/* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
+/* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara
+   kurung siku; antara dua elemen dipisahkan dengan separator "koma", tanpa
+   tambahan karakter di depan, di tengah, atau di belakang, termasuk spasi dan
+   enter */
 /* I.S. q boleh kosong */
 /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */

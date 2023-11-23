@@ -14,8 +14,13 @@
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
 #include "../../adt/stackdraft.h"
+#include "../friend/friend.h"
+#include "../friend_request/friend_request.h"
 #include "../input/input.h"
 #include "../profile/profile.h"
+#include "../tweet/main_tweet.h"
+#include "../tweet/tweet.h"
+#include "../tweet_draft/main_draft.h"
 #include "../user/user.h"
 
 void concat(char *str1, char *str2, char *output);
@@ -26,7 +31,7 @@ boolean searchConfigFolder(char path[1000]);
 void initialization(Word *command);
 
 void readDateTime(Word time, Word date, DATETIME *output);
-
+void concat(char *str1, char *str2, char *output);
 void ExtractWordAfterDash(const Word *inputWord, Word *outputWord);
 void readUtasConfig(char filePath[]);
 void readUserConfig(char filePath[]);
@@ -35,5 +40,8 @@ void readKicauanConfig(char filePath[]);
 void readBalasanConfig(char filePath[]);
 void readMatrix(PhotoMat *m, int nRow, int nCol);
 void readDateTime(Word time, Word date, DATETIME *output);
+boolean searchConfigFolder(char path[1000]);
+void loadSemuaConfig(Word *folderName);
+void initialization(Word *command);
 
 #endif  // LOAD_USER_H

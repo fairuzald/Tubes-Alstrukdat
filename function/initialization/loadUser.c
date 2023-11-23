@@ -17,37 +17,38 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
   }
 }
 
-readGraphPertemanan(int countUser) {
-  CreateGraph(&mFriendship.Friendship, countUser);
+void readGraphPertemanan(int countUser) {
+  CreateGraph(&grafPertemanan, countUser);
   for (int i = 0; i < countUser; i++) {
     for (int j = 0; j < countUser; j++) {
       if (currentWordFile.Length > 0) {
-        if (currentWordFile.TabWord[0] == '1') {
-          insertEdge(&mFriendship.Friendship, i, j);
-        } else {
-          deleteEdge(&mFriendship.Friendship, i, j);
+        if (currentWordFile.TabWord[2 * j] == '1') {
+          insertEdge(&grafPertemanan, i, j);
         }
       }
-      ADVWORDFILE();
     }
+    ADVWORDFILE();
   }
 }
 
-// readReqPertemanan(int row) {
-//   CreateGraph(&mFriendship.Friendship, countUser);
-//   for (int i = 0; i < countUser; i++) {
-//     for (int j = 0; j < countUser; j++) {
-//       if (currentWordFile.Length > 0) {
-//         if (currentWordFile.TabWord[0] == '1') {
-//           insertEdge(&mFriendship.Friendship, i, j);
-//         } else {
-//           deleteEdge(&mFriendship.Friendship, i, j);
-//         }
-//       }
-//       ADVWORDFILE();
-//     }
-//   }
-// }
+void readReqPertemanan(int row) {
+  CreateQueue(&friendRequestQueue);
+  for (int i = 0; i < row; i++) {
+    ADVWORDFILEnoBLANK();
+    Word id, addressId, friendCount;
+    CopyWordwWord(&id, &currentWordFile);
+    int idInt = wordToInt(id);
+    ADVWORDFILEnoBLANK();
+    CopyWordwWord(&addressId, &currentWordFile);
+    int idAddressInt = wordToInt(addressId);
+    ADVWORDFILEnoBLANK();
+    CopyWordwWord(&friendCount, &currentWordFile);
+    int friendCountInt = wordToInt(friendCount);
+    AppendQueue(&friendRequestQueue, idInt, idAddressInt, friendCountInt);
+    ADVWORDFILEnoBLANK();
+  }
+}
+
 void readUserConfig(char filePath[]) {
   CreateuserList();
   char fullPath[1000];
@@ -88,13 +89,12 @@ void readUserConfig(char filePath[]) {
     readMatrix(&pp, 5, 5);
     loadUser(nama, pass, bio, numberHP, weton, isPublic, pp);
   }
-  ADVWORDFILE();
 
-  readGraphPertemanan(countUser);
   ADVWORDFILE();
+  readGraphPertemanan(countUser);
 
   Word countRequest;
   CopyWordwWord(&countRequest, &currentWordFile);
   int countReq = wordToInt(countRequest);
-  // readReqPertemanan(countReq);
+  readReqPertemanan(countReq);
 }

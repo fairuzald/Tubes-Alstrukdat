@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-const MAX_CHOICE_LENGTH = 7;
+const int MAX_CHOICE_LENGTH = 7;
 
 /* State Global ListStackDraft */
 ListStackDraft listStackDraftMain;
@@ -57,7 +57,7 @@ void saveNewDraft(ListStackDraft *listStackDraft, User user, Word newText) {
   // Jika belum, buat StackDraft baru
   if (IDX_UNDEF_LISTSTACKDRAFT == indexUser) {
     StackDraft newStackDraft;
-    const INITIAL_CAPACITY = 20;
+    const int INITIAL_CAPACITY = 20;
     CreateEmptyStackDraft(&newStackDraft, INITIAL_CAPACITY, user.nama);
     insertLastListStackDraft(listStackDraft, newStackDraft);
     indexUser = NEFF_LISTSTACKDRAFT(*listStackDraft) - 1;

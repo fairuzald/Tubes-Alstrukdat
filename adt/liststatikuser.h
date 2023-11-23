@@ -38,7 +38,7 @@ extern boolean sudahMasuk;
 #define FOTO(i) USER(i).fotoProfil
 
 /*  Kamus Umum */
-#define CAPACITY 20
+#define CAPACITYUSER 20
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
@@ -49,7 +49,7 @@ extern boolean sudahMasuk;
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
-  User contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+  User contents[CAPACITYUSER]; /* memori tempat penyimpan elemen (container) */
 } ListStatikUser;
 /* Definisi :
    List kosong: semua user berisi nilai bawaan (Word kosong untuk Word, 0 untuk
@@ -64,7 +64,7 @@ PhotoMat initPP();
 
 void CreateuserList();
 /* I.S. userList sembarang */
-/* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
+/* F.S. Terbentuk userList kosong dengan kapasitas CAPACITYUSER */
 /* Proses: Inisialisasi semua elemen userList sesuai nilai bawaan */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */

@@ -1,13 +1,13 @@
 #ifndef friend_request_H
 #define friend_request_H
 
-#include "friend.h"
-#include "./adt/input/wordmachine.h"
-#include "./adt/boolean.h"
-#include "./../adt/graph.h"
-#include "./../adt/liststatikuser.h"
+#include "../../adt/boolean.h"
+#include "../../adt/graph.h"
+#include "../../adt/input/wordmachine.h"
+#include "../../adt/liststatikuser.h"
+#include "../friend/friend.h"
 
-#define MAX_CAP 20*19 // (?) bener ga sih?
+#define MAX_CAP 20 * 19  // (?) bener ga sih?
 #define IDX_UNDEF -1
 
 typedef struct {
@@ -19,10 +19,10 @@ typedef struct {
 typedef FriendRequest ElType;
 
 typedef struct {
-	ElType buffer[MAX_CAP]; 
-	int idxHead;
-	int idxTail;
-  int n; // Semacam Length
+  ElType buffer[MAX_CAP];
+  int idxHead;
+  int idxTail;
+  int n;  // Semacam Length
 } FriendRequestQueue;
 
 #define SenderID(x) (x).senderID
@@ -31,9 +31,10 @@ typedef struct {
 
 extern FriendRequestQueue friendRequestQueue;
 
-void CreateQueue(FriendRequestQueue * friendRequestQueue);
+void CreateQueue(FriendRequestQueue* friendRequestQueue);
 
-void CreateFriendRequestQueue(FriendRequestQueue * friendRequestQueue, int row, int senderID, int receiverID, int senderFriendCount);
+void AppendQueue(FriendRequestQueue* friendRequestQueue, int senderID,
+                 int receiverID, int senderFriendCount);
 
 boolean isEmpty(FriendRequestQueue friendRequestQueue);
 
@@ -41,13 +42,17 @@ boolean isFull(FriendRequestQueue friendRequestQueue);
 
 int length(FriendRequestQueue friendRequestQueue);
 
-void addFriend(FriendRequestQueue * friendRequestQueue, ListStatikUser userList, Word currentUser);
+void addFriend(FriendRequestQueue* friendRequestQueue, ListStatikUser userList,
+               Word currentUser);
 
-void displayFriendRequests(FriendRequestQueue friendRequestQueue, ListStatikUser userList, Word currentUser);
+void displayFriendRequests(FriendRequestQueue friendRequestQueue,
+                           ListStatikUser userList, Word currentUser);
 
-void approveFriendRequest(FriendRequestQueue * friendRequestQueue, ListStatikUser userList, Word currentUser);
+void approveFriendRequest(FriendRequestQueue* friendRequestQueue,
+                          ListStatikUser userList, Word currentUser);
 
-int NRequest(FriendRequestQueue friendRequestQueue, ListStatikUser userList, Word currentUser);
+int NRequest(FriendRequestQueue friendRequestQueue, ListStatikUser userList,
+             Word currentUser);
 
 boolean isRequestExist(Word username, Word currentUser);
 

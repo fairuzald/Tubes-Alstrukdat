@@ -23,7 +23,7 @@ PhotoMat initPP() {
 
 void CreateuserList() {
   /* I.S. userList sembarang */
-  /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
+  /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITYUSER */
   /* Proses: Inisialisasi semua elemen userList sesuai nilai bawaan */
   /*KAMUS LOKAL*/
   int i, j, k;
@@ -34,14 +34,14 @@ void CreateuserList() {
   emptyWord.TabWord[0] = BLANK;
   emptyWord.Length = 0;
 
-  for (i = IDX_MIN; i < CAPACITY; i++) {
+  for (i = IDX_MIN; i < CAPACITYUSER; i++) {
     NAMA(i) = emptyWord;
     PASS(i) = emptyWord;
     BIO(i) = emptyWord;
     HP(i) = emptyWord;
     WETON(i) = emptyWord;
     PUBLIC(i) = true;
-    FOTO(i)=initPP();
+    FOTO(i) = initPP();
   }
 }
 
@@ -55,7 +55,7 @@ int userCount() {
 
   /*algoritma*/
   counter = 0;
-  while (NAMA(counter).Length != 0 && counter < CAPACITY) {
+  while (NAMA(counter).Length != 0 && counter < CAPACITYUSER) {
     counter += 1;
   }
   return counter;
@@ -77,7 +77,7 @@ boolean noUsers() {
 /* *** Test List penuh *** */
 boolean userFull() {
   /* Mengirimkan true jika userList l penuh, mengirimkan false jika tidak */
-  return (userCount() == CAPACITY);
+  return (userCount() == CAPACITYUSER);
 }
 
 /* ********** SEARCHING ********** */
