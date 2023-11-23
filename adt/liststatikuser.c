@@ -34,7 +34,7 @@ void CreateuserList() {
   emptyWord.TabWord[0] = BLANK;
   emptyWord.Length = 0;
 
-  for (i = IDX_MIN; i < CAPACITYUSER; i++) {
+  for (i = 0; i < CAPACITYUSER; i++) {
     NAMA(i) = emptyWord;
     PASS(i) = emptyWord;
     BIO(i) = emptyWord;
@@ -62,7 +62,7 @@ int userCount() {
 }
 
 /* *** Selektor INDEKS *** */
-int getLastIdx() {
+int getLastUserId() {
   /* Prekondisi : userList tidak kosong */
   /* Mengirimkan indeks elemen userList terakhir */
   return (userCount() - 1);
@@ -89,14 +89,14 @@ int userIndex(Word val) {
 
   /*algoritma*/
   if (noUsers()) {
-    return IDX_UNDEF;
+    return IDX_UNDEF_U;
   } else {
-    for (i = IDX_MIN; i <= getLastIdx(); i++) {
+    for (i = 0; i <= getLastUserId(); i++) {
       if (compareWordwWord(NAMA(i), val)) {
         return i;
       }
     }
-    return IDX_UNDEF;
+    return IDX_UNDEF_U;
   }
 }
 
@@ -135,7 +135,7 @@ void displayAllUsers() {
     printf("List of Users:\n");
     printf("=====================\n");
 
-    for (int i = IDX_MIN; i <= getLastIdx(); i++) {
+    for (int i = 0; i <= getLastIdx(); i++) {
       printf("Index: %d\n", i);
       printf("Name: ");
       printWord(NAMA(i));

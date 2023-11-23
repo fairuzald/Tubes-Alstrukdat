@@ -57,7 +57,7 @@ void masuk(){
       printf("Masukkan nama:\n");
       STARTWORDnoIgnore(20);
       i=userIndex(currentWord);
-      while (i==IDX_UNDEF){
+      while (i==IDX_UNDEF_U){
         printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
         printf("\nMasukkan nama:\n");
         STARTWORDnoIgnore(20);
