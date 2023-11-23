@@ -48,12 +48,13 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
 }
 
 // Folder config search
-boolean searchConfigFolder(char path[1000]) {
-  // Membuat path lengkap untuk folder konfigurasi
+boolean searchConfigFolder(char path[]) {
+  char fullPath[1000];
+  concat("config/", path, fullPath);
 
   // Pengecekan keberadaan folder
   struct stat st;
-  if (stat(path, &st) == -1) {
+  if (stat(fullPath, &st) == -1) {
     printf("Folder %s tidak ditemukan.\n", path);
     return false;
   } else {
@@ -63,19 +64,16 @@ boolean searchConfigFolder(char path[1000]) {
 }
 
 void loadSemuaConfig(Word *folderName) {
-  Word configFolder;
-  CopyWordwWord(&configFolder, folderName);
-  char path[200];
-  configFolder.TabWord[configFolder.Length] = '\0';
-  if (!searchConfigFolder(path)) {
+  printWord(*folderName);
+  if (!searchConfigFolder(folderName->TabWord)) {
     return;
   }
 
-  readUserConfig(path);
-  readUtasConfig(path);
-  readDrafConfig(path);
-  readKicauanConfig(path);
-  readBalasanConfig(path);
+  readUserConfig(folderName->TabWord);
+  readUtasConfig(folderName->TabWord);
+  readDrafConfig(folderName->TabWord);
+  readKicauanConfig(folderName->TabWord);
+  readBalasanConfig(folderName->TabWord);
 }
 void initialization(Word *command) {
   printf("Silakan masukan folder konfigurasi untuk dimuat: ");

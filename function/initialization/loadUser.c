@@ -51,8 +51,9 @@ void readReqPertemanan(int row) {
 
 void readUserConfig(char filePath[]) {
   CreateuserList();
-  char fullPath[1000];
-  concat(filePath, "/user.config", fullPath);
+  char fullPath[200];
+  concat("config/", filePath, fullPath);
+  concat(fullPath, "/pengguna.config", fullPath);
   STARTWORDFILE(fullPath);
 
   int countUser;
@@ -89,7 +90,7 @@ void readUserConfig(char filePath[]) {
     readMatrix(&pp, 5, 5);
     loadUser(nama, pass, bio, numberHP, weton, isPublic, pp);
   }
-
+  displayAllUsers();
   ADVWORDFILE();
   readGraphPertemanan(countUser);
 
@@ -97,4 +98,12 @@ void readUserConfig(char filePath[]) {
   CopyWordwWord(&countRequest, &currentWordFile);
   int countReq = wordToInt(countRequest);
   readReqPertemanan(countReq);
+
+  // ADVWORDFILE();
+  // readGraphPertemanan(countUser);
+
+  // Word countRequest;
+  // CopyWordwWord(&countRequest, &currentWordFile);
+  // int countReq = wordToInt(countRequest);
+  // readReqPertemanan(countReq);
 }
