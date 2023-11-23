@@ -1,7 +1,6 @@
 # Set the compiler executable
 COMPILER = gcc
 
-
 # Compile .c files
 main.o: main.c
 	$(COMPILER) -c main.c
@@ -35,41 +34,41 @@ OBJECT_FILES = main.o \
                adt/input/charmachinefile.o \
                adt/input/wordmachinefile.o \
                adt/matrix/matrix.o \
-							 adt/bintreetweet.o \
-							 adt/datetime.o \
-							 adt/graph.o \
-							 adt/listdintweet.o \
-							 adt/liststackdraft.o \
-							 adt/liststatikuser.o \
-							 adt/queue.o \
-							 adt/stackdraft.o \
-							 adt/time.o \
-               procedure/splashscreen.o
-							 procedure/globalFeature/globalFeature.o \
-							 procedure/loginFeature/loginFeature.o \
-							 procedure/logoutFeature/logoutFeature.o \
+               adt/bintreetweet.o \
+               adt/datetime.o \
+               adt/graph.o \
+               adt/listdintweet.o \
+               adt/liststackdraft.o \
+               adt/liststatikuser.o \
+               adt/queue.o \
+               adt/stackdraft.o \
+               adt/time.o \
+               procedure/splashscreen.o \
+               procedure/globalFeature/globalFeature.o \
+               procedure/loginFeature/loginFeature.o \
+               procedure/logoutFeature/logoutFeature.o \
 
 # Build main.exe from object files
 main.exe: $(OBJECT_FILES)
 	$(COMPILER) -o main.exe \
 	  $(OBJECT_FILES) \
 	  -Ifunction/friend \
-	  -Ifunction/initialization \
-	  -Ifunction/user \
-	  -Ifunction/input \
-	  -Ifunction/save_load \
-	  -Ifunction/utas \
-	  -Ifunction/tweet_draft \
-	  -Ifunction/reply \
-	  -Ifunction/tweet \
-	  -Ifunction/friend_request \
-	  -Ifunction/profile \
-	  -Ifunction/pcolor \
 	  -Ifunction/error \
+	  -Ifunction/friend_request \
+	  -Ifunction/initialization \
+	  -Ifunction/input \
+	  -Ifunction/pcolor \
+	  -Ifunction/profile \
+	  -Ifunction/reply \
+	  -Ifunction/save \
+	  -Ifunction/tweet \
+	  -Ifunction/tweet_draft \
+	  -Ifunction/user \
+	  -Ifunction/utas \
 	  -Iadt/input \
-	  -Iadt/input/wordmachine \
-	  -Iadt/input/charmachine \
-	  -Iprocedure/splashscreen
+	  -Iadt/matrix \
+	  -Iadt \
+	  -Iprocedure
 
 # Clean up .o files
 .PHONY: clean

@@ -1,11 +1,11 @@
 #ifndef friend_request_H
 #define friend_request_H
 
-#include "./../adt/graph.h"
-#include "./../adt/liststatikuser.h"
-#include "./adt/boolean.h"
-#include "./adt/input/wordmachine.h"
-#include "friend.h"
+#include "../../adt/boolean.h"
+#include "../../adt/graph.h"
+#include "../../adt/input/wordmachine.h"
+#include "../../adt/liststatikuser.h"
+#include "../friend/friend.h"
 
 #define MAX_CAP 20 * 19  // (?) bener ga sih?
 #define IDX_UNDEF -1
