@@ -59,7 +59,7 @@ typedef struct {
 extern ListStatikUser userList; /*men-global-kan userList*/
 
 /* ********** KONSTRUKTOR ********** */
-void initPP(PhotoMat P);
+PhotoMat initPP();
 /* Menginitialisasi foto profil */
 
 void CreateuserList();
