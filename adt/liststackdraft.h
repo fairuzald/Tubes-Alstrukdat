@@ -7,7 +7,6 @@
 #define LISTSTACKDRAFT_H
 
 #include "boolean.h"
-#include "listdintweet.h"
 #include "stackdraft.h"
 
 /*  Kamus Umum */
@@ -36,9 +35,6 @@ typedef struct {
 /* Definisi :
    List kosong: nEff = 0
    Definisi elemen pertama: ELMT_LISTSTACKDRAFT(l,i) dengan i=0 */
-
-/* State Global ListStackDraft */
-extern ListStackDraft listStackDraftMain;
 
 /* ********** SELEKTOR ********** */
 
@@ -91,39 +87,5 @@ void insertLastListStackDraft(ListStackDraft *l, ElType val);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
-
-/* Fitur-Fitur Utama */
-
-void inputNewDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
-                   User user);
-/* Menambahkan sebuah draft */
-/* Kemudian, user dapat memilih untuk menghapus, menyimpan, atau menerbitkan
- * draft */
-
-void deleteNewDraft();
-/* Menghapus draft yang baru dibuat */
-
-void saveNewDraft(ListStackDraft *listStackDraft, User user, Word newText);
-/* Menyimpan draft yang baru dibuat */
-
-void publishNewDraft(ListDinTweet *listTweet, User user, Word newText);
-/* Menerbitkan draft yang baru dibuat */
-
-void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
-                      User user);
-/* Menampilkan draft terakhir */
-/* Kemudian, user dapat memilih untuk menghapus, mengubah, atau menerbitkan
- * draft */
-
-void deleteUserDraft(ListStackDraft *listStackDraft, User user);
-/* Menghapus draft terakhir milik user */
-
-void modifyUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
-                     User user);
-/* Mengubah draft terakhir milik user */
-
-void publishUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
-                      User user);
-/* Menerbitkan draft terakhir milik user */
 
 #endif

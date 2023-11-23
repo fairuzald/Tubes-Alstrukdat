@@ -7,6 +7,7 @@
 #include "../../function/friend_request/friend_request.h"
 #include "../../function/profile/profile.h"
 #include "../../function/save/save.h"
+#include "../../function/tweet/main_tweet.h"
 #include "../../function/user/user.h"
 #ifndef LOGIN_FEATURE_H
 #define LOGIN_FEATURE_H
