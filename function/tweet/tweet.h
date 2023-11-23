@@ -1,8 +1,6 @@
 #ifndef TWEET_H
 #define TWEET_H
 
-#include <time.h>
-
 #include "../../adt/datetime.h"
 #include "../../adt/input/wordmachine.h"
 
