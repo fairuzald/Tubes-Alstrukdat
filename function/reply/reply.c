@@ -59,6 +59,8 @@ void displayReply(int idKicau, int space, AddressTweet pTweet) {
       printf(" ");
     }
 
+    idAuthorTweet = userIndex(AuthorTweet(pTweet));
+    priv = !PUBLIC(idAuthorTweet) && !isTeman(AuthorTweet(pTweet), currentUser.nama);
     if (priv) {
       printf("| PRIVAT\n");
     } else {

@@ -2,17 +2,20 @@
 #define UTAS_H
 
 #include "../tweet/tweet.h"
+#include "../friend/friend.h"
 #include "./../adt/input/wordmachine.h"
 #include "./../adt/listdintweet.h"
+#include "./../adt/liststatikuser.h"
+#include "./../adt/datetime.h"
+#include "./../adt/listlinierutas.h"
+#include "./../adt/boolean.h"
 
-void CreateUtas(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
-                long idUtas, AddressTweet utas, Tweet *prev);
+void CreateUtas(ListDinTweet *listTweetMain, int idKicau);
 
-void connectUtas(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
-                 long idUtas, long index, Tweet *prev);
+void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index);
 
-void deleteUtas(int index, Tweet *utama);
+void deleteUtas(ListDinTweet *listTweetMain, int idUtas, int idKicau);
 
-void displayUtas(ListDinTweet l, int idUtas, AddressTweet pTweet);
+void displayUtas(ListDinTweet *listTweetMain, int idUtas);
 
 #endif
