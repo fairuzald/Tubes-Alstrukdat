@@ -1,5 +1,7 @@
 #include "main_draft.h"
 
+#include <stdio.h>
+
 const MAX_CHOICE_LENGTH = 7;
 
 /* State Global ListStackDraft */

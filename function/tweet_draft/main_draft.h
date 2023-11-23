@@ -4,6 +4,7 @@
 #include "../../adt/listdintweet.h"
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
+#include "../tweet/main_tweet.h"
 
 /* State Global ListStackDraft */
 extern ListStackDraft listStackDraftMain;

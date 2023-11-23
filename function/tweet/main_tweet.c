@@ -1,5 +1,7 @@
 #include "main_tweet.h"
 
+#include <stdio.h>
+
 /* State Global ListDinTweet */
 ListDinTweet listTweetMain;
 
