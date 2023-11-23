@@ -81,17 +81,9 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   // }
   fclose(file);
 }
-
-void saveTweet(ListDinTweet *l, char folderName[]) {
-  // Mengecek apakah direktori sudah ada
-  struct stat st = {0};
-  if (stat(folderName, &st) == -1) {
-    mkdir(folderName, 0700);
-  }
-
+saveTweet(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/kicauan.config", folderPath);
-
   FILE *file = fopen(folderPath, "w");
   if (file == NULL) {
     printf("Tidak bisa membuat file kicauan.config\n");
@@ -116,6 +108,115 @@ void saveTweet(ListDinTweet *l, char folderName[]) {
   }
 
   fclose(file);
+}
+
+void saveUtas(ListDinTweet *l, char folderName[]) {
+  char folderPath[200];
+  concat(folderName, "/utas.config", folderPath);
+  FILE *file = fopen(folderPath, "w");
+  if (file == NULL) {
+    printf("Tidak bisa membuat file utas.config\n");
+    return;
+  }
+
+  // Menulis jumlah kicauan yang memiliki utas
+  fprintf(file, "%ld\n", NEFF_LISTDINTWEET(*l));
+
+  // Menulis data setiap utas
+  for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
+    AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
+
+    if (Utas(tweet) != NULL) {                 // Jika tweet ini memiliki utas
+      fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+
+      AddressTweet utas = Utas(tweet);
+      int utasCount = 0;
+      while (utas != NULL) {  // Menghitung jumlah utas
+        utasCount++;
+        utas = Utas(utas);
+      }
+
+      fprintf(file, "%d\n", utasCount);  // Jumlah utas
+
+      utas = Utas(tweet);
+      while (utas != NULL) {  // Menulis setiap utas
+        fprintf(file, "%s\n", TextTweet(utas).TabWord);
+        fprintf(file, "%s\n", AuthorTweet(utas).TabWord);
+        fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
+                TimeCreatedTweet(utas).DD, TimeCreatedTweet(utas).MM,
+                TimeCreatedTweet(utas).YYYY, TimeCreatedTweet(utas).T.HH,
+                TimeCreatedTweet(utas).T.MM, TimeCreatedTweet(utas).T.SS);
+
+        utas = Utas(utas);
+      }
+    }
+  }
+
+  fclose(file);
+}
+void saveReply(ListDinTweet *l, char folderName[]) {
+  char folderPath[200];
+  concat(folderName, "/balasan.config", folderPath);
+  FILE *file = fopen(folderPath, "w");
+  if (file == NULL) {
+    printf("Tidak bisa membuat file balasan.config\n");
+    return;
+  }
+
+  // Menulis jumlah kicauan yang memiliki balasan
+  fprintf(file, "%ld\n", NEFF_LISTDINTWEET(*l));
+
+  // Menulis data setiap balasan
+  for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
+    AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
+
+    if (Reply1(tweet) != NULL ||
+        Reply2(tweet) != NULL) {  // Jika tweet ini memiliki balasan
+      fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+
+      AddressTweet reply = Reply1(tweet);
+      int replyCount = 0;
+      while (reply != NULL) {  // Menghitung jumlah balasan
+        replyCount++;
+        reply = Reply1(reply);
+      }
+
+      fprintf(file, "%d\n", replyCount);  // Jumlah balasan
+
+      reply = Reply1(tweet);
+      int couter = 0;
+      while (reply != NULL) {
+        if (couter == 0) {
+          fprintf(file, "-1 %ld\n", IdReply(reply));
+        }  // Parent dan ID balasan
+        else {
+          fprintf(file, "1 %ld\n", IdTweet(reply));  // ID balasan
+        }
+        fprintf(file, "%s\n", TextTweet(reply).TabWord);    // Isi balasan
+        fprintf(file, "%s\n", AuthorTweet(reply).TabWord);  // Author
+        fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
+                TimeCreatedTweet(reply).DD, TimeCreatedTweet(reply).MM,
+                TimeCreatedTweet(reply).YYYY, TimeCreatedTweet(reply).T.HH,
+                TimeCreatedTweet(reply).T.MM, TimeCreatedTweet(reply).T.SS);
+
+        reply = Reply1(reply);
+      }
+      reply = Reply2(tweet);
+    }
+  }
+
+  fclose(file);
+}
+
+void saveTweetReplyUtas(ListDinTweet *l, char folderName[]) {
+  /// Mengecek apakah direktori sudah ada
+  struct stat st = {0};
+  if (stat(folderName, &st) == -1) {
+    mkdir(folderName, 0700);
+  }
+
+  saveTweet(l, folderName);
+  saveUtas(l, folderName);
 }
 
 void saveDraft(ListStackDraft *l, char folderName[]) {
