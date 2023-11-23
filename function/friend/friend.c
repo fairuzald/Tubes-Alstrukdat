@@ -1,6 +1,5 @@
-#include "friend.h"
-
 #include <stdio.h>
+#include "friend.h"
 
 Graph grafPertemanan;
 ListStatikUser userList;
@@ -12,8 +11,14 @@ int findID(ListStatikUser users, Word username) {
   for (i = 0; i < CAPACITY; i++) {
     if (compareWordwWord(users.contents[i].nama, username)) {
       return i;
+    } else {
+      return IDX_UNDEF;
     }
   }
+}
+
+Word findUser(ListStatikUser users, int userID) {
+  return (users.contents[userID].nama);
 }
 
 int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username) {
@@ -27,26 +32,21 @@ int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username) {
     }
   }
 
-  return ctr - 1;  // Ada 1 kemungkinan suatu user akan berteman dengan dirinya
-                   // sendiri
+  return ctr - 1; // Ada 1 kemungkinan suatu user akan berteman dengan dirinya sendiri
 }
 
-void DaftarTeman(Graph grafPertemanan, ListStatikUser userList,
-                 Word CurrentUser, boolean sudahMasuk) {
+void DaftarTeman(Graph grafPertemanan, ListStatikUser userList, Word CurrentUser, boolean sudahMasuk) {
   int i, userID, jumlahTeman;
   userID = findID(userList, CurrentUser);
   jumlahTeman = countTeman(grafPertemanan, userList, CurrentUser);
 
   if (!sudahMasuk) {
-    printf(
-        "Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan "
-        "BurBir.\n");
+    printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
   } else {
     if (jumlahTeman == 0) {
       printf("WADOOHHHHH ");
       printWord(CurrentUser);
-      printf(
-          " belum punya teman nich hiks! cariin dia temen donkk xixixi :D \n");
+      printf(" belum punya teman nich hiks! cariin dia temen donkk xixixi :D \n");
     } else {
       printWord(CurrentUser);
       printf(" memiliki %d teman\n", jumlahTeman);
@@ -81,8 +81,7 @@ boolean isTeman(Graph grafPertemanan, Word userFriend, Word currentUser) {
   return isTeman;
 }
 
-void HapusTeman(Graph* grafPertemanan, ListStatikUser* userList,
-                Word currentUser) {
+void HapusTeman(Graph * grafPertemanan, ListStatikUser * userList, Word currentUser) {
   Word userFriend;
   int friendID, userID;
 
@@ -90,9 +89,7 @@ void HapusTeman(Graph* grafPertemanan, ListStatikUser* userList,
   friendID = findID(*userList, userFriend);
 
   if (!sudahMasuk) {
-    printf(
-        "Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan "
-        "BurBir.\n");
+    printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
   } else {
     printf("Masukkan nama pengguna: \n");
     STARTWORD();
@@ -115,7 +112,7 @@ void HapusTeman(Graph* grafPertemanan, ListStatikUser* userList,
 }
 
 // Hapus informasi pertemanan dari Adjacency Matrix
-void removeFriend(Graph* grafPertemanan, Word userFriend, Word currentUser) {
+void removeFriend(Graph * grafPertemanan, Word userFriend, Word currentUser) {
   int userID, friendID;
 
   userID = findID(userList, currentUser);
@@ -123,4 +120,15 @@ void removeFriend(Graph* grafPertemanan, Word userFriend, Word currentUser) {
 
   deleteEdge(grafPertemanan, userID, friendID);
   deleteEdge(grafPertemanan, friendID, userID);
+}
+
+// Menambah informasi pertemanan dari Adjacency Matrix
+void insertFriend(Graph * grafPertemanan, Word userFriend, Word currentUser) {
+  int userID, friendID;
+
+  userID = findID(userList, currentUser);
+  friendID = findID(userList, userFriend);
+
+  insertEdge(grafPertemanan, userID, friendID);
+  insertEdge(grafPertemanan, friendID, userID);
 }

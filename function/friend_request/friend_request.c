@@ -1,119 +1,190 @@
 #include <stdio.h>
+#include "friend_request.h"
 
-#include "../../adt/boolean.h"
-#include "../../adt/input/wordmachine.h"
-#include "../../adt/queue.h"
-#include "../friend/friend.h"
+FriendRequestQueue friendRequestQueue;
 
-#define MAX_USERS 20
-
-// Fungsi untuk menambahkan teman
-void addFriend(Queue *friendRequests, UserList *users, User currentUser) {
-  if (isEmpty(*friendRequests)) {
-    char friendName[50];
-    printf("Masukkan nama pengguna: ");
-    scanf("%s", friendName);
-
-    int found = false;
-    for (int i = 0; i < MAX_USERS; i++) {
-      if (isEqual(users->users[i].name, friendName)) {
-        found = true;
-
-        // Pemeriksaan apakah pengguna sudah mengirim permintaan sebelumnya
-        int existingRequest = false;
-        Queue tempQueue;
-        CreateQueue(&tempQueue);
-
-        // Iterasi melalui queue untuk mencari permintaan pertemanan
-        while (!isEmpty(*friendRequests)) {
-          User existingRequestUser;
-          dequeue(friendRequests, &existingRequestUser);
-          enqueue(&tempQueue, existingRequestUser);
-
-          // Jika ditemukan permintaan dari pengguna yang sama, set
-          // existingRequest menjadi true dan hentikan iterasi
-          if (isEqual(existingRequestUser.name, friendName)) {
-            existingRequest = true;
-            break;
-          }
-        }
-
-        // Mengembalikan elemen ke queue semula
-        while (!isEmpty(tempQueue)) {
-          User tempUser;
-          dequeue(&tempQueue, &tempUser);
-          enqueue(friendRequests, tempUser);
-        }
-
-        if (existingRequest) {
-          printf(
-              "Anda telah mengirimkan permintaan pertemanan kepada %s "
-              "sebelumnya. Silakan tunggu hingga permintaan Anda disetujui.\n",
-              friendName);
-        } else {
-          User friendRequest;
-          strcpy(friendRequest.name, friendName);
-          friendRequest.popularity = users->users[i].popularity;
-          enqueue(friendRequests, friendRequest);
-          printf(
-              "Permintaan pertemanan kepada %s telah dikirim. Tunggu beberapa "
-              "saat hingga permintaan Anda disetujui.\n",
-              friendName);
-        }
-
-        break;
-      }
-    }
-
-    if (!found) {
-      printf("Pengguna bernama %s tidak ditemukan.\n", friendName);
-    }
-  } else {
-    printf(
-        "Terdapat permintaan pertemanan yang belum Anda setujui. Silakan "
-        "kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.\n");
-  }
+void CreateQueue(FriendRequestQueue * friendRequestQueue) {
+    friendRequestQueue->idxHead = IDX_UNDEF;
+    friendRequestQueue->idxTail = IDX_UNDEF;
+    friendRequestQueue->n = 0;
 }
 
-void displayFriendRequests(Queue *friendRequests) {
-  printf("\nTerdapat %d permintaan pertemanan untuk Anda.\n\n",
-         length(*friendRequests));
-  if (!isEmpty(*friendRequests)) {
-    for (int i = IDX_HEAD(*friendRequests);
-         i != (IDX_TAIL(*friendRequests) + 1) % CAPACITY;
-         i = (i + 1) % CAPACITY) {
-      printf("| %s\n", friendRequests->buffer[i].name);
-      printf("| Jumlah teman: %d\n", friendRequests->buffer[i].popularity);
-    }
-  }
+boolean isEmpty(FriendRequestQueue friendRequestQueue) {
+    return (friendRequestQueue.n == 0);
 }
 
-// Fungsi untuk menyetujui permintaan pertemanan
-void approveFriendRequest(Queue *friendRequests) {
-  if (!isEmpty(*friendRequests)) {
-    User topRequest;
-    dequeue(friendRequests, &topRequest);
+boolean isFull(FriendRequestQueue friendRequestQueue) {
+    return (friendRequestQueue.n == MAX_CAP);
+}
 
-    printf("\nPermintaan pertemanan teratas dari %s\n", topRequest.name);
-    printf("| %s\n", topRequest.name);
-    printf("| Jumlah teman: %d\n", topRequest.popularity);
+int length(FriendRequestQueue friendRequestQueue) {
+    return (friendRequestQueue.n);
+}
 
-    char response[3];
-    printf(
-        "Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) ");
-    scanf("%s", response);
-
-    if (isEqual(response, "YA")) {
-      printf(
-          "Permintaan pertemanan dari %s telah disetujui. Selamat! Anda telah "
-          "berteman dengan %s.\n",
-          topRequest.name, topRequest.name);
+void addFriend(FriendRequestQueue * friendRequestQueue, Word currentUser) {
+    int i;
+    Word CalonTeman;
+    int userID = findID(userList, currentUser);
+    if (NRequest(*friendRequestQueue, currentUser) > 0) {
+        printf("WADOOOHHHH masih terdapat permintaan pertemanan yang belum Anda setujui. Silakan kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.\n");
     } else {
-      printf("Permintaan pertemanan dari %s telah ditolak.\n", topRequest.name);
-      enqueue(friendRequests,
-              topRequest);  // Menambahkan kembali ke antrian jika ditolak
+        printf("Masukkan nama pengguna: \n");
+        STARTWORD();
+        CopyWordwWord(&CalonTeman, &currentWord);
+    
+        if (findID(userList, CalonTeman) == IDX_UNDEF) {
+            printf("YAHHHH Pengguna bernama ");
+            printWord(CalonTeman);
+            printf(" tidak ditemukan.\n");
+        } else if (isRequestExist(CalonTeman, currentUser)){
+            printf("Anda sudah mengirimkan permintaan pertemanan kepada ");
+            printWordNoNewLine(CalonTeman);
+            printf(". Silakan tunggu hingga permintaan Anda disetujui.");
+        } else if (isTeman(grafPertemanan, CalonTeman, currentUser)) {
+            printf("Lu udah temenan sama dia ASW\n");
+        } else {
+            if (isEmpty(*friendRequestQueue)) {
+                CreateQueue(&friendRequestQueue);
+                friendRequestQueue->buffer[0].senderID = userID;
+                friendRequestQueue->buffer[0].receiverID = findID(userList, CalonTeman);
+                friendRequestQueue->buffer[0].senderFriendCount = countTeman(grafPertemanan, userList, currentUser);
+            }  else {
+                friendRequestQueue->idxTail++;
+                i = friendRequestQueue->idxTail - 1;
+                while (countTeman(grafPertemanan, userList, currentUser) > friendRequestQueue->buffer[i].senderFriendCount) {
+                    friendRequestQueue->buffer[i + 1].senderID = friendRequestQueue->buffer[i].senderID;
+                    friendRequestQueue->buffer[i + 1].receiverID = friendRequestQueue->buffer[i].receiverID;
+                    friendRequestQueue->buffer[i + 1].senderFriendCount = friendRequestQueue->buffer[i].senderFriendCount;
+                    i--;
+                }
+                friendRequestQueue->buffer[i + 1].senderID = friendRequestQueue->buffer[i].senderID;
+                friendRequestQueue->buffer[i + 1].receiverID = friendRequestQueue->buffer[i].receiverID;
+                friendRequestQueue->buffer[i + 1].senderFriendCount = friendRequestQueue->buffer[i].senderFriendCount;
+                friendRequestQueue->buffer[i].senderID = userID;
+                friendRequestQueue->buffer[i].receiverID = findID(userList, CalonTeman);
+                friendRequestQueue->buffer[i].senderFriendCount = countTeman(grafPertemanan, userList, currentUser);
+        }
+        friendRequestQueue->idxTail++;
+        friendRequestQueue->n++;
+        printf("Permintaan pertemanan kepada "); 
+        printWord(CalonTeman);
+        printf("telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.");
     }
-  } else {
-    printf("Tidak ada permintaan pertemanan untuk Anda.\n");
-  }
+}
+}
+
+void displayFriendRequests(FriendRequestQueue friendRequestQueue, Word currentUser) {
+    int i, userID;
+
+    userID = findID(userList, currentUser);
+
+    if (NRequest(friendRequestQueue, currentUser) == 0) {
+        printf("WADOOOHHHH Tidak ada permintaan pertemanan untuk Anda. Sabar, ya!\n");
+    } else {
+        printf("Terdapat %d permintaan pertemanan untuk Anda.\n", NRequest(friendRequestQueue, currentUser));
+        for (i = 0; i < friendRequestQueue.n; i++) {
+            if (friendRequestQueue.buffer[i].receiverID == userID) {
+                printf("| ");
+                printWord(findUser(userList, userID));
+                printf("\n");
+                printf("| Jumlah teman: ");
+                printf("%d", friendRequestQueue.buffer[i].senderFriendCount);
+                printf("\n\n");
+            }
+        }
+    }
+}
+
+void approveFriendRequest(Word currentUser) {
+    int i = 0;
+    int userID, friendID;
+    userID = findID(userList, currentUser);
+
+    if (isEmpty(friendRequestQueue) || NRequest(friendRequestQueue, currentUser) == 0) {
+        printf("Waduhh belum ada permintaan pertemanan, nich :'D \n");
+    } else {
+        while (friendRequestQueue.buffer[i].receiverID != userID) {
+            i++;
+        }
+
+        printf("Permintaan teratas dari ");
+        printWord(findUser(userList, friendRequestQueue.buffer[i].senderID));
+        printf("\n");
+        printf("\n");
+        printf("| ");
+        printWord(findUser(userList, friendRequestQueue.buffer[i].senderID));
+        printf("\n");
+        printf("| Jumlah teman: ");
+        printf("%d", friendRequestQueue.buffer[i].senderFriendCount);
+        printf("\n");
+        printf("\n");
+        printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) ");
+        printf("\n");
+        STARTWORD();
+        if (compareWordwString(currentWord, "YA")) {
+            printf("Permintaan pertemanan dari ");
+            printWord(findUser(userList, friendRequestQueue.buffer[i].senderID));
+            printf(" telah disetujui. Selamat! Anda telah berteman dengan ");
+            printWord(findUser(userList, friendRequestQueue.buffer[i].senderID));
+            printf(".\n");
+            insertFriend(&grafPertemanan, currentUser, findUser(userList, friendRequestQueue.buffer[i].senderID));
+        } else {
+            printf("Permintaan pertemanan dari ");
+            printWord(findUser(userList, friendRequestQueue.buffer[i].senderID));
+            printf(" telah ditolak.");
+        }
+
+        friendRequestQueue.n--;
+
+        if (friendRequestQueue.n == 0) {
+            CreateQueue(&friendRequestQueue);
+        } else {
+            while (i < friendRequestQueue.idxTail) {
+                friendRequestQueue.buffer[i].senderID = friendRequestQueue.buffer[i+1].senderID;
+                friendRequestQueue.buffer[i].receiverID = friendRequestQueue.buffer[i+1].receiverID;
+                friendRequestQueue.buffer[i].senderFriendCount = friendRequestQueue.buffer[i+1].senderFriendCount;
+                i++;
+            }
+            friendRequestQueue.idxTail--;
+        }
+    }
+}
+
+// Jumlah Permintaan Teman
+int NRequest(FriendRequestQueue friendRequestQueue, Word currentUser) {
+    int i, ctr, userID;
+    
+    ctr = 0;
+
+    userID = findID(userList, currentUser);
+
+    if (isEmpty(friendRequestQueue)) {
+        ctr = 0;
+    } else {
+        for (i = 0; i < friendRequestQueue.n; i++) {
+            if (friendRequestQueue.buffer[i].senderID == userID) {
+                ctr++;
+            }
+        }
+    }
+
+    return ctr;
+}
+
+boolean isRequestExist(Word username, Word currentUser) {
+    int i, userID, friendID;
+    boolean found;
+    found = false;
+    i = 0;
+
+    userID = findID(userList, currentUser);
+    friendID = findID(userList, username);
+
+    while (i < friendRequestQueue.n && !found) {
+        if (friendRequestQueue.buffer[i].senderID == userID && friendRequestQueue.buffer[i].receiverID == friendID) {
+            found = true;
+        }
+    }
+
+    return found;
 }
