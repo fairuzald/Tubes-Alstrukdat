@@ -65,16 +65,17 @@ void saveUser(ListStatikUser *l, char folderName[]) {
     }
   }
 
-  // for (int j = 0; j < userCount(); j++) {
-  //   for (int k = 0; k < userCount(); k++) {
-  //     if (k < userCount() - 1) {
-  //       fprintf(file, "%c ", mFriend.Friendship.adjMatrix.mem[j][k]);
-  //     } else {
-  //       fprintf(file, "%c", mFriend.Friendship.adjMatrix.mem[j][k]);
-  //     }
-  //   }
-  //   fprintf(file, "\n");
-  // }
+  for (int j = 0; j < userCount(); j++) {
+    for (int k = 0; k < userCount(); k++) {
+      if (k < userCount() - 1) {
+        fprintf(file, "%c ", isFriend(j, k) ? '1' : '0');
+      } else {
+        fprintf(file, "%c", isFriend(j, k) ? '1' : '0');
+      }
+    }
+    fprintf(file, "\n");
+  }
+
   fclose(file);
 }
 void saveTweet(ListDinTweet *l, char folderName[]) {
