@@ -57,7 +57,7 @@ void saveNewDraft(ListStackDraft *listStackDraft, User user, Word newText) {
   // Jika belum, buat StackDraft baru
   if (IDX_UNDEF_LISTSTACKDRAFT == indexUser) {
     StackDraft newStackDraft;
-    const INITIAL_CAPACITY = 10;
+    const INITIAL_CAPACITY = 20;
     CreateEmptyStackDraft(&newStackDraft, INITIAL_CAPACITY, user.nama);
     insertLastListStackDraft(listStackDraft, newStackDraft);
     indexUser = NEFF_LISTSTACKDRAFT(*listStackDraft) - 1;
@@ -138,7 +138,8 @@ void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
     STARTWORDnoIgnore(MAX_CHOICE_LENGTH);
 
     if (compareWordwWord(currentWord, stringToWord("HAPUS"))) {
-      deleteUserDraft(listStackDraft, user);
+      Draft deletedDraft;
+      deleteUserDraft(listStackDraft, user, &deletedDraft);
       printf("Draf telah berhasil dihapus!\n");
     } else if (compareWordwWord(currentWord, stringToWord("UBAH"))) {
       modifyUserDraft(listStackDraft, listTweet, user);
@@ -150,18 +151,29 @@ void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
   }
 }
 
-void deleteUserDraft(ListStackDraft *listStackDraft, User user) {
+void deleteUserDraft(ListStackDraft *listStackDraft, User user,
+                     Draft *deletedDraft) {
   /* Menghapus draft terakhir milik user */
 
   int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
-  Draft deletedDraft;
-  Pop(&ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser), &deletedDraft);
+  StackDraft stackDraftUser = ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser);
+  Pop(&stackDraftUser, deletedDraft);
+
+  // Mengurangi kapasitas StackDtaft jika terisi < 25% dari kapasitas
+  // Kapasitas minimal StackDraft adalah 20
+  if ((Top(stackDraftUser) + 1) < (CapacityStackDraft(stackDraftUser) / 4) &&
+      (CapacityStackDraft(stackDraftUser) / 2) >= 20) {
+    // Kapasitas berkurang menjadi 50% dari kapasitas semula
+    shrinkStackDraft(&stackDraftUser, (CapacityStackDraft(stackDraftUser) / 2));
+  }
 }
 
 void modifyUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
                      User user) {
   /* Mengubah draft terakhir milik user */
-  deleteUserDraft(listStackDraft, user);
+
+  Draft deletedDraft;
+  deleteUserDraft(listStackDraft, user, &deletedDraft);
   inputNewDraft(listStackDraft, listTweet, user);
 }
 
@@ -169,11 +181,11 @@ void publishUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
                       User user) {
   /* Menerbitkan draft terakhir milik user */
 
-  int indexUser = indexOfAuthorDraft(*listStackDraft, user.nama);
+  Draft deletedDraft;
+  deleteUserDraft(listStackDraft, user, &deletedDraft);
 
   // Memasukkan semua informasi yang dibutuhkan ke dalam Tweet
-  Word newText =
-      TextDraft(InfoTop(ELMT_LISTSTACKDRAFT(*listStackDraft, indexUser)));
+  Word newText = TextDraft(deletedDraft);
   Word author = user.nama;
   DATETIME timeCreated = getCurrentDateTime();
   long idTweet = NEFF_LISTDINTWEET(*listTweet) + 1;
