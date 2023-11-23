@@ -3,17 +3,7 @@
 #include <stdio.h>
 
 void displayPhoto(PhotoMat m) {
-  /* I.S. m terdefinisi */
-  /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing
-  elemen per baris dipisahkan sebuah spasi. Baris terakhir tidak diakhiri dengan
-  newline */
-  /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris
-   * dan per kolom */
-  /* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
-  1 2 3
-  4 5 6
-  8 9 10
-  */
+  /* menulis matriks content m dengan warna dari color m */
 
   int i, j;
 
@@ -174,7 +164,6 @@ void ubah_foto_profil() {
   printf("\nFoto profil Anda saat ini adalah\n");
   displayPhoto(currentUser.fotoProfil);
   printf("\nMasukkan foto profil yang baru!\n");
-  printf("(Masukkan TIDAK jika anda tidak jadi merubah foto profil)\n");
   STARTWORD();
   i = 0;
   j = 0;
