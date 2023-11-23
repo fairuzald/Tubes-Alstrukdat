@@ -1,4 +1,4 @@
-#include "loadUser.h"
+#include "initialization.h"
 
 void readMatrix(PhotoMat *m, int nRow, int nCol) {
   /* I.S. isIdxValid(nRow,nCol) */
@@ -17,10 +17,42 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
   }
 }
 
-void readUserConfig() {
+readGraphPertemanan(int countUser) {
+  CreateGraph(&mFriendship.Friendship, countUser);
+  for (int i = 0; i < countUser; i++) {
+    for (int j = 0; j < countUser; j++) {
+      if (currentWordFile.Length > 0) {
+        if (currentWordFile.TabWord[0] == '1') {
+          insertEdge(&mFriendship.Friendship, i, j);
+        } else {
+          deleteEdge(&mFriendship.Friendship, i, j);
+        }
+      }
+      ADVWORDFILE();
+    }
+  }
+}
+
+// readReqPertemanan(int row) {
+//   CreateGraph(&mFriendship.Friendship, countUser);
+//   for (int i = 0; i < countUser; i++) {
+//     for (int j = 0; j < countUser; j++) {
+//       if (currentWordFile.Length > 0) {
+//         if (currentWordFile.TabWord[0] == '1') {
+//           insertEdge(&mFriendship.Friendship, i, j);
+//         } else {
+//           deleteEdge(&mFriendship.Friendship, i, j);
+//         }
+//       }
+//       ADVWORDFILE();
+//     }
+//   }
+// }
+void readUserConfig(char filePath[]) {
   CreateuserList();
-  STARTWORDFILE("pengguna.config");
-  ADVFILE();
+  char fullPath[1000];
+  concat(filePath, "/user.config", fullPath);
+  STARTWORDFILE(fullPath);
 
   int countUser;
 
@@ -32,53 +64,37 @@ void readUserConfig() {
   for (int i = 0; i < countUser; i++) {
     CopyWordwWord(&nama, &currentWordFile);
     CropWord(&nama, 20);
-    // printf("Nama: ");
-    // printWord(nama);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&pass, &currentWordFile);
     CropWord(&pass, 20);
-    // printf("Pass: ");
-    // printWord(pass);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&bio, &currentWordFile);
     CropWord(&bio, 135);
-    // printf("Bio: ");
-    // printWord(bio);
-    // printf("\n");
     ADVWORDFILE();
 
     CopyWordwWord(&numberHP, &currentWordFile);
-    // printf("Number HP: ");
-    // printWord(numberHP);
-    // printf("\n");
     ADVWORDFILE();
+
     CopyWordwWord(&weton, &currentWordFile);
-    // printf("Weton: ");
-    // printWord(weton);
-    // printf("\n");
     ADVWORDFILE();
 
     boolean isPublic = compareWordwString(status, "PUBLIC");
     CopyWordwWord(&status, &currentWordFile);
-    // printf("Status: ");
-    // printWord(status);
-    // printf("\n");
+
     ADVWORDFILE();
 
     readMatrix(&pp, 5, 5);
-    // displayMatrix(pp);
     loadUser(nama, pass, bio, numberHP, weton, isPublic, pp);
-    // nunggu matrix pertemanan
   }
-  // displayAllUsers();
-}
+  ADVWORDFILE();
 
-int main() {
-  readUserConfig();
+  readGraphPertemanan(countUser);
+  ADVWORDFILE();
 
-  return 0;
+  Word countRequest;
+  CopyWordwWord(&countRequest, &currentWordFile);
+  int countReq = wordToInt(countRequest);
+  // readReqPertemanan(countReq);
 }

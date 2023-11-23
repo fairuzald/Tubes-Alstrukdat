@@ -1,10 +1,12 @@
 #ifndef REPLY_H
 #define REPLY_H
 
+#include "../../adt/input/wordmachine.h"
 #include "../tweet/tweet.h"
-#include "./../adt/input/wordmachine.h"
 
-void CreateReply(Tweet *tweet, Word);
+void CreateReply(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
+                 long idUtas, AddressTweet utas, Tweet *prev, Tweet root,
+                 AddressTweet *newReply);
 
 void deleteReply();
 

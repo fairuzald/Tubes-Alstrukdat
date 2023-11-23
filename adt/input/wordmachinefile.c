@@ -60,6 +60,19 @@ void ADVWORDFILE() {
   }
 }
 
+void ADVTIME() {
+  IgnoreBlanksFile();
+  if (currentCharFile == '/') {
+    endWordFile = true;
+    ADVFILE();
+    CopyWordFile();
+  } else {
+    endWordFile = false;
+    CopyWordFile();
+    IgnoreBlanksFile();
+  }
+}
+
 void CopyWordFileNoBlank() {
   /* Mengakuisisi kata, menyimpan dalam currentWord
      I.S. : currentChar adalah karakter pertama dari kata
@@ -137,6 +150,28 @@ void CropWord(Word *word, int maxLength) {
   }
 }
 
+void CropWordFront(Word *word, int croppedLength) {
+  /* Memotong panjang kata sesuai dengan maxLength
+     I.S. : word terdefinisi, maxLength merupakan panjang maksimum yang
+     diinginkan F.S. : Jika panjang kata lebih dari maxLength, maka kata
+     dipotong menjadi maxLength; Jika panjang kata kurang dari atau sama dengan
+     maxLength, tidak ada perubahan. */
+
+  if (word->Length > croppedLength) {
+    int startIdx = word->Length - croppedLength;
+    int i, j;
+
+    // Geser karakter ke depan untuk memotong dari belakang
+    for (i = 0, j = startIdx; j < word->Length; ++i, ++j) {
+      word->TabWord[i] = word->TabWord[j];
+    }
+
+    word->Length -= croppedLength;
+    word->TabWord[word->Length] =
+        '\0';  // Pastikan string berakhir dengan null terminator
+  }
+}
+
 void LowerCaseFile() {
   /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
   /* F.S. currentword menjadi lowercase di setiap karakternya */
@@ -152,4 +187,86 @@ void copyIntegerFromWordMachine(int *num, Word word) {
   for (int i = 0; i < word.Length; i++) {
     *num = (*num * 10) + (word.TabWord[i] - 48);
   }
+}
+
+void splitTime(Word time, int *inthh, int *intmm, int *intss) {
+  // Mencari posisi karakter ":" dalam string waktu
+  int colonPosHour = 0;
+  while (time.TabWord[colonPosHour] != ':' && colonPosHour < time.Length) {
+    colonPosHour++;
+  }
+
+  int colonPosMinute = colonPosHour + 1;
+  while (time.TabWord[colonPosMinute] != ':' && colonPosMinute < time.Length) {
+    colonPosMinute++;
+  }
+
+  // Memisahkan string waktu menjadi jam, menit, dan detik
+  Word hh, mm, ss;
+  for (int i = 0; i < colonPosHour; i++) {
+    hh.TabWord[i] = time.TabWord[i];
+  }
+  hh.Length = colonPosHour;
+  hh.TabWord[colonPosHour] = '\0';  // Menambahkan null terminator
+
+  int j = 0;
+  for (int i = colonPosHour + 1; i < colonPosMinute; i++) {
+    mm.TabWord[j++] = time.TabWord[i];
+  }
+  mm.Length = j;
+  mm.TabWord[j] = '\0';  // Menambahkan null terminator
+
+  j = 0;
+  for (int i = colonPosMinute + 1; i < time.Length; i++) {
+    ss.TabWord[j++] = time.TabWord[i];
+  }
+  ss.Length = j;
+  ss.TabWord[j] = '\0';  // Menambahkan null terminator
+  *inthh = wordToInt(hh);
+  *intmm = wordToInt(mm);
+  *intss = wordToInt(ss);
+}
+
+// Fungsi untuk memisahkan tanggal
+DATETIME splitDate(Word date, int hh, int mm, int ss) {
+  // Mencari posisi karakter "/" dalam string tanggal
+  int slashPosDay = 0;
+  while (date.TabWord[slashPosDay] != '/' && slashPosDay < date.Length) {
+    slashPosDay++;
+  }
+
+  int slashPosMonth = slashPosDay + 1;
+  while (date.TabWord[slashPosMonth] != '/' && slashPosMonth < date.Length) {
+    slashPosMonth++;
+  }
+
+  // Memisahkan string tanggal menjadi hari, bulan, dan tahun
+  Word dd, month, yyyy;
+  for (int i = 0; i < slashPosDay; i++) {
+    dd.TabWord[i] = date.TabWord[i];
+  }
+  dd.Length = slashPosDay;
+  dd.TabWord[slashPosDay] = '\0';  // Menambahkan null terminator
+
+  int j = 0;
+  for (int i = slashPosDay + 1; i < slashPosMonth; i++) {
+    month.TabWord[j++] = date.TabWord[i];
+  }
+  month.Length = j;
+  month.TabWord[j] = '\0';  // Menambahkan null terminator
+
+  j = 0;
+  for (int i = slashPosMonth + 1; i < date.Length; i++) {
+    yyyy.TabWord[j++] = date.TabWord[i];
+  }
+  yyyy.Length = j;
+  yyyy.TabWord[j] = '\0';  // Menambahkan null terminator
+
+  int intdd = wordToInt(dd);
+  int intmonth = wordToInt(month);
+  int intyyyy = wordToInt(yyyy);
+
+  DATETIME dt;
+  CreateDATETIME(&dt, intdd, intmonth, intyyyy, hh, mm, ss);
+  return dt;
 }

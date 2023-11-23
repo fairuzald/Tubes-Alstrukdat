@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-#include "./../adt/graph.h"
-#include "./../adt/input/wordmachine.h"
-#include "./../adt/liststatikuser.h"
+#include "../../adt/graph.h"
+#include "../../adt/input/wordmachine.h"
+#include "../../adt/liststatikuser.h"
 
 extern Graph grafPertemanan;
 
