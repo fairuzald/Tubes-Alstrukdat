@@ -2,8 +2,8 @@
 #define LISTSTATIKUSER_H
 
 #include "boolean.h"
-#include "input/wordmachine.h"
 #include "input/charmachine.h"
+#include "input/wordmachine.h"
 
 /*ADT untuk user dan foto profil*/
 typedef struct {
@@ -77,7 +77,6 @@ int userCount();
 int getLastIdx();
 /* Prekondisi : userList tidak kosong */
 /* Mengirimkan indeks elemen userList terakhir */
-
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */

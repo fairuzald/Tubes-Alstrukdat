@@ -66,7 +66,6 @@ int getLastIdx() {
   return (userCount() - 1);
 }
 
-
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
 boolean noUsers() {
