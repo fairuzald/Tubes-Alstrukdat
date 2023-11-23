@@ -48,7 +48,7 @@ void displayTweet(AddressTweet pTweet) {
   /* Menampilkan ID, author, timeCreated, text, dan like dari suatu tweet */
 
   // display ID
-  printf("| ID = %ld\n", IdTweet(pTweet));
+  printf("| ID = %d\n", IdTweet(pTweet));
 
   // display author
   printf("| ");
@@ -73,7 +73,7 @@ void displayTweet(AddressTweet pTweet) {
   printf("\n");
 
   // display like
-  printf("| Disukai: %ld\n", Like(pTweet));
+  printf("| Disukai: %d\n", Like(pTweet));
 
   printf("\n");
 }

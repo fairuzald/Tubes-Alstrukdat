@@ -33,6 +33,10 @@ extern FriendRequestQueue friendRequestQueue;
 
 void CreateQueue(FriendRequestQueue* friendRequestQueue);
 
+void CreateFriendRequestQueue(FriendRequestQueue* friendRequestQueue, int row,
+                              int senderID, int receiverID,
+                              int senderFriendCount);
+
 boolean isEmpty(FriendRequestQueue friendRequestQueue);
 
 boolean isFull(FriendRequestQueue friendRequestQueue);
