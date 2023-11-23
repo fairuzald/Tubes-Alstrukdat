@@ -32,7 +32,8 @@ void displayUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
 /* Kemudian, user dapat memilih untuk menghapus, mengubah, atau menerbitkan
  * draft */
 
-void deleteUserDraft(ListStackDraft *listStackDraft, User user);
+void deleteUserDraft(ListStackDraft *listStackDraft, User user,
+                     Draft *deletedDraft);
 /* Menghapus draft terakhir milik user */
 
 void modifyUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
