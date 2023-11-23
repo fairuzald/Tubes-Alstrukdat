@@ -5,11 +5,11 @@ Graph grafPertemanan;
 ListStatikUser userList;
 boolean sudahMasuk;
 
-int findID(ListStatikUser users, Word username) {
+int findID(ListStatikUser userList, Word username) {
   int i;
 
   for (i = 0; i < CAPACITY; i++) {
-    if (compareWordwWord(users.contents[i].nama, username)) {
+    if (compareWordwWord(userList.contents[i].nama, username)) {
       return i;
     } else {
       return IDX_UNDEF;
@@ -17,8 +17,8 @@ int findID(ListStatikUser users, Word username) {
   }
 }
 
-Word findUser(ListStatikUser users, int userID) {
-  return (users.contents[userID].nama);
+Word findUser(ListStatikUser userList, int userID) {
+  return (userList.contents[userID].nama);
 }
 
 int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username) {
@@ -81,7 +81,7 @@ boolean isTeman(Graph grafPertemanan, Word userFriend, Word currentUser) {
   return isTeman;
 }
 
-void HapusTeman(Graph * grafPertemanan, ListStatikUser * userList, Word currentUser) {
+void HapusTeman(Graph * grafPertemanan, ListStatikUser * userList, Word currentUser, boolean sudahMasuk) {
   Word userFriend;
   int friendID, userID;
 
@@ -92,7 +92,7 @@ void HapusTeman(Graph * grafPertemanan, ListStatikUser * userList, Word currentU
     printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
   } else {
     printf("Masukkan nama pengguna: \n");
-    STARTWORD();
+    STARTWORDnoIgnore(20);
     CopyWordwWord(&userFriend, &currentWord);
     if (isTeman(*grafPertemanan, currentUser, userFriend)) {
       printf("HAHHH? Apakah anda yakin ingin menghapus ");

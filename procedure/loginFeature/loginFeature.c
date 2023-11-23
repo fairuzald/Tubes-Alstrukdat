@@ -29,7 +29,7 @@ void loginFeatureTeman(Word *command, boolean sudahMasuk) {
     DaftarTeman(grafPertemanan, userList, currentUser.nama, sudahMasuk);
     ADV();
   } else if (compareWordwString(*command, "HAPUS_TEMAN")) {
-    HapusTeman(&grafPertemanan, &userList, currentUser.nama);
+    HapusTeman(&grafPertemanan, &userList, currentUser.nama, sudahMasuk);
     ADV();
   } else {
     printf("Command perintah tidak ditemukan\n");
@@ -38,13 +38,13 @@ void loginFeatureTeman(Word *command, boolean sudahMasuk) {
 
 void loginFeatureTemanReq(Word *command) {
   if (compareWordwString(*command, "TAMBAH_TEMAN")) {
-    addFriend(&friendRequestQueue, currentUser.nama);
+    addFriend(&friendRequestQueue, userList, currentUser.nama);
     ADV();
   } else if (compareWordwString(*command, "DAFTAR_PERMINTAAN_PERTEMANAN")) {
-    displayFriendRequests(friendRequestQueue, currentUser.nama);
+    displayFriendRequests(friendRequestQueue, userList, currentUser.nama);
     ADV();
   } else if (compareWordwString(*command, "SETUJUI_PERTEMANAN")) {
-    approveFriendRequest(currentUser.nama);
+    approveFriendRequest(&friendRequestQueue, userList, currentUser.nama);
     ADV();
   } else {
     printf("Command perintah tidak ditemukan\n");

@@ -77,7 +77,7 @@ int indexOfAuthorDraft(ListStackDraft l, Word authorDraft) {
 
 /* *** Menambahkan elemen terakhir *** */
 
-void insertLastListStackDraft(ListStackDraft *l, ElType val) {
+void insertLastListStackDraft(ListStackDraft *l, ElTypeListStackDraft val) {
   /* Proses: Menambahkan val sebagai elemen terakhir List */
   /* I.S. List l boleh kosong, tetapi tidak penuh */
   /* F.S. val adalah elemen terakhir l yang baru */

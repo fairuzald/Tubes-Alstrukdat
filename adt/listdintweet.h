@@ -17,12 +17,12 @@
 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef AddressTweet ElTypeListDin; /* type elemen list */
-typedef long IdxType;
+typedef AddressTweet ElTypeListDinTweet; /* type elemen list */
+typedef int IdxTypeListDinTweet;
 typedef struct {
-  ElTypeListDin *buffer; /* memori tempat penyimpan elemen (container) */
-  long nEff;             /* >=0, banyaknya elemen efektif */
-  long capacity;         /* ukuran elemen */
+  ElTypeListDinTweet *buffer; /* memori tempat penyimpan elemen (container) */
+  int nEff;                   /* >=0, banyaknya elemen efektif */
+  int capacity;               /* ukuran elemen */
 } ListDinTweet;
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah : ListDinTweet, cara deklarasi dan akses: */
@@ -47,7 +47,7 @@ typedef struct {
 
 /* Konstruktor : create list kosong  */
 
-void CreateListDinTweet(ListDinTweet *l, long capacity);
+void CreateListDinTweet(ListDinTweet *l, int capacity);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
 
@@ -81,7 +81,7 @@ boolean isFullListTweet(ListDinTweet l);
 
 /* *** Menambahkan elemen terakhir *** */
 
-void insertLastListTweet(ListDinTweet *l, ElTypeListDin val);
+void insertLastListTweet(ListDinTweet *l, ElTypeListDinTweet val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */

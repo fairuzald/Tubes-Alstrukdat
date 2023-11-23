@@ -20,7 +20,8 @@ void DaftarTeman(Graph grafPertemanan, ListStatikUser userList,
 
 boolean isTeman(Graph grafPertemanan, Word userFriend, Word currentUser);
 
-void HapusTeman(Graph* G, ListStatikUser* userList, Word CurrentUser);
+void HapusTeman(Graph* grafPertemanan, ListStatikUser* userList,
+                Word currentUser, boolean sudahMasuk);
 
 void insertFriend(Graph* grafPertemanan, Word userFriend, Word currentUser);
 

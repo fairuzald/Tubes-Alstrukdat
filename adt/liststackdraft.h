@@ -20,11 +20,11 @@
 
 /* Definisi elemen dan koleksi objek */
 
-typedef StackDraft ElType; /* type elemen List */
-typedef int IdxType;
+typedef StackDraft ElTypeListStackDraft; /* type elemen List */
+typedef int IdxTypeListStackDraft;
 typedef struct {
-  ElType contents[CAPACITY_LISTSTACKDRAFT]; /* memori tempat penyimpan elemen
-                                               (container) */
+  ElTypeListStackDraft contents[CAPACITY_LISTSTACKDRAFT]; /* memori tempat
+                                               penyimpan elemen (container) */
   int nEff;
 } ListStackDraft;
 /* Indeks yang digunakan [0..CAPACITY_LISTSTACKDRAFT-1] */
@@ -83,7 +83,7 @@ int indexOfAuthorDraft(ListStackDraft l, Word authorDraft);
 
 /* *** Menambahkan elemen terakhir *** */
 
-void insertLastListStackDraft(ListStackDraft *l, ElType val);
+void insertLastListStackDraft(ListStackDraft *l, ElTypeListStackDraft val);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */

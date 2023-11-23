@@ -30,16 +30,27 @@ typedef struct {
 #define FriendCount(x) (x).senderFriendCount
 
 extern FriendRequestQueue friendRequestQueue;
-// Function declarations
-void CreateQueue(FriendRequestQueue *friendRequestQueue);
+
+void CreateQueue(FriendRequestQueue* friendRequestQueue);
+
 boolean isEmpty(FriendRequestQueue friendRequestQueue);
+
 boolean isFull(FriendRequestQueue friendRequestQueue);
+
 int length(FriendRequestQueue friendRequestQueue);
-void addFriend(FriendRequestQueue *friendRequestQueue, Word currentUser);
+
+void addFriend(FriendRequestQueue* friendRequestQueue, ListStatikUser userList,
+               Word currentUser);
+
 void displayFriendRequests(FriendRequestQueue friendRequestQueue,
-                           Word currentUser);
-void approveFriendRequest(Word currentUser);
-int NRequest(FriendRequestQueue friendRequestQueue, Word currentUser);
+                           ListStatikUser userList, Word currentUser);
+
+void approveFriendRequest(FriendRequestQueue* friendRequestQueue,
+                          ListStatikUser userList, Word currentUser);
+
+int NRequest(FriendRequestQueue friendRequestQueue, ListStatikUser userList,
+             Word currentUser);
+
 boolean isRequestExist(Word username, Word currentUser);
 
 #endif
