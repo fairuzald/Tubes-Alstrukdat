@@ -9,6 +9,18 @@ void CreateQueue(FriendRequestQueue * friendRequestQueue) {
     friendRequestQueue->n = 0;
 }
 
+void CreateFriendRequestQueue(FriendRequestQueue * friendRequestQueue, int row, int senderID, int receiverID, int senderFriendCount) {
+    int i;
+    
+    CreateQueue(&friendRequestQueue);
+
+    for (i = 0; i < row; i++) {
+    friendRequestQueue->buffer[i].senderID = senderID;
+    friendRequestQueue->buffer[i].receiverID = receiverID;
+    friendRequestQueue->buffer[i].senderFriendCount = senderFriendCount;
+    }
+}
+
 boolean isEmpty(FriendRequestQueue friendRequestQueue) {
     return (friendRequestQueue.n == 0);
 }
