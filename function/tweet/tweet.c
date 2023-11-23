@@ -6,10 +6,10 @@
 /* Constructor Tweet */
 
 AddressTweet CreateTweet(Word textTweet, Word authorTweet,
-                         DATETIME timeCreatedTweet, long idTweet, long idReply,
-                         long idUtas, long like, long depth,
-                         AddressTweet reply1, AddressTweet reply2,
-                         AddressTweet utas) {
+                         DATETIME timeCreatedTweet, int idTweet, int idReply,
+                         int idUtas, int like, int depth, AddressTweet reply1,
+                         AddressTweet reply2, AddressTweet utas,
+                         boolean kicauanUtama) {
   /* Membentuk tweet baru dan memasukkan semua informasi ke dalam tweet tersebut
    */
   /* Mengirimkan address hasil alokasi semua informasi tweet */
@@ -21,13 +21,14 @@ AddressTweet CreateTweet(Word textTweet, Word authorTweet,
     AuthorTweet(pNew) = authorTweet;
     TimeCreatedTweet(pNew) = timeCreatedTweet;
     IdTweet(pNew) = idTweet;
-    IdReply(pNew) = idReply;  // inisialisasi dengan 0
-    IdUtas(pNew) = idUtas;    // inisialisasi dengan 0
-    Like(pNew) = like;        // inisialisasi dengan 0
-    Depth(pNew) = depth;      // inisialisasi dengan 0
-    Reply1(pNew) = reply1;    // inisialisasi dengan NULL
-    Reply2(pNew) = reply2;    // inisialisasi dengan NULL
-    Utas(pNew) = utas;        // inisialisasi dengan NULL
+    IdReply(pNew) = idReply;            // inisialisasi dengan 0
+    IdUtas(pNew) = idUtas;              // inisialisasi dengan 0
+    Like(pNew) = like;                  // inisialisasi dengan 0
+    Depth(pNew) = depth;                // inisialisasi dengan 0
+    Reply1(pNew) = reply1;              // inisialisasi dengan NULL
+    Reply2(pNew) = reply2;              // inisialisasi dengan NULL
+    Utas(pNew) = utas;                  // inisialisasi dengan NULL
+    KicauanUtama(pNew) = kicauanUtama;  // inisialisasi dengan false
   }
 
   return pNew;
@@ -47,7 +48,7 @@ void displayTweet(AddressTweet pTweet) {
   /* Menampilkan ID, author, timeCreated, text, dan like dari suatu tweet */
 
   // display ID
-  printf("| ID = %ld\n", IdTweet(pTweet));
+  printf("| ID = %d\n", IdTweet(pTweet));
 
   // display author
   printf("| ");
@@ -72,7 +73,7 @@ void displayTweet(AddressTweet pTweet) {
   printf("\n");
 
   // display like
-  printf("| Disukai: %ld\n", Like(pTweet));
+  printf("| Disukai: %d\n", Like(pTweet));
 
   printf("\n");
 }
