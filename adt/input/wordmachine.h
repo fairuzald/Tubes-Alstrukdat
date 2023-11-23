@@ -65,6 +65,8 @@ int wordToInt(Word w);
 /*mengubah word menjadi integer (untuk input integer)*/
 
 Word stringToWord(char *);
+void CopyWordBlank();
+void STARTWORDBLANK();
 /*mengubah string menjadi word*/
 void ConcatWords(Word *result, const Word *word1, const Word *word2);
 void CopyWordwWord(Word *dest, Word *src);

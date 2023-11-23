@@ -1,92 +1,105 @@
+
+#include "initialization.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 
-#include "../../adt/input/charmachine.h"
-#include "../../adt/input/wordmachine.h"
-#include "loadUser.h"
-
-struct stat st;
-Word configFolder;
-// Function to construct the path from folderPath and folderName
-void constructPath(const Word *folderPath, const Word *folderName, char *path) {
-  int i;
-  for (i = 0; i < folderPath->Length && folderPath->TabWord[i] != '\0'; ++i) {
-    path[i] = folderPath->TabWord[i];
+void concat(char *str1, char *str2, char *output) {
+  int i, j;
+  for (i = 0; str1[i] != '\0'; ++i) {
+    output[i] = str1[i];
   }
 
-  // Append folderName to path
-  int j;
-  for (j = 0; i < folderPath->Length && folderName->TabWord[j] != '\0';
-       ++i, ++j) {
-    path[i] = folderName->TabWord[j];
+  for (j = 0; str2[j] != '\0'; ++j, ++i) {
+    output[i] = str2[j];
   }
 
-  path[i] = '\0';  // Null-terminate the string
+  output[i] = '\0';
+}
+
+void readDateTime(Word time, Word date, DATETIME *output) {
+  int hh, mm, ss;
+  splitTime(time, &hh, &mm, &ss);
+  *output = splitDate(date, hh, mm, ss);
+}
+
+void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
+  /* Mengambil kata setelah tanda '-' pada inputWord dan menyimpannya di
+     outputWord I.S. : inputWord terdefinisi F.S. : outputWord berisi kata
+     setelah tanda '-', jika tidak ada tanda '-' atau bertemu dengan '\n', maka
+     outputWord kosong */
+  const int initialLength = inputWord->Length;
+  const char *inputString = inputWord->TabWord;
+  int indexFound = -1;
+  int i = 0;
+
+  // Temukan posisi tanda '-' pertama
+  while (inputString[i] != '\0' && inputString[i] != '\n') {
+    if (inputString[i] == '-') {
+      indexFound = i;
+      break;
+    }
+    i++;
+  }
+  if (indexFound != -1) {
+    i = 0;
+    while (inputString[indexFound + 1] != '\0' &&
+           inputString[indexFound + 1] != '\n' &&
+           indexFound < initialLength - 1) {
+      outputWord->TabWord[i] = inputString[indexFound + 1];
+
+      indexFound++;
+      i++;
+    }
+    outputWord->TabWord[i] = '\0';
+    outputWord->Length = i;
+  } else {
+    outputWord->TabWord[0] = '\0';
+    outputWord->Length = 0;
+  }
 }
 
 // Folder config search
-boolean searchConfigFolder(Word folderName) {
+boolean searchConfigFolder(char path[1000]) {
   // Membuat path lengkap untuk folder konfigurasi
-  Word folderPath;
-  Word configFolder;
-  configFolder = stringToWord("config/");
-  ConcatWords(&folderPath, &configFolder, &folderName);
-
-  // Construct the path
-  char path[folderPath.Length + folderName.Length];
-  constructPath(&folderPath, &folderName, path);
 
   // Pengecekan keberadaan folder
   struct stat st;
   if (stat(path, &st) == -1) {
-    printf("Folder %s tidak ditemukan.\n", folderName.TabWord);
+    printf("Folder %s tidak ditemukan.\n", path);
     return false;
   } else {
-    printf("Folder %s ditemukan!\n", folderName.TabWord);
+    printf("Folder %s ditemukan!\n", path);
     return true;
   }
 }
 
-boolean searchConfigFile(Word fileName) {
-  // Membuat path lengkap untuk file konfigurasi
-  Word filePath;
-  ConcatWords(&filePath, &configFolder, &fileName);
-
-  // Construct the path
-  char path[configFolder.Length + fileName.Length];
-  constructPath(&configFolder, &fileName, path);
-
-  // Pengecekan keberadaan file
-  if (stat(path, &st) == -1) {
-    printf("File %s tidak ditemukan.\n", fileName.TabWord);
-    return false;
-  } else {
-    printf("File %s ditemukan!\n", fileName.TabWord);
-    return true;
-  }
-}
-
-void initialization() {
+void initialization(Word *command) {
   printf("Silakan masukan folder konfigurasi untuk dimuat: ");
-  readWord();
+  readInputNoIgnore(command);
+  Word configFolder;
   CopyWordwWord(&configFolder, &currentWord);
-
-  if (!searchConfigFolder(configFolder)) {
-    printf("Initialization failed. Folder not found.\n");
+  printWord(configFolder);
+  char path[200];
+  configFolder.TabWord[configFolder.Length] = '\0';
+  printWord(configFolder);
+  if (!searchConfigFolder(path)) {
     return;
   }
 
-  // Assume your configuration file is named "pengguna.config"
-  Word configFileName = stringToWord("pengguna.config");
+  readUserConfig(path);
+  readUtasConfig(path);
+  readDrafConfig(path);
+  readKicauanConfig(path);
+  readBalasanConfig(path);
 
-  if (!searchConfigFile(configFileName)) {
-    printf("Initialization failed. Configuration file not found.\n");
-    return;
-  }
-
-  // If both folder and file are found, proceed with reading the configuration
-  readUserConfig();
+  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }
 
-int main() { return 0; }
+int main() {
+  Word command;
+  initialization(&command);
+
+  return 0;
+}

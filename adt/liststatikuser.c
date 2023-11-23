@@ -66,7 +66,6 @@ int getLastIdx() {
   return (userCount() - 1);
 }
 
-
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
 boolean noUsers() {
@@ -136,12 +135,23 @@ void displayAllUsers() {
 
     for (int i = IDX_MIN; i <= getLastIdx(); i++) {
       printf("Index: %d\n", i);
-      printf("Name: %s\n", NAMA(i).TabWord);
-      printf("Password: %s\n", PASS(i).TabWord);
-      printf("Bio: %s\n", BIO(i).TabWord);
-      printf("HP: %s\n", HP(i).TabWord);
-      printf("Weton: %s\n", WETON(i).TabWord);
-      printf("Public: %s\n", (PUBLIC(i) ? "true" : "false"));
+      printf("Name: ");
+      printWord(NAMA(i));
+      printf("\n");
+      printf("Password: ");
+      printWord(PASS(i));
+      printf("\n");
+      printf("Bio: ");
+      printWord(BIO(i));
+      printf("\n");
+      printf("HP: ");
+      printWord(HP(i));
+      printf("\n");
+      printf("Weton: ");
+      printWord(WETON(i));
+      printf("\n");
+      printf("Public: ", (PUBLIC(i) ? "true" : "false"));
+      printf("\n");
       printf("---------------------\n");
     }
 

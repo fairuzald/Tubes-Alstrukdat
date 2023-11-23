@@ -5,6 +5,7 @@
 #define __MESINKATAFILE_H__
 
 #include "../boolean.h"
+#include "../datetime.h"
 #include "charmachinefile.h"
 #include "wordmachine.h"
 
@@ -32,6 +33,7 @@ F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
         Jika currentChar = MARK, EndWord = true.
 Proses : Akuisisi kata menggunakan procedure SalinWord */
 void CropWord(Word *word, int maxLength);
+void CropWordFront(Word *word, int croppedLength);
 void CopyWordFile();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -41,5 +43,9 @@ void CopyWordFile();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 void STARTWORDFilenoIgnore(int maxChar);
 void copyIntegerFromWordMachine(int *num, Word word);
+
+void splitTime(Word time, int *inthh, int *intmm, int *intss);
+// Fungsi untuk memisahkan tanggal
+DATETIME splitDate(Word date, int hh, int mm, int ss);
 
 #endif
