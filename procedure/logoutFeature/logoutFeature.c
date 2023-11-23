@@ -30,16 +30,12 @@ void muat(boolean sudahMasuk) {
 
 void logoutFeature(Word* command, boolean sudahMasuk) {
   if (compareWordwString(*command, "DAFTAR")) {
-    ADV();
     daftar();
   } else if (compareWordwString(*command, "MASUK")) {
-    ADV();
     masuk();
   } else if (compareWordwString(*command, "KELUAR")) {
-    ADV();
     keluar();
   } else if (compareWordwString(*command, "MUAT")) {
-    ADV();
     muat(sudahMasuk);
   } else {
     printf("Command yang anda pilih belum bisa dilakukan, masuk dulu, yuk!");

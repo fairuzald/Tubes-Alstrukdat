@@ -87,6 +87,24 @@ void ADVWORD() {
   }
 }
 
+void ADVWORDnoIgnore() {
+  int ctr;
+  
+  if (currentChar == MARK) {
+    endWord = true;
+  } else {
+    endWord = false;
+    ctr=0;
+    while (currentChar != MARK) {
+      currentWord.TabWord[ctr] = currentChar;
+      ADV();
+      ctr++;
+    }
+    currentWord.Length = ctr;
+    endWord = true;
+  }
+}
+
 void concat(char *str1, char *str2, char *output) {
   int i, j;
   for (i = 0; str1[i] != '\0'; ++i) {
