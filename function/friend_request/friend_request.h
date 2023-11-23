@@ -36,11 +36,11 @@ void CreateQueue(FriendRequestQueue* friendRequestQueue);
 void AppendQueue(FriendRequestQueue* friendRequestQueue, int senderID,
                  int receiverID, int senderFriendCount);
 
-boolean isEmpty(FriendRequestQueue friendRequestQueue);
+boolean isEmptyQueue(FriendRequestQueue friendRequestQueue);
 
-boolean isFull(FriendRequestQueue friendRequestQueue);
+boolean isFullQueue(FriendRequestQueue friendRequestQueue);
 
-int length(FriendRequestQueue friendRequestQueue);
+int lengthQueue(FriendRequestQueue friendRequestQueue);
 
 void addFriend(FriendRequestQueue* friendRequestQueue, ListStatikUser userList,
                Word currentUser);

@@ -21,15 +21,15 @@ void AppendQueue(FriendRequestQueue* friendRequestQueue, int senderID,
   friendRequestQueue->n++;
 }
 
-boolean isEmpty(FriendRequestQueue friendRequestQueue) {
+boolean isEmptyQueue(FriendRequestQueue friendRequestQueue) {
   return (friendRequestQueue.n == 0);
 }
 
-boolean isFull(FriendRequestQueue friendRequestQueue) {
+boolean isFullQueue(FriendRequestQueue friendRequestQueue) {
   return (friendRequestQueue.n == MAX_CAP);
 }
 
-int length(FriendRequestQueue friendRequestQueue) {
+int lengthQueue(FriendRequestQueue friendRequestQueue) {
   return (friendRequestQueue.n);
 }
 
@@ -59,7 +59,7 @@ void addFriend(FriendRequestQueue* friendRequestQueue, ListStatikUser userList,
     } else if (isTeman(grafPertemanan, CalonTeman, currentUser)) {
       printf("Lu udah temenan sama dia ASW\n");
     } else {
-      if (isEmpty(*friendRequestQueue)) {
+      if (isEmptyQueue(*friendRequestQueue)) {
         CreateQueue(friendRequestQueue);
         friendRequestQueue->buffer[0].senderID = userID;
         friendRequestQueue->buffer[0].receiverID = findID(userList, CalonTeman);
@@ -131,7 +131,7 @@ void approveFriendRequest(FriendRequestQueue* friendRequestQueue,
   int userID, friendID;
   userID = findID(userList, currentUser);
 
-  if (isEmpty(*friendRequestQueue) ||
+  if (isEmptyQueue(*friendRequestQueue) ||
       NRequest(*friendRequestQueue, userList, currentUser) == 0) {
     printf("Waduhh belum ada permintaan pertemanan, nich :'D \n");
   } else {
@@ -196,7 +196,7 @@ int NRequest(FriendRequestQueue friendRequestQueue, ListStatikUser userList,
 
   userID = findID(userList, currentUser);
 
-  if (isEmpty(friendRequestQueue)) {
+  if (isEmptyQueue(friendRequestQueue)) {
     ctr = 0;
   } else {
     for (i = 0; i < friendRequestQueue.n; i++) {
