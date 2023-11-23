@@ -1,11 +1,5 @@
 #include "initialization.h"
 
-void readDateTime(Word time, Word date, DATETIME *output) {
-  int hh, mm, ss;
-  splitTime(time, &hh, &mm, &ss);
-  *output = splitDate(date, hh, mm, ss);
-}
-
 void readKicauanConfig(char filePath[]) {
   char fullPath[1000];
   concat(filePath, "/kicauan.config", fullPath);

@@ -25,6 +25,9 @@ boolean searchConfigFolder(char path[1000]);
 
 void initialization(Word *command);
 
+void readDateTime(Word time, Word date, DATETIME *output);
+
+void ExtractWordAfterDash(const Word *inputWord, Word *outputWord);
 void readUtasConfig(char filePath[]);
 void readUserConfig(char filePath[]);
 void readDrafConfig(char filePath[]);
