@@ -24,11 +24,12 @@ int main() {
   AddressTweet reply1A = NULL;
   AddressTweet reply2A = NULL;
   AddressTweet utasA = NULL;
+  boolean kicauanUtamaA = false;
 
   // Membuat Tweet
   AddressTweet pTweetA =
       CreateTweet(textA, authorA, timeA, idTweetA, idReplyA, idUtasA, likeA,
-                  depthA, reply1A, reply2A, utasA);
+                  depthA, reply1A, reply2A, utasA, kicauanUtamaA);
 
   // Menampilkan Tweet
   displayTweet(pTweetA);
