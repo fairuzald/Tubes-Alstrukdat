@@ -33,18 +33,20 @@ extern FriendRequestQueue friendRequestQueue;
 
 void CreateQueue(FriendRequestQueue * friendRequestQueue);
 
-boolean isEmpty();
+boolean isEmpty(FriendRequestQueue friendRequestQueue);
 
-boolean isFull();
+boolean isFull(FriendRequestQueue friendRequestQueue);
 
-int length();
+int length(FriendRequestQueue friendRequestQueue);
 
-void tambahTeman();
+void addFriend(FriendRequestQueue * friendRequestQueue, ListStatikUser userList, Word currentUser);
 
-void addFriend();
+void displayFriendRequests(FriendRequestQueue friendRequestQueue, ListStatikUser userList, Word currentUser);
 
-void displayFriendRequests();
+void approveFriendRequest(FriendRequestQueue * friendRequestQueue, ListStatikUser userList, Word currentUser);
 
-void approveFriendRequest();
+int NRequest(FriendRequestQueue friendRequestQueue, ListStatikUser userList, Word currentUser);
+
+boolean isRequestExist(Word username, Word currentUser);
 
 #endif
