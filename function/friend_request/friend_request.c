@@ -54,13 +54,13 @@ void addFriend(FriendRequestQueue* friendRequestQueue, ListStatikUser userList,
       printf(" tidak ditemukan.\n");
     } else if (isRequestExist(CalonTeman, currentUser)) {
       printf("Anda sudah mengirimkan permintaan pertemanan kepada ");
-      printWordNoNewLine(CalonTeman);
+      printWord(CalonTeman);
       printf(". Silakan tunggu hingga permintaan Anda disetujui.");
     } else if (isTeman(grafPertemanan, CalonTeman, currentUser)) {
       printf("Lu udah temenan sama dia ASW\n");
     } else {
       if (isEmpty(*friendRequestQueue)) {
-        CreateQueue(&friendRequestQueue);
+        CreateQueue(friendRequestQueue);
         friendRequestQueue->buffer[0].senderID = userID;
         friendRequestQueue->buffer[0].receiverID = findID(userList, CalonTeman);
         friendRequestQueue->buffer[0].senderFriendCount =
@@ -171,7 +171,7 @@ void approveFriendRequest(FriendRequestQueue* friendRequestQueue,
     friendRequestQueue->n--;
 
     if (friendRequestQueue->n == 0) {
-      CreateQueue(&friendRequestQueue);
+      CreateQueue(friendRequestQueue);
     } else {
       while (i < friendRequestQueue->idxTail) {
         friendRequestQueue->buffer[i].senderID =

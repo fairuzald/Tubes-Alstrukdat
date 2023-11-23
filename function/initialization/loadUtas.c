@@ -1,5 +1,4 @@
 #include "initialization.h"
-#include "utas.h"
 
 void readUtasConfig(char filePath[]) {
   char fullPath[1000];

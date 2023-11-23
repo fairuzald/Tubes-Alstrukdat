@@ -4,7 +4,6 @@ void loadFromFolder(char* folderName) {
   printf("Anda akan melakukan pemuatan dari %s.\n\n", folderName);
   for (int i = 1; i <= 3; i++) {
     printf("%d...\n", i);
-    _sleep(1000);
   }
 
   printf("Pemuatan selesai!\n\n");

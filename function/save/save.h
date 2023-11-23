@@ -11,6 +11,7 @@
 #include "../../adt/listdintweet.h"
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
+#include "../friend/friend.h"
 #include "../input/input.h"
 #include "../user/user.h"
 // Function prototypes

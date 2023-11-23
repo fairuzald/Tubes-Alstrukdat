@@ -77,7 +77,7 @@ boolean searchConfigFolder(char path[1000]) {
 
 void loadSemuaConfig(Word *folderName) {
   Word configFolder;
-  CopyWordwWord(&configFolder, &folderName);
+  CopyWordwWord(&configFolder, folderName);
   char path[200];
   configFolder.TabWord[configFolder.Length] = '\0';
   if (!searchConfigFolder(path)) {

@@ -1,7 +1,9 @@
 #include "save.h"
 
 #include <stdio.h>
-#include <sys/stat.h>  // Untuk fungsi mkdir dan struct stat
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 void concat(char *str1, char *str2, char *output) {
   int i, j;
   for (i = 0; str1[i] != '\0'; ++i) {
@@ -65,16 +67,16 @@ void saveUser(ListStatikUser *l, char folderName[]) {
     }
   }
 
-  for (int j = 0; j < userCount(); j++) {
-    for (int k = 0; k < userCount(); k++) {
-      if (k < userCount() - 1) {
-        fprintf(file, "%c ", isFriend(j, k) ? '1' : '0');
-      } else {
-        fprintf(file, "%c", isFriend(j, k) ? '1' : '0');
-      }
-    }
-    fprintf(file, "\n");
-  }
+  // for (int j = 0; j < userCount(); j++) {
+  //   for (int k = 0; k < userCount(); k++) {
+  //     if (k < userCount() - 1) {
+  //       fprintf(file, "%c ", isTeman(j, k) ? '1' : '0');
+  //     } else {
+  //       fprintf(file, "%c", isTeman(j, k) ? '1' : '0');
+  //     }
+  //   }
+  //   fprintf(file, "\n");
+  // }
 
   fclose(file);
 }
@@ -248,13 +250,12 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   fclose(file);
 }
 
-void createFolder(char *folderName) { mkdir(folderName, 0700); }
+void createFolder(char *folderName) {}
 
 void saveToFolder(char *folderName) {
   printf("Anda akan melakukan penyimpanan di %s.\n\n", folderName);
   for (int i = 1; i <= 3; i++) {
     printf("%d...\n", i);
-    _sleep(1000);
   }
 
   // Masukin fungsi penyimpanan disini
@@ -273,7 +274,6 @@ void simpan() {
         folderName, folderName);
     for (int i = 1; i <= 3; i++) {
       printf("%d...\n", i);
-      _sleep(1000);
     }
     createFolder(folderName.TabWord);
     printf("%s sudah berhasil dibuat.\n\n", folderName.TabWord);
