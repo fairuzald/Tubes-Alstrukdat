@@ -43,11 +43,12 @@ void inputNewTweet(ListDinTweet *listTweet, User user) {
     AddressTweet reply1 = NULL;
     AddressTweet reply2 = NULL;
     AddressTweet utas = NULL;
+    boolean kicauanUtama = false;
 
     // Memasukkan semua informasi ke dalam Tweet
     AddressTweet pNewTweet =
         CreateTweet(currentWord, author, timeCreated, idTweet, idReply, idUtas,
-                    like, depth, reply1, reply2, utas);
+                    like, depth, reply1, reply2, utas, kicauanUtama);
 
     // Memasukkan tweet ke dalam list Tweet
     if (isFullListTweet(*listTweet)) {

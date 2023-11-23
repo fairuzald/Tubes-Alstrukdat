@@ -95,9 +95,10 @@ void publishNewDraft(ListDinTweet *listTweet, User user, Word newText) {
   AddressTweet reply1 = NULL;
   AddressTweet reply2 = NULL;
   AddressTweet utas = NULL;
+  boolean kicauanUtama = false;
   AddressTweet pNewTweet =
       CreateTweet(newText, author, timeCreated, idTweet, idReply, idUtas, like,
-                  depth, reply1, reply2, utas);
+                  depth, reply1, reply2, utas, kicauanUtama);
 
   // Cek apakah ListTweet sudah penuh
   // Jika sudah penuh, tambah kapasitasnya
@@ -196,9 +197,10 @@ void publishUserDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
   AddressTweet reply1 = NULL;
   AddressTweet reply2 = NULL;
   AddressTweet utas = NULL;
+  boolean kicauanUtama = false;
   AddressTweet pNewTweet =
       CreateTweet(newText, author, timeCreated, idTweet, idReply, idUtas, like,
-                  depth, reply1, reply2, utas);
+                  depth, reply1, reply2, utas, kicauanUtama);
 
   // Cek apakah ListTweet sudah penuh
   // Jika sudah penuh, tambah kapasitasnya
