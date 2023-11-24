@@ -114,4 +114,5 @@ void loginFeature(Word *command, boolean sudahMasuk) {
   loginFeatureTeman(command, sudahMasuk);
   loginFeatureTemanReq(command);
   loginFeatureTweet(command);
+  loginFeatureUtas(command);
 }
