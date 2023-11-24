@@ -27,16 +27,6 @@ typedef struct {
 extern User currentUser;
 extern boolean sudahMasuk;
 
-/* ********** SELEKTOR ********** */
-#define USER(i) (userList).contents[(i)]
-#define NAMA(i) USER(i).nama
-#define PASS(i) USER(i).password
-#define BIO(i) USER(i).bio
-#define HP(i) USER(i).nomorHP
-#define WETON(i) USER(i).weton
-#define PUBLIC(i) USER(i).public
-#define FOTO(i) USER(i).fotoProfil
-
 /*  Kamus Umum */
 #define CAPACITYUSER 20
 /* Kapasitas penyimpanan */
@@ -55,6 +45,15 @@ typedef struct {
    kosong adalah word dengan TabWord "" dan length==0*/
 
 extern ListStatikUser userList; /*men-global-kan userList*/
+/* ********** SELEKTOR ********** */
+#define USER(i) (userList).contents[(i)]
+#define NAMA(i) USER(i).nama
+#define PASS(i) USER(i).password
+#define BIO(i) USER(i).bio
+#define HP(i) USER(i).nomorHP
+#define WETON(i) USER(i).weton
+#define PUBLIC(i) USER(i).public
+#define FOTO(i) USER(i).fotoProfil
 
 /* ********** KONSTRUKTOR ********** */
 PhotoMat initPP();

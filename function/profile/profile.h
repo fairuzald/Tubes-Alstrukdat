@@ -5,6 +5,8 @@
 #include "../../adt/boolean.h"
 #include "../pcolor/pcolor.h"
 #include "../user/user.h"
+#include "../friend/friend.h"
+
 
 
 void readMatrix(PhotoMat *m, int nRow, int nCol);
@@ -34,7 +36,7 @@ void displayPhoto(PhotoMat m);
 void ganti_profil();
 /*Digunakan untuk mengganti isi profil Currentuser (selain foto profil dan jenis akun)*/
 
-void lihat_profil(Word Username);
+void lihat_profil(Word Username, Graph grafPertemanan);
 /*Digunakan untuk melihat profil milik Username*/
 
 void atur_jenis_akun();
@@ -43,3 +45,4 @@ void atur_jenis_akun();
 void ubah_foto_profil();
 /*Digunakan untuk mengubah foto profil Currentuser*/
 #endif
+
