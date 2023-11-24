@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-ListStatikUser userList;
+User currentUser;
 
 /* ********** KONSTRUKTOR ********** */
 PhotoMat initPP() {
