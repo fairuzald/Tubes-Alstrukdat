@@ -8,13 +8,13 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
   initPP(*m);
   // Read the matrix from the input string
   for (i = 0; i < nRow; i++) {
-    ADVWORDFILE();
     for (j = 0; j < nCol; j++) {
       if (currentWordFile.Length > 0) {
         COLOR(*m, i, j) = currentWordFile.TabWord[4 * j];
         CONTENT(*m, i, j) = currentWordFile.TabWord[4 * j + 2];
       }
     }
+    ADVWORDFILE();
   }
 }
 
@@ -73,11 +73,11 @@ void readUserConfig(char filePath[]) {
 
   countUser = wordToInt(currentWordFile);
   ADVWORDFILE();
-  Word nama, pass, bio, numberHP, weton, status;
-  PhotoMat pp;
-  boolean isPublic;
 
   for (int i = 0; i < countUser; i++) {
+    Word nama, pass, bio, numberHP, weton, status;
+    PhotoMat pp;
+    boolean isPublic;
     CopyWordwWord(&nama, &currentWordFile);
     CropWord(&nama, 20);
     ADVWORDFILE();

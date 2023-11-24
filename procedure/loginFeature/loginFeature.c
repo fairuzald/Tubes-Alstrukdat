@@ -1,16 +1,21 @@
 #include "loginFeature.h"
+
+void getIdFromCommand(Word *id) {
+  ADVWORD();
+  *id = currentWord;
+  while (currentChar != MARK) {
+    ADVWORD();
+    ConcatWords(id, id, &currentWord);
+  }
+}
+
 void loginFeatureUser(Word *command) {
   if (compareWordwString(*command, "GANTI_PROFIL")) {
     ganti_profil();
     ADV();
   } else if (compareWordwString(*command, "LIHAT_PROFIL")) {
     Word usn;
-    ADVWORD();
-    usn = currentWord;
-    while (currentChar != MARK) {
-      ADVWORD();
-      ConcatWords(&usn, &usn, &currentWord);
-    }
+    getIdFromCommand(&usn);
     lihat_profil(usn);
     ADV();
   } else if (compareWordwString(*command, "ATUR_JENIS_AKUN")) {
@@ -20,7 +25,9 @@ void loginFeatureUser(Word *command) {
     ubah_foto_profil();
     ADV();
   } else {
-    printf("Command perintah tidak ditemukan\n");
+    printf("Command perintah tidak ditemukan: ");
+    printWord(*command);
+    printf("\n");
   }
 }
 
@@ -32,7 +39,9 @@ void loginFeatureTeman(Word *command, boolean sudahMasuk) {
     HapusTeman(&grafPertemanan, &userList, currentUser.nama, sudahMasuk);
     ADV();
   } else {
-    printf("Command perintah tidak ditemukan\n");
+    printf("Command perintah tidak ditemukan: ");
+    printWord(*command);
+    printf("\n");
   }
 }
 
@@ -47,7 +56,9 @@ void loginFeatureTemanReq(Word *command) {
     approveFriendRequest(&friendRequestQueue, userList, currentUser.nama);
     ADV();
   } else {
-    printf("Command perintah tidak ditemukan\n");
+    printf("Command perintah tidak ditemukan: ");
+    printWord(*command);
+    printf("\n");
   }
 }
 
@@ -60,38 +71,19 @@ void loginFeatureTweet(Word *command) {
     ADV();
   } else if (compareWordwString(*command, "SUKA_KICAUAN")) {
     Word id;
-    ADVWORD();
-    id = currentWord;
-    while (currentChar != MARK) {
-      ADVWORD();
-      ConcatWords(&id, &id, &currentWord);
-    }
-    int idInt = wordToInt(id);
-    like(&listTweetMain, idInt, userList, grafPertemanan, currentUser);
-    ADV();
-  } else if (compareWordwString(*command, "SUKA_KICAUAN")) {
-    Word id;
-    ADVWORD();
-    id = currentWord;
-    while (currentChar != MARK) {
-      ADVWORD();
-      ConcatWords(&id, &id, &currentWord);
-    }
+    getIdFromCommand(&id);
     int idInt = wordToInt(id);
     like(&listTweetMain, idInt, userList, grafPertemanan, currentUser);
     ADV();
   } else if (compareWordwString(*command, "UBAH_KICAUAN")) {
     Word id;
-    ADVWORD();
-    id = currentWord;
-    while (currentChar != MARK) {
-      ADVWORD();
-      ConcatWords(&id, &id, &currentWord);
-    }
+    getIdFromCommand(&id);
     int idInt = wordToInt(id);
     editTweetInList(&listTweetMain, idInt, currentUser);
   } else {
-    printf("Command perintah tidak ditemukan\n");
+    printf("Command perintah tidak ditemukan: ");
+    printWord(*command);
+    printf("\n");
     ADV();
   }
 }

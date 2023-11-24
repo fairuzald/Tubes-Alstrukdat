@@ -70,7 +70,7 @@ void loadSemuaConfig(Word *folderName) {
 
   readUserConfig(configPath.TabWord);
   readKicauanConfig(configPath.TabWord);
-  // readDrafConfig(folderName->TabWord);
+  readDrafConfig(configPath.TabWord);
   // readUtasConfig(folderName->TabWord);
   // readBalasanConfig(folderName->TabWord);
 }

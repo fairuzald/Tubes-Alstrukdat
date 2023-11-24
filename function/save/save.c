@@ -10,6 +10,7 @@ void saveUser(ListStatikUser *l, char folderName[]) {
 
   char folderPath[200];
   concat(folderName, "/pengguna.config", folderPath);
+  printf("%s\n", folderPath);
 
   FILE *file = fopen(folderPath, "a");
   if (file == NULL) {
@@ -22,49 +23,55 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   fprintf(file, "%d\n", userCount());
   // Menulis data setiap pengguna
   for (int i = 0; i < userCount(); i++) {
-    User user = USER(i);
-
     // Potong karakter yang berlebihan
-    if (user.nama.Length > 20) {
-      user.nama.TabWord[20] = '\0';
+    if (NAMA(i).Length > 20) {
+      NAMA(i).TabWord[20] = '\0';
+    } else {
+      NAMA(i).TabWord[NAMA(i).Length] = '\0';
     }
-    if (user.password.Length > 20) {
-      user.password.TabWord[20] = '\0';
+    if (PASS(i).Length > 20) {
+      PASS(i).TabWord[20] = '\0';
+    } else {
+      PASS(i).TabWord[PASS(i).Length] = '\0';
     }
-    if (user.bio.Length > 135) {
-      user.bio.TabWord[135] = '\0';
+    if (BIO(i).Length > 135) {
+      BIO(i).TabWord[135] = '\0';
+    } else {
+      BIO(i).TabWord[BIO(i).Length] = '\0';
     }
 
-    fprintf(file, "%s\n", user.nama.TabWord);                  // Nama
-    fprintf(file, "%s\n", user.password.TabWord);              // Password
-    fprintf(file, "%s\n", user.bio.TabWord);                   // Bio
-    fprintf(file, "%s\n", user.nomorHP.TabWord);               // No HP
-    fprintf(file, "%s\n", user.weton.TabWord);                 // Weton
-    fprintf(file, "%s\n", user.public ? "Publik" : "Privat");  // Jenis akun
+    fprintf(file, "%s\n", NAMA(i).TabWord);  // Nama
+    fprintf(file, "%s\n", PASS(i).TabWord);  // Password
+    fprintf(file, "%s\n", BIO(i).TabWord);   // Bio
+    HP(i).TabWord[HP(i).Length] = '\0';
+    fprintf(file, "%s\n", HP(i).TabWord);  // No HP
+    WETON(i).TabWord[WETON(i).Length] = '\0';
+    fprintf(file, "%s\n", WETON(i).TabWord);                 // Weton
+    fprintf(file, "%s\n", PUBLIC(i) ? "Publik" : "Privat");  // Jenis akun
     // Foto Profil
     for (int j = 0; j < 5; j++) {
       for (int k = 0; k < 5; k++) {
-        fprintf(file, "%c ", user.fotoProfil.color[j][k]);
+        fprintf(file, "%c ", FOTO(i).color[j][k]);
         if (k < 4) {
-          fprintf(file, "%c ", user.fotoProfil.content[j][k]);
+          fprintf(file, "%c ", FOTO(i).content[j][k]);
         } else {
-          fprintf(file, "%c ", user.fotoProfil.content[j][k]);
+          fprintf(file, "%c ", FOTO(i).content[j][k]);
         }
       }
       fprintf(file, "\n");
     }
   }
 
-  // for (int j = 0; j < userCount(); j++) {
-  //   for (int k = 0; k < userCount(); k++) {
-  //     if (k < userCount() - 1) {
-  //       fprintf(file, "%c ", isTeman(j, k) ? '1' : '0');
-  //     } else {
-  //       fprintf(file, "%c", isTeman(j, k) ? '1' : '0');
-  //     }
-  //   }F
-  //   fprintf(file, "\n");
-  // }
+  for (int j = 0; j < grafPertemanan.n; j++) {
+    for (int k = 0; k < grafPertemanan.n; k++) {
+      if (k < grafPertemanan.n - 1) {
+        fprintf(file, "%c ", grafPertemanan.mem[j][k]);
+      } else {
+        fprintf(file, "%c", grafPertemanan.mem[j][k]);
+      }
+    }
+    fprintf(file, "\n");
+  }
 
   fclose(file);
 }
@@ -238,7 +245,13 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   fclose(file);
 }
 
-void createFolder(char *folderName) {}
+void createFolder(char *folderName) {
+#ifdef __linux__
+  mkdir(folderName, 0777);
+#else
+  mkdir(folderName);
+#endif
+}
 
 void saveToFolder(char *folderName) {
   printf("Anda akan melakukan penyimpanan di %s.\n\n", folderName);
@@ -247,25 +260,27 @@ void saveToFolder(char *folderName) {
   }
 
   // Masukin fungsi penyimpanan disini
+  saveUser(&userList, folderName);
+
   printf("Penyimpanan telah berhasil dilakukan!\n\n");
 }
 
 void simpan() {
-  Word folderName;
+  char folderName[256];
   struct stat st = {0};
 
   printf("Masukkan nama folder penyimpanan\n");
-  readInput(&folderName);
-  if (stat(folderName.TabWord, &st) == -1) {
+  scanf("%s", folderName);
+  if (stat(folderName, &st) == -1) {
     printf(
         "Belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n\n",
         folderName, folderName);
     for (int i = 1; i <= 3; i++) {
       printf("%d...\n", i);
     }
-    createFolder(folderName.TabWord);
-    printf("%s sudah berhasil dibuat.\n\n", folderName.TabWord);
+    createFolder(folderName);
+    printf("%s sudah berhasil dibuat.\n\n", folderName);
   }
 
-  saveToFolder(folderName.TabWord);
+  saveToFolder(folderName);
 }
