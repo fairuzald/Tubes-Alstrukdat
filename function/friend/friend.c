@@ -2,7 +2,8 @@
 
 #include <stdio.h>
 
-Graph grafPertemanan;
+ListStatikUser userList;
+boolean sudahMasuk;
 
 int findID(ListStatikUser userList, Word username) {
   int i;

@@ -47,7 +47,6 @@ boolean searchConfigFolder(char path[200]) {
     printf("Folder %s tidak ditemukan.\n", path);
     return false;
   } else {
-    printf("Folder %s ditemukan!\n", path);
     return true;
   }
 }
@@ -60,24 +59,26 @@ boolean searchConfigFile(char path[200]) {
   }
 }
 
-void loadSemuaConfig(Word *folderName) {
+void loadSemuaConfig(boolean init, Word *folderName) {
   Word configPath;
   concat("config/", folderName->TabWord, configPath.TabWord);
   configPath.Length = folderName->Length + 7;
   if (!searchConfigFolder(configPath.TabWord)) {
     return;
   }
+  if (init) {
+    printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
+  }
 
   readUserConfig(configPath.TabWord);
   readKicauanConfig(configPath.TabWord);
   readDrafConfig(configPath.TabWord);
-  // readUtasConfig(folderName->TabWord);
+  readUtasConfig(configPath.TabWord);
   // readBalasanConfig(folderName->TabWord);
 }
 
 void initialization(Word *command) {
   printf("Silakan masukan folder konfigurasi untuk dimuat: ");
   readInputNoIgnore(command);
-  loadSemuaConfig(command);
-  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
+  loadSemuaConfig(true, command);
 }

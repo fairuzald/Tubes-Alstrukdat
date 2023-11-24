@@ -19,7 +19,6 @@ void readKicauanConfig(char filePath[]) {
   Word idWord, text, date, time, like, author;
   int id, likeCount;
   DATETIME dt;
-  AddressTweet tweet;
   for (int i = 0; i < countKicauan; i++) {
     CopyWordwWord(&idWord, &currentWordFile);
     int id = wordToInt(idWord);
@@ -46,8 +45,8 @@ void readKicauanConfig(char filePath[]) {
     ADVWORDFILEnoBLANK();
     CopyWordwWord(&time, &currentWordFile);
     readDateTime(time, date, &dt);
-    tweet = CreateTweet(text, author, dt, id, 0, 0, likeCount, 0, NULL, NULL,
-                        NULL, false);
+    AddressTweet tweet = CreateTweet(text, author, dt, id, 0, 0, likeCount, 0,
+                                     NULL, NULL, NULL, false);
     // displayTweet(tweet);
     insertLastListTweet(&listTweetMain, tweet);
     // TulisDATETIME(dt);
