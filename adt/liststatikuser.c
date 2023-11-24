@@ -3,8 +3,6 @@
 #include <stdio.h>
 
 ListStatikUser userList;
-User currentUser;
-boolean sudahMasuk;
 
 /* ********** KONSTRUKTOR ********** */
 PhotoMat initPP() {
