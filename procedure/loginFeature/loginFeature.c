@@ -116,3 +116,4 @@ void loginFeature(Word *command, boolean sudahMasuk) {
   loginFeatureTweet(command);
   loginFeatureUtas(command);
 }
+
