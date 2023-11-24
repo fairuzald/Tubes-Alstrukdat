@@ -59,10 +59,12 @@ void loginFeatureTweet(Word *command) {
     like(&listTweetMain, idInt, userList, grafPertemanan, currentUser);
   } else if (compareWordwString(*command, "UBAH_KICAUAN")) {
     Word id;
-    ADVWORD();
+    // ADVWORD();
     IgnoreBlanks();
-    ADVWORDnoIgnore();
+    ADVWORD();
+    id = currentWord;
     int idInt = wordToInt(id);
+    // printf("idInt: %d\n", idInt);
     editTweetInList(&listTweetMain, idInt, currentUser);
   } else {
     printf("Perintah tidak ditemukan\n");
@@ -109,10 +111,19 @@ void loginFeatureUtas(Word *command) {
   }
 }
 
+void loginFeatureDraft(Word *command) {
+  if (compareWordwString(*command, "BUAT_DRAF")) {
+    inputNewDraft(&listStackDraftMain, &listTweetMain, currentUser);
+  } else if (compareWordwString(*command, "LIHAT_DRAF")) {
+    displayUserDraft(&listStackDraftMain, &listTweetMain, currentUser);
+  }
+}
+
 void loginFeature(Word *command, boolean sudahMasuk) {
   loginFeatureUser(command);
   loginFeatureTeman(command, sudahMasuk);
   loginFeatureTemanReq(command);
   loginFeatureTweet(command);
+  loginFeatureDraft(command);
   loginFeatureUtas(command);
 }
