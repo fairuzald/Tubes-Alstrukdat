@@ -8,6 +8,6 @@ void logoutFeature(Word* command, boolean sudahMasuk) {
   } else if (compareWordwString(*command, "KELUAR")) {
     keluar();
   } else {
-    printf("Command yang anda pilih belum bisa dilakukan, masuk dulu, yuk!");
+    printf("\nCommand yang anda pilih belum bisa dilakukan, masuk dulu, yuk!\n");
   }
 }

@@ -16,6 +16,6 @@ void CreateGraph(Graph* G, int n) {
   }
 }
 
-void insertEdge(Graph* G, int prec, int succ) { ELMT(*G, prec, succ) = 1; }
+void insertEdge(Graph* G, int prec, int succ) {ELMT(*G, prec, succ) = 1; }
 
 void deleteEdge(Graph* G, int prec, int succ) { ELMT(*G, prec, succ) = 0; }

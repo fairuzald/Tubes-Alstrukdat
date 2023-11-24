@@ -1,76 +1,52 @@
 # Set the compiler executable
 COMPILER = gcc
 
-# Compile .c files
-main.o: main.c
-	$(COMPILER) -c main.c
+# Source files
+SRC_FILES = main.c \
+            function/error/error.c \
+            function/friend/friend.c \
+            function/friend_request/friend_request.c \
+            function/initialization/initialization.c \
+            function/initialization/loadBalasan.c \
+            function/initialization/loadDraf.c \
+            function/initialization/loadKicauan.c \
+            function/initialization/loadUser.c \
+            function/initialization/loadUtas.c \
+            function/input/input.c \
+            function/pcolor/pcolor.c \
+            function/profile/profile.c \
+            function/reply/reply.c \
+            function/save/save.c \
+            function/tweet/tweet.c \
+            function/tweet/main_tweet.c \
+            function/tweet_draft/tweet_draft.c \
+            function/tweet_draft/main_draft.c \
+            function/user/user.c \
+            function/utas/utas.c \
+            adt/input/charmachine.c \
+            adt/input/wordmachine.c \
+            adt/input/charmachinefile.c \
+            adt/input/wordmachinefile.c \
+            adt/matrix/matrix.c \
+            adt/bintreetweet.c \
+            adt/datetime.c \
+            adt/graph.c \
+            adt/listdintweet.c \
+            adt/liststackdraft.c \
+            adt/liststatikuser.c \
+            adt/listlinierutas.c \
+            adt/stackdraft.c \
+            adt/time.c \
+            procedure/splashscreen.c \
+            procedure/globalFeature/globalFeature.c \
+            procedure/loginFeature/loginFeature.c \
+            procedure/logoutFeature/logoutFeature.c
 
-# Add more rules for other .c files as needed
+# Build main.exe directly from source files
+main.exe: $(SRC_FILES)
+	$(COMPILER) -o $@ $^
 
-# List object files
-OBJECT_FILES = main.o \
-               function/error/error.o \
-               function/friend/friend.o \
-               function/friend_request/friend_request.o \
-               function/initialization/initialization.o \
-               function/initialization/loadBalasan.o \
-               function/initialization/loadDraf.o \
-               function/initialization/loadKicauan.o \
-               function/initialization/loadUser.o \
-               function/initialization/loadUtas.o \
-               function/input/input.o \
-               function/pcolor/pcolor.o \
-               function/profile/profile.o \
-               function/reply/reply.o \
-               function/save/save.o \
-               function/tweet/tweet.o \
-               function/tweet/main_tweet.o \
-               function/tweet_draft/tweet_draft.o \
-               function/tweet_draft/main_draft.o \
-               function/user/user.o \
-               function/utas/utas.o \
-               adt/input/charmachine.o \
-               adt/input/wordmachine.o \
-               adt/input/charmachinefile.o \
-               adt/input/wordmachinefile.o \
-               adt/matrix/matrix.o \
-               adt/bintreetweet.o \
-               adt/datetime.o \
-               adt/graph.o \
-               adt/listdintweet.o \
-               adt/liststackdraft.o \
-               adt/liststatikuser.o \
-               adt/queue.o \
-               adt/stackdraft.o \
-               adt/time.o \
-               procedure/splashscreen.o \
-               procedure/globalFeature/globalFeature.o \
-               procedure/loginFeature/loginFeature.o \
-               procedure/logoutFeature/logoutFeature.o \
-
-# Build main.exe from object files
-main.exe: $(OBJECT_FILES)
-	$(COMPILER) -o main.exe \
-	  $(OBJECT_FILES) \
-	  -Ifunction/friend \
-	  -Ifunction/error \
-	  -Ifunction/friend_request \
-	  -Ifunction/initialization \
-	  -Ifunction/input \
-	  -Ifunction/pcolor \
-	  -Ifunction/profile \
-	  -Ifunction/reply \
-	  -Ifunction/save \
-	  -Ifunction/tweet \
-	  -Ifunction/tweet_draft \
-	  -Ifunction/user \
-	  -Ifunction/utas \
-	  -Iadt/input \
-	  -Iadt/matrix \
-	  -Iadt \
-	  -Iprocedure
-
-# Clean up .o files
+# Clean up main.exe
 .PHONY: clean
 clean:
-	if exist *.o del /F /Q *.o
+	rm -f main.exe

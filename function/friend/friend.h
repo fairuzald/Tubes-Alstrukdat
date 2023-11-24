@@ -9,8 +9,6 @@
 
 extern Graph grafPertemanan;
 
-int findID(ListStatikUser userList, Word username);
-
 Word findUser(ListStatikUser userList, int userID);
 
 int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username);
