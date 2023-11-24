@@ -78,6 +78,34 @@ void loginFeatureUtas(Word *command) {
     int intId = wordToInt(id);
     initUtas(&listTweetMain, intId, currentUser);
   } else if (compareWordwString(*command, "SAMBUNG_UTAS")) {
+    IgnoreBlanks;
+    Word idUtas;
+    ADVWORD();
+    idUtas = currentWord;
+    int intIdUtas = wordToInt(idUtas);
+    Word index;
+    ADVWORD();
+    index = currentWord;
+    int intIndex = wordToInt(currentWord);
+    connectUtas(&listTweetMain, intIdUtas, intIndex, currentUser);
+  } else if (compareWordwString(*command, "HAPUS_UTAS")) {
+    IgnoreBlanks;
+    Word idUtas;
+    ADVWORD();
+    idUtas = currentWord;
+    int intIdUtas = wordToInt(idUtas);
+    Word index;
+    ADVWORD();
+    index = currentWord;
+    int intIndex = wordToInt(currentWord);
+    deleteUtas(&listTweetMain, intIdUtas, intIndex, currentUser);
+  } else if (compareWordwString(*command, "CETAK_UTAS")) {
+    IgnoreBlanks;
+    Word idUtas;
+    ADVWORD();
+    idUtas = currentWord;
+    int intIdUtas = wordToInt(idUtas);
+    displayUtas(&listTweetMain, intIdUtas, currentUser, grafPertemanan);
   }
 }
 
