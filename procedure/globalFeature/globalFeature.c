@@ -33,8 +33,13 @@ void muat(boolean sudahMasuk) {
 
 void globalFeature(Word* command, boolean sudahMasuk) {
   if (compareWordwString(*command, "SIMPAN")) {
+    IgnoreBlanks();
     simpan(command);
+    IgnoreBlanks();
   } else if (compareWordwString(*command, "MUAT")) {
+    IgnoreBlanks();
+
     muat(sudahMasuk);
+    IgnoreBlanks();
   }
 }
