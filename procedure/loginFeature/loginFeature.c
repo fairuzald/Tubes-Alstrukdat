@@ -64,8 +64,6 @@ void loginFeatureTweet(Word *command) {
     ADVWORDnoIgnore();
     int idInt = wordToInt(id);
     editTweetInList(&listTweetMain, idInt, currentUser);
-  } else {
-    printf("Perintah tidak ditemukan\n");
   }
 }
 

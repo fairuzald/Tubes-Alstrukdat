@@ -40,7 +40,7 @@ void readKicauanConfig(char filePath[]);
 void readBalasanConfig(char filePath[]);
 void readMatrix(PhotoMat *m, int nRow, int nCol);
 void readDateTime(Word time, Word date, DATETIME *output);
-boolean searchConfigFolder(char path[1000]);
+boolean searchConfigFolder(char path[200]);
 void loadSemuaConfig(Word *folderName);
 void initialization(Word *command);
 boolean searchConfigFile(char path[]);

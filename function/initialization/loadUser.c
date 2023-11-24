@@ -21,7 +21,6 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
 void readGraphPertemanan(int countUser) {
   CreateGraph(&grafPertemanan, countUser);
   for (int i = 0; i < countUser; i++) {
-    ADVWORDFILE();
     for (int j = 0; j < countUser; j++) {
       if (currentWordFile.Length > 0) {
         if (currentWordFile.TabWord[2 * j] == '1') {
@@ -29,6 +28,7 @@ void readGraphPertemanan(int countUser) {
         }
       }
     }
+    ADVWORDFILE();
   }
 }
 
