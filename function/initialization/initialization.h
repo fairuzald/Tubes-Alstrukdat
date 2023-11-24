@@ -43,7 +43,6 @@ void readMatrix(PhotoMat *m, int nRow, int nCol);
 void loadSemuaConfig(boolean init, Word *folderName);
 void readDateTime(Word time, Word date, DATETIME *output);
 boolean searchConfigFolder(char path[200]);
-void loadSemuaConfig(Word *folderName);
 void initialization(Word *command);
 boolean searchConfigFolder(char path[200]);
 boolean searchConfigFile(char path[200]);
