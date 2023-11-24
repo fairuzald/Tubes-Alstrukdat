@@ -15,7 +15,7 @@ void readUtasConfig(char filePath[]) {
   for (int i = 0; i < countKicauan; i++) {
     CopyWordwWord(&idWord, &currentWordFile);
     id = wordToInt(idWord);
-    printf("%d\n", id);
+    // printf("%d\n", id);
     ADVWORDFILE();
 
     // UTAS COUNT
@@ -26,14 +26,15 @@ void readUtasConfig(char filePath[]) {
     for (int j = 0; j < utasCount; j++) {
       // Text
       CopyWordwWord(&text, &currentWordFile);
+      // printWord(text);
 
-      printf("\n");
+      // printf("\n");
       ADVWORDFILE();
 
       // author
       CopyWordwWord(&author, &currentWordFile);
-      printWord(author);
-      printf("\n");
+      // printWord(author);
+      // printf("\n");
 
       // Datetime
       ADVWORDFILEnoBLANK();
@@ -42,9 +43,10 @@ void readUtasConfig(char filePath[]) {
       CopyWordwWord(&time, &currentWordFile);
       readDateTime(time, date, &dt);
       // TulisDATETIME(dt);
-      printf("\n");
-      // CreateUtas(text, author, dt, j,);
+      // printf("\n");
       ADVWORDFILE();
+      // printf("%d", listTweetMain.nEff);
+      // CreateUtas(&listTweetMain, id, text, author, dt);
     }
   }
 }

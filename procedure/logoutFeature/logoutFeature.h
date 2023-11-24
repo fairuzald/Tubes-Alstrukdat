@@ -8,7 +8,5 @@
 #include "../../function/initialization/initialization.h"
 #include "../../function/input/input.h"
 
-void loadFromFolder(char* folderName);
-void muat(boolean sudahMasuk);
 void logoutFeature(Word* command, boolean sudahMasuk);
 #endif

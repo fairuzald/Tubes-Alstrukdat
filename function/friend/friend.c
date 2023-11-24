@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 
-Graph grafPertemanan;
 ListStatikUser userList;
 boolean sudahMasuk;
 
