@@ -1,7 +1,7 @@
 # Tugas-Besar-Alstrukdat-K01-K
 
 ## Ringkasan
-Burbir aplikasi 
+Burbir aplikasi adalah aplikasi duplikat dari twitter berbasis CLI
 
 ## Cara Menjalankan Program
 Untuk menjalankan program, run kode berikut:
