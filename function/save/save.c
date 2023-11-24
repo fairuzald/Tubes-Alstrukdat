@@ -84,14 +84,14 @@ void saveTweet(ListDinTweet *l, char folderName[]) {
   for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
     AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
 
-    fprintf(file, "%ld\n", IdTweet(tweet));             // ID kicauan
-    fprintf(file, "%s\n", TextTweet(tweet).TabWord);    // Text
-    fprintf(file, "%ld\n", Like(tweet));                // Like
-    fprintf(file, "%s\n", AuthorTweet(tweet).TabWord);  // Author
+    fprintf(file, "%ld\n", tweet->idTweet);             // ID kicauan
+    fprintf(file, "%s\n", tweet->textTweet.TabWord);    // Text
+    fprintf(file, "%ld\n", tweet->like);                // Like
+    fprintf(file, "%s\n", tweet->authorTweet.TabWord);  // Author
     fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
-            TimeCreatedTweet(tweet).DD, TimeCreatedTweet(tweet).MM,
-            TimeCreatedTweet(tweet).YYYY, TimeCreatedTweet(tweet).T.HH,
-            TimeCreatedTweet(tweet).T.MM, TimeCreatedTweet(tweet).T.SS);
+            tweet->timeCreatedTweet.DD, tweet->timeCreatedTweet.MM,
+            tweet->timeCreatedTweet.YYYY, tweet->timeCreatedTweet.T.HH,
+            tweet->timeCreatedTweet.T.MM, tweet->timeCreatedTweet.T.SS);
   }
 
   fclose(file);
@@ -110,34 +110,35 @@ void saveUtas(ListDinTweet *l, char folderName[]) {
   fprintf(file, "%ld\n", NEFF_LISTDINTWEET(*l));
 
   // Menulis data setiap utas
-  for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
-    AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
+  // for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
+  //   AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
 
-    if (Utas(tweet) != NULL) {                 // Jika tweet ini memiliki utas
-      fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+  //   if (Utas(tweet) != NULL) {                 // Jika tweet ini memiliki
+  //   utas
+  //     fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
 
-      AddressTweet utas = Utas(tweet);
-      int utasCount = 0;
-      while (utas != NULL) {  // Menghitung jumlah utas
-        utasCount++;
-        utas = Utas(utas);
-      }
+  //     AddressTweet utas = Utas(tweet);
+  //     int utasCount = 0;
+  //     while (utas != NULL) {  // Menghitung jumlah utas
+  //       utasCount++;
+  //       utas = Utas(utas);
+  //     }
 
-      fprintf(file, "%d\n", utasCount);  // Jumlah utas
+  //     fprintf(file, "%d\n", utasCount);  // Jumlah utas
 
-      utas = Utas(tweet);
-      while (utas != NULL) {  // Menulis setiap utas
-        fprintf(file, "%s\n", TextTweet(utas).TabWord);
-        fprintf(file, "%s\n", AuthorTweet(utas).TabWord);
-        fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
-                TimeCreatedTweet(utas).DD, TimeCreatedTweet(utas).MM,
-                TimeCreatedTweet(utas).YYYY, TimeCreatedTweet(utas).T.HH,
-                TimeCreatedTweet(utas).T.MM, TimeCreatedTweet(utas).T.SS);
+  //     utas = Utas(tweet);
+  //     while (utas != NULL) {  // Menulis setiap utas
+  //       fprintf(file, "%s\n", TextTweet(utas).TabWord);
+  //       fprintf(file, "%s\n", AuthorTweet(utas).TabWord);
+  //       fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
+  //               TimeCreatedTweet(utas).DD, TimeCreatedTweet(utas).MM,
+  //               TimeCreatedTweet(utas).YYYY, TimeCreatedTweet(utas).T.HH,
+  //               TimeCreatedTweet(utas).T.MM, TimeCreatedTweet(utas).T.SS);
 
-        utas = Utas(utas);
-      }
-    }
-  }
+  //       utas = Utas(utas);
+  //     }
+  //   }
+  // }
 
   fclose(file);
 }
@@ -154,43 +155,43 @@ void saveReply(ListDinTweet *l, char folderName[]) {
   fprintf(file, "%ld\n", NEFF_LISTDINTWEET(*l));
 
   // Menulis data setiap balasan
-  for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
-    AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
+  // for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
+  //   AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
 
-    if (Reply1(tweet) != NULL ||
-        Reply2(tweet) != NULL) {  // Jika tweet ini memiliki balasan
-      fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+  //   if (Reply1(tweet) != NULL ||
+  //       Reply2(tweet) != NULL) {  // Jika tweet ini memiliki balasan
+  //     fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
 
-      AddressTweet reply = Reply1(tweet);
-      int replyCount = 0;
-      while (reply != NULL) {  // Menghitung jumlah balasan
-        replyCount++;
-        reply = Reply1(reply);
-      }
+  //     AddressTweet reply = Reply1(tweet);
+  //     int replyCount = 0;
+  //     while (reply != NULL) {  // Menghitung jumlah balasan
+  //       replyCount++;
+  //       reply = Reply1(reply);
+  //     }
 
-      fprintf(file, "%d\n", replyCount);  // Jumlah balasan
+  //     fprintf(file, "%d\n", replyCount);  // Jumlah balasan
 
-      reply = Reply1(tweet);
-      int couter = 0;
-      while (reply != NULL) {
-        if (couter == 0) {
-          fprintf(file, "-1 %ld\n", IdReply(reply));
-        }  // Parent dan ID balasan
-        else {
-          fprintf(file, "1 %ld\n", IdTweet(reply));  // ID balasan
-        }
-        fprintf(file, "%s\n", TextTweet(reply).TabWord);    // Isi balasan
-        fprintf(file, "%s\n", AuthorTweet(reply).TabWord);  // Author
-        fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
-                TimeCreatedTweet(reply).DD, TimeCreatedTweet(reply).MM,
-                TimeCreatedTweet(reply).YYYY, TimeCreatedTweet(reply).T.HH,
-                TimeCreatedTweet(reply).T.MM, TimeCreatedTweet(reply).T.SS);
+  //     reply = Reply1(tweet);
+  //     int couter = 0;
+  //     while (reply != NULL) {
+  //       if (couter == 0) {
+  //         fprintf(file, "-1 %ld\n", IdReply(reply));
+  //       }  // Parent dan ID balasan
+  //       else {
+  //         fprintf(file, "1 %ld\n", IdTweet(reply));  // ID balasan
+  //       }
+  //       fprintf(file, "%s\n", TextTweet(reply).TabWord);    // Isi balasan
+  //       fprintf(file, "%s\n", AuthorTweet(reply).TabWord);  // Author
+  //       fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
+  //               TimeCreatedTweet(reply).DD, TimeCreatedTweet(reply).MM,
+  //               TimeCreatedTweet(reply).YYYY, TimeCreatedTweet(reply).T.HH,
+  //               TimeCreatedTweet(reply).T.MM, TimeCreatedTweet(reply).T.SS);
 
-        reply = Reply1(reply);
-      }
-      reply = Reply1(tweet);
-    }
-  }
+  //       reply = Reply1(reply);
+  //     }
+  //     reply = Reply1(tweet);
+  //   }
+  // }
 
   fclose(file);
 }
