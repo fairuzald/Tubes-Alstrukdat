@@ -1,18 +1,23 @@
-// #ifndef UTAS_H
-// #define UTAS_H
+#ifndef UTAS_H
+#define UTAS_H
 
-// #include "../tweet/tweet.h"
-// #include "./../adt/input/wordmachine.h"
-// #include "./../adt/listdintweet.h"
+#include "../tweet/tweet.h"
+#include "../friend/friend.h"
+#include "./../adt/input/wordmachine.h"
+#include "./../adt/listdintweet.h"
+#include "./../adt/liststatikuser.h"
+#include "./../adt/datetime.h"
+#include "./../adt/listlinierutas.h"
+#include "./../adt/boolean.h"
 
-// void CreateUtas(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
-//                 long idUtas, AddressTweet utas, Tweet *prev);
+void CreateUtas(ListDinTweet *listTweetMain, int idKicau, Word textTweet, Word authorTweet, DATETIME timeCreatedTweet);
 
-// void connectUtas(Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,
-//                  long idUtas, long index, Tweet *prev);
+void initUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser);
 
-// void deleteUtas(int index, Tweet *utama);
+void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index);
 
-// void displayUtas(ListDinTweet l, int idUtas, AddressTweet pTweet);
+void deleteUtas(ListDinTweet *listTweetMain, int idUtas, int idKicau);
 
-// #endif
+void displayUtas(ListDinTweet *listTweetMain, int idUtas);
+
+#endif
