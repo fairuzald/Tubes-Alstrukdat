@@ -26,7 +26,7 @@
 void concat(char *str1, char *str2, char *output);
 
 // Folder config search
-boolean searchConfigFolder(char path[1000]);
+boolean searchConfigFolder(char path[200]);
 
 void initialization(Word *command);
 
