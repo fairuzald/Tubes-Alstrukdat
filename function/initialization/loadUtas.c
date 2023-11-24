@@ -26,6 +26,7 @@ void readUtasConfig(char filePath[]) {
     for (int j = 0; j < utasCount; j++) {
       // Text
       CopyWordwWord(&text, &currentWordFile);
+      printWord(text);
 
       printf("\n");
       ADVWORDFILE();
@@ -41,10 +42,11 @@ void readUtasConfig(char filePath[]) {
       ADVWORDFILEnoBLANK();
       CopyWordwWord(&time, &currentWordFile);
       readDateTime(time, date, &dt);
-      // TulisDATETIME(dt);
+      TulisDATETIME(dt);
       printf("\n");
-      // CreateUtas(text, author, dt, j,);
       ADVWORDFILE();
+      printf("%d", listTweetMain.nEff);
+      // CreateUtas(&listTweetMain, id, text, author, dt);
     }
   }
 }

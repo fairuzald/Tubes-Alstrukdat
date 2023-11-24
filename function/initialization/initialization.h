@@ -22,6 +22,7 @@
 #include "../tweet/tweet.h"
 #include "../tweet_draft/main_draft.h"
 #include "../user/user.h"
+#include "../utas/utas.h"
 
 void concat(char *str1, char *str2, char *output);
 

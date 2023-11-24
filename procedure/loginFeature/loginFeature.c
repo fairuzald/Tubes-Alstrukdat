@@ -73,8 +73,9 @@ void loginFeatureUtas(Word *command) {
   if (compareWordwString(*command, "UTAS")) {
     Word id;
     IgnoreBlanks();
-    ADVWORDnoIgnore();
+    ADVWORD();
     id = currentWord;
+    printWord(currentWord);
     int intId = wordToInt(id);
     initUtas(&listTweetMain, intId, currentUser);
   } else if (compareWordwString(*command, "SAMBUNG_UTAS")) {
@@ -86,4 +87,5 @@ void loginFeature(Word *command, boolean sudahMasuk) {
   loginFeatureTeman(command, sudahMasuk);
   loginFeatureTemanReq(command);
   loginFeatureTweet(command);
+  loginFeatureUtas(command);
 }
