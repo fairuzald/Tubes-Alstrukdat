@@ -20,7 +20,7 @@ int main() {
   printf("\nSilakan masukkan command: \n");
   readInput(&command);
   while (!compareWordwString(command, "TUTUP_PROGRAM")) {
-    globalFeature(&command);
+    globalFeature(&command, sudahMasuk);
     if (!sudahMasuk) {
       logoutFeature(&command, sudahMasuk);
     } else {
