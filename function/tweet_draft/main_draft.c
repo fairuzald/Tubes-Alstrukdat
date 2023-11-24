@@ -18,9 +18,10 @@ void inputNewDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
   // Memasukkan text draft
   printf("Masukkan draf:\n");
   STARTWORDnoIgnore(MAX_TWEET_LENGTH);
+  Word inputWord = currentWord;
 
   // Validasi masukan text draft
-  if (isOnlySpace(currentWord)) {
+  if (isOnlySpace(inputWord)) {
     // Jika masukan tidak valid, menampilkan pesan bahwa draft gagal dibuat
     printf("Draf tidak boleh hanya berisi spasi!\n");
   } else {
@@ -32,9 +33,9 @@ void inputNewDraft(ListStackDraft *listStackDraft, ListDinTweet *listTweet,
     if (compareWordwWord(currentWord, stringToWord("HAPUS"))) {
       deleteNewDraft();
     } else if (compareWordwWord(currentWord, stringToWord("SIMPAN"))) {
-      saveNewDraft(listStackDraft, user, currentWord);
+      saveNewDraft(listStackDraft, user, inputWord);
     } else if (compareWordwWord(currentWord, stringToWord("TERBIT"))) {
-      publishNewDraft(listTweet, user, currentWord);
+      publishNewDraft(listTweet, user, inputWord);
     } else {
       printf("Masukan tidak valid\n");
       printf("Draf terhapus secara otomatis\n");
