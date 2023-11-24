@@ -3,6 +3,7 @@
 
 #include "../../adt/boolean.h"
 #include "../../adt/datetime.h"
+#include "../../adt/input/charmachine.h"
 #include "../../adt/input/wordmachine.h"
 #include "../../adt/listdintweet.h"
 #include "../../adt/listlinierutas.h"

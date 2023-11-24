@@ -4,9 +4,11 @@
 #include "../../adt/bintreetweet.h"
 #include "../../adt/input/wordmachine.h"
 #include "../../adt/listdintweet.h"
+#include "../../adt/listlinierutas.h"
 #include "../friend/friend.h"
 #include "../tweet/tweet.h"
 #include "../user/user.h"
+#include "../utas/utas.h"
 
 void CreateReply(ListDinTweet *listTweetMain, AddressTweet *temp,
                  Word textTweet, Word authorTweet, DATETIME timeCreatedTweet,

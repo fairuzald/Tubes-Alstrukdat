@@ -84,13 +84,13 @@ AddressTweet findPrevReply(AddressTweet root, int idBalasan) {
   }
 
   // cari di kiri
-  AddressTweet leftRes = findReply(Reply1(root), idBalasan);
+  AddressTweet leftRes = findPrevReply(Reply1(root), idBalasan);
   if (leftRes != NULL) {
     return leftRes;
   }
 
   // cari di kanan
-  AddressTweet rightRes = findReply(Reply2(root), idBalasan);
+  AddressTweet rightRes = findPrevReply(Reply2(root), idBalasan);
 
   return rightRes;
 }
@@ -125,7 +125,7 @@ void inputNewReply(ListDinTweet *listTweetMain, User user, int idKicau,
 
         // mengambil input kicauan
         printf("\nMasukkan balasan:\n");
-        STARTWORDNOIGNORE(280);
+        STARTWORDnoIgnore(280);
 
         CreateReply(listTweetMain, &temp, currentWord, currentUser.nama,
                     getCurrentDateTime(), idKicau, idBalasan);
@@ -162,7 +162,7 @@ void inputNewReply(ListDinTweet *listTweetMain, User user, int idKicau,
 
         // mengambil input kicauan
         printf("\nMasukkan balasan:\n");
-        STARTWORDNOIGNORE(280);
+        STARTWORDnoIgnore(280);
 
         CreateReply(listTweetMain, &temp, currentWord, currentUser.nama,
                     getCurrentDateTime(), idKicau, idBalasan);

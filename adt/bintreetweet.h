@@ -6,12 +6,13 @@
 #ifndef POHONBINER_H
 #define POHONBINER_H
 
+#include "../function/friend/friend.h"
+#include "../function/tweet/tweet.h"
+#include "../function/user/user.h"
 #include "boolean.h"
 #include "listdintweet.h"
-#include "../function/tweet/tweet.h"
 
-void deleteNode(AddressTweet *nodeBalasan);
-
-void displayNode(AddressTweet *kicauanUtama, int space);
+void deleteNode(AddressTweet *root);
+void displayNode(AddressTweet kicauanUtama, int space);
 
 #endif

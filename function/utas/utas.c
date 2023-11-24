@@ -37,7 +37,7 @@ void initUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser) {
     do {
       // mengambil input kicauan
       printf("\nMasukkan kicauan:\n");
-      STARTWORDNOIGNORE(280);
+      STARTWORDnoIgnore(280);
 
       CreateUtas(listTweetMain, idKicau, currentWord, currentUser.nama,
                  getCurrentDateTime());
@@ -53,7 +53,7 @@ void initUtas(ListDinTweet *listTweetMain, int idKicau, User currentUser) {
         printf("\nApakah Anda ingin melanjutkan utas ini? (YA/TIDAK)  ");
         STARTWORD();
       } while (!(compareWordwString(currentWord, "TIDAK") ||
-                 compareWordwString(currentWord, 'YA')));  // handle input
+                 compareWordwString(currentWord, "YA")));  // handle input
 
       // lanjut atau tidak
       if (compareWordwString(currentWord, "TIDAK")) {
@@ -94,7 +94,7 @@ void connectUtas(ListDinTweet *listTweetMain, int idUtas, int index,
         // syarat terpenuhi
         // mengambil input kicauan
         printf("\nMasukkan kicauan:\n");
-        STARTWORDNOIGNORE(280);
+        STARTWORDnoIgnore(280);
 
         // membuat node tweet baru
         AddressTweet temp =
