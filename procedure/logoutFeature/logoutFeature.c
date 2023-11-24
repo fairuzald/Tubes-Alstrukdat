@@ -14,17 +14,19 @@ void muat(boolean sudahMasuk) {
     printf("Anda harus keluar terlebih dahulu sebelum melakukan pemuatan!\n\n");
     return;
   }
+  char fullPath[200];
   Word folderName;
   struct stat st = {0};
 
   printf("Masukkan nama folder yang hendak dimuat.\n");
   readInputNoIgnore(&folderName);
-  loadSemuaConfig(&folderName);
-
-  if (stat(folderName.TabWord, &st) == -1) {
+  folderName.TabWord[folderName.Length] = '\0';
+  concat("config/", folderName.TabWord, fullPath);
+  if (stat(fullPath, &st) == -1) {
     printf("Tidak ada folder yang dimaksud!\n\n");
   } else {
-    loadFromFolder(folderName.TabWord);
+    loadSemuaConfig(&folderName);
+    loadFromFolder(fullPath);
   }
 }
 

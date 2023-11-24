@@ -65,16 +65,24 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   for (int j = 0; j < grafPertemanan.n; j++) {
     for (int k = 0; k < grafPertemanan.n; k++) {
       if (k < grafPertemanan.n - 1) {
-        fprintf(file, "%c ", grafPertemanan.mem[j][k]);
+        fprintf(file, "%d ", grafPertemanan.mem[j][k]);
       } else {
-        fprintf(file, "%c", grafPertemanan.mem[j][k]);
+        fprintf(file, "%d", grafPertemanan.mem[j][k]);
       }
     }
     fprintf(file, "\n");
   }
 
+  fprintf(file, "%d\n", friendRequestQueue.n);
+  for (int i = 0; i < friendRequestQueue.n; i++) {
+    fprintf(file, "%d ", friendRequestQueue.buffer[i].senderID);
+    fprintf(file, "%d ", friendRequestQueue.buffer[i].receiverID);
+    fprintf(file, "%d\n", friendRequestQueue.buffer[i].senderFriendCount);
+  }
+
   fclose(file);
 }
+
 void saveTweet(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/kicauan.config", folderPath);
@@ -91,9 +99,11 @@ void saveTweet(ListDinTweet *l, char folderName[]) {
   for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
     AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
 
-    fprintf(file, "%ld\n", IdTweet(tweet));             // ID kicauan
-    fprintf(file, "%s\n", TextTweet(tweet).TabWord);    // Text
-    fprintf(file, "%ld\n", Like(tweet));                // Like
+    fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+    TextTweet(tweet).TabWord[TextTweet(tweet).Length] = '\0';
+    fprintf(file, "%s\n", TextTweet(tweet).TabWord);  // Text
+    fprintf(file, "%ld\n", Like(tweet));              // Like
+    AuthorTweet(tweet).TabWord[AuthorTweet(tweet).Length] = '\0';
     fprintf(file, "%s\n", AuthorTweet(tweet).TabWord);  // Author
     fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
             TimeCreatedTweet(tweet).DD, TimeCreatedTweet(tweet).MM,
@@ -148,6 +158,7 @@ void saveUtas(ListDinTweet *l, char folderName[]) {
 
   fclose(file);
 }
+
 void saveReply(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/balasan.config", folderPath);
@@ -227,11 +238,12 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   // Menulis data setiap draft
   for (int i = 0; i < NEFF_LISTSTACKDRAFT(*l); i++) {
     StackDraft draft = ELMT_LISTSTACKDRAFT(*l, i);
-
-    fprintf(file, "%s %ld\n", AuthorDraft(draft).TabWord,
+    AuthorDraft(draft).TabWord[AuthorDraft(draft).Length] = '\0';
+    fprintf(file, "%s %d\n", AuthorDraft(draft).TabWord,
             draft.TOP + 1);  // username pengguna dan banyak draft
 
     for (int j = 0; j <= draft.TOP; j++) {
+      TextDraft(draft.T[j]).TabWord[TextDraft(draft.T[j]).Length] = '\0';
       fprintf(file, "%s\n", TextDraft(draft.T[j]).TabWord);
       fprintf(
           file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
@@ -261,26 +273,32 @@ void saveToFolder(char *folderName) {
 
   // Masukin fungsi penyimpanan disini
   saveUser(&userList, folderName);
+  saveDraft(&listStackDraftMain, folderName);
+  saveTweet(&listTweetMain, folderName);
 
   printf("Penyimpanan telah berhasil dilakukan!\n\n");
 }
 
-void simpan() {
-  char folderName[256];
+void simpan(Word *command) {
+  Word folderName;
+  char folderPath[200];
   struct stat st = {0};
-
   printf("Masukkan nama folder penyimpanan\n");
-  scanf("%s", folderName);
-  if (stat(folderName, &st) == -1) {
+  readInputNoIgnore(command);
+  ADV();
+  command->TabWord[command->Length] = '\0';
+  concat("config/", command->TabWord, folderPath);
+
+  if (stat(folderPath, &st) == -1) {
     printf(
         "Belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n\n",
-        folderName, folderName);
+        folderPath, folderPath);
     for (int i = 1; i <= 3; i++) {
       printf("%d...\n", i);
     }
-    createFolder(folderName);
-    printf("%s sudah berhasil dibuat.\n\n", folderName);
+    createFolder(folderPath);
+    printf("%s sudah berhasil dibuat.\n\n", folderPath);
   }
 
-  saveToFolder(folderName);
+  saveToFolder(folderPath);
 }
