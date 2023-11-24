@@ -10,6 +10,7 @@ void saveUser(ListStatikUser *l, char folderName[]) {
 
   char folderPath[200];
   concat(folderName, "/pengguna.config", folderPath);
+  printf("%s\n", folderPath);
 
   FILE *file = fopen(folderPath, "a");
   if (file == NULL) {
@@ -22,52 +23,66 @@ void saveUser(ListStatikUser *l, char folderName[]) {
   fprintf(file, "%d\n", userCount());
   // Menulis data setiap pengguna
   for (int i = 0; i < userCount(); i++) {
-    User user = USER(i);
-
     // Potong karakter yang berlebihan
-    if (user.nama.Length > 20) {
-      user.nama.TabWord[20] = '\0';
+    if (NAMA(i).Length > 20) {
+      NAMA(i).TabWord[20] = '\0';
+    } else {
+      NAMA(i).TabWord[NAMA(i).Length] = '\0';
     }
-    if (user.password.Length > 20) {
-      user.password.TabWord[20] = '\0';
+    if (PASS(i).Length > 20) {
+      PASS(i).TabWord[20] = '\0';
+    } else {
+      PASS(i).TabWord[PASS(i).Length] = '\0';
     }
-    if (user.bio.Length > 135) {
-      user.bio.TabWord[135] = '\0';
+    if (BIO(i).Length > 135) {
+      BIO(i).TabWord[135] = '\0';
+    } else {
+      BIO(i).TabWord[BIO(i).Length] = '\0';
     }
 
-    fprintf(file, "%s\n", user.nama.TabWord);                  // Nama
-    fprintf(file, "%s\n", user.password.TabWord);              // Password
-    fprintf(file, "%s\n", user.bio.TabWord);                   // Bio
-    fprintf(file, "%s\n", user.nomorHP.TabWord);               // No HP
-    fprintf(file, "%s\n", user.weton.TabWord);                 // Weton
-    fprintf(file, "%s\n", user.public ? "Publik" : "Privat");  // Jenis akun
+    fprintf(file, "%s\n", NAMA(i).TabWord);  // Nama
+    fprintf(file, "%s\n", PASS(i).TabWord);  // Password
+    fprintf(file, "%s\n", BIO(i).TabWord);   // Bio
+    HP(i).TabWord[HP(i).Length] = '\0';
+    fprintf(file, "%s\n", HP(i).TabWord);  // No HP
+    WETON(i).TabWord[WETON(i).Length] = '\0';
+    fprintf(file, "%s\n", WETON(i).TabWord);                 // Weton
+    fprintf(file, "%s\n", PUBLIC(i) ? "Publik" : "Privat");  // Jenis akun
     // Foto Profil
     for (int j = 0; j < 5; j++) {
       for (int k = 0; k < 5; k++) {
-        fprintf(file, "%c ", user.fotoProfil.color[j][k]);
+        fprintf(file, "%c ", FOTO(i).color[j][k]);
         if (k < 4) {
-          fprintf(file, "%c ", user.fotoProfil.content[j][k]);
+          fprintf(file, "%c ", FOTO(i).content[j][k]);
         } else {
-          fprintf(file, "%c ", user.fotoProfil.content[j][k]);
+          fprintf(file, "%c ", FOTO(i).content[j][k]);
         }
       }
       fprintf(file, "\n");
     }
   }
 
-  // for (int j = 0; j < userCount(); j++) {
-  //   for (int k = 0; k < userCount(); k++) {
-  //     if (k < userCount() - 1) {
-  //       fprintf(file, "%c ", isTeman(j, k) ? '1' : '0');
-  //     } else {
-  //       fprintf(file, "%c", isTeman(j, k) ? '1' : '0');
-  //     }
-  //   }F
-  //   fprintf(file, "\n");
-  // }
+  for (int j = 0; j < grafPertemanan.n; j++) {
+    for (int k = 0; k < grafPertemanan.n; k++) {
+      if (k < grafPertemanan.n - 1) {
+        fprintf(file, "%d ", grafPertemanan.mem[j][k]);
+      } else {
+        fprintf(file, "%d", grafPertemanan.mem[j][k]);
+      }
+    }
+    fprintf(file, "\n");
+  }
+
+  fprintf(file, "%d\n", friendRequestQueue.n);
+  for (int i = 0; i < friendRequestQueue.n; i++) {
+    fprintf(file, "%d ", friendRequestQueue.buffer[i].senderID);
+    fprintf(file, "%d ", friendRequestQueue.buffer[i].receiverID);
+    fprintf(file, "%d\n", friendRequestQueue.buffer[i].senderFriendCount);
+  }
 
   fclose(file);
 }
+
 void saveTweet(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/kicauan.config", folderPath);
@@ -84,9 +99,11 @@ void saveTweet(ListDinTweet *l, char folderName[]) {
   for (int i = 0; i < NEFF_LISTDINTWEET(*l); i++) {
     AddressTweet tweet = ELMT_LISTDINTWEET(*l, i);
 
-    fprintf(file, "%ld\n", IdTweet(tweet));             // ID kicauan
-    fprintf(file, "%s\n", TextTweet(tweet).TabWord);    // Text
-    fprintf(file, "%ld\n", Like(tweet));                // Like
+    fprintf(file, "%ld\n", IdTweet(tweet));  // ID kicauan
+    TextTweet(tweet).TabWord[TextTweet(tweet).Length] = '\0';
+    fprintf(file, "%s\n", TextTweet(tweet).TabWord);  // Text
+    fprintf(file, "%ld\n", Like(tweet));              // Like
+    AuthorTweet(tweet).TabWord[AuthorTweet(tweet).Length] = '\0';
     fprintf(file, "%s\n", AuthorTweet(tweet).TabWord);  // Author
     fprintf(file, "%02d/%02d/%04d %02d:%02d:%02d\n",    // Datetime
             TimeCreatedTweet(tweet).DD, TimeCreatedTweet(tweet).MM,
@@ -141,6 +158,7 @@ void saveUtas(ListDinTweet *l, char folderName[]) {
 
   fclose(file);
 }
+
 void saveReply(ListDinTweet *l, char folderName[]) {
   char folderPath[200];
   concat(folderName, "/balasan.config", folderPath);
@@ -220,11 +238,12 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   // Menulis data setiap draft
   for (int i = 0; i < NEFF_LISTSTACKDRAFT(*l); i++) {
     StackDraft draft = ELMT_LISTSTACKDRAFT(*l, i);
-
-    fprintf(file, "%s %ld\n", AuthorDraft(draft).TabWord,
+    AuthorDraft(draft).TabWord[AuthorDraft(draft).Length] = '\0';
+    fprintf(file, "%s %d\n", AuthorDraft(draft).TabWord,
             draft.TOP + 1);  // username pengguna dan banyak draft
 
     for (int j = 0; j <= draft.TOP; j++) {
+      TextDraft(draft.T[j]).TabWord[TextDraft(draft.T[j]).Length] = '\0';
       fprintf(file, "%s\n", TextDraft(draft.T[j]).TabWord);
       fprintf(
           file, "%02d/%02d/%04d %02d:%02d:%02d\n",  // Datetime
@@ -238,7 +257,13 @@ void saveDraft(ListStackDraft *l, char folderName[]) {
   fclose(file);
 }
 
-void createFolder(char *folderName) {}
+void createFolder(char *folderName) {
+#ifdef __linux__
+  mkdir(folderName, 0777);
+#else
+  mkdir(folderName);
+#endif
+}
 
 void saveToFolder(char *folderName) {
   printf("Anda akan melakukan penyimpanan di %s.\n\n", folderName);
@@ -247,25 +272,33 @@ void saveToFolder(char *folderName) {
   }
 
   // Masukin fungsi penyimpanan disini
+  saveUser(&userList, folderName);
+  saveDraft(&listStackDraftMain, folderName);
+  saveTweet(&listTweetMain, folderName);
+
   printf("Penyimpanan telah berhasil dilakukan!\n\n");
 }
 
-void simpan() {
+void simpan(Word *command) {
   Word folderName;
+  char folderPath[200];
   struct stat st = {0};
-
   printf("Masukkan nama folder penyimpanan\n");
-  readInput(&folderName);
-  if (stat(folderName.TabWord, &st) == -1) {
+  readInputNoIgnore(command);
+  ADV();
+  command->TabWord[command->Length] = '\0';
+  concat("config/", command->TabWord, folderPath);
+
+  if (stat(folderPath, &st) == -1) {
     printf(
         "Belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n\n",
-        folderName, folderName);
+        folderPath, folderPath);
     for (int i = 1; i <= 3; i++) {
       printf("%d...\n", i);
     }
-    createFolder(folderName.TabWord);
-    printf("%s sudah berhasil dibuat.\n\n", folderName.TabWord);
+    createFolder(folderPath);
+    printf("%s sudah berhasil dibuat.\n\n", folderPath);
   }
 
-  saveToFolder(folderName.TabWord);
+  saveToFolder(folderPath);
 }

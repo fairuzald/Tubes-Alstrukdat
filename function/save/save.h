@@ -12,7 +12,12 @@
 #include "../../adt/liststackdraft.h"
 #include "../../adt/liststatikuser.h"
 #include "../friend/friend.h"
+#include "../friend_request/friend_request.h"
 #include "../input/input.h"
+#include "../tweet/main_tweet.h"
+#include "../tweet/tweet.h"
+#include "../tweet_draft/main_draft.h"
+#include "../tweet_draft/tweet_draft.h"
 #include "../user/user.h"
 // Function prototypes
 #include <stdio.h>
@@ -27,6 +32,6 @@ void saveTweetReplyUtas(ListDinTweet *l, char folderName[]);
 void saveDraft(ListStackDraft *l, char folderName[]);
 void createFolder(char *folderName);
 void saveToFolder(char *folderName);
-void simpan();
+void simpan(Word *command);
 
-#endif /* LOA */
+#endif

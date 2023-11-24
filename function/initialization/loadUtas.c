@@ -21,7 +21,6 @@ void readUtasConfig(char filePath[]) {
     // UTAS COUNT
     CopyWordwWord(&utasCountWord, &currentWordFile);
     utasCount = wordToInt(utasCountWord);
-    printf("counter: %d\n", utasCount);
     ADVWORDFILE();
 
     for (int j = 0; j < utasCount; j++) {

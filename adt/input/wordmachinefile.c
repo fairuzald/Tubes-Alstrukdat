@@ -28,7 +28,6 @@ void STARTWORDFILE(char path[]) {
     CopyWordFile();
   }
 }
-
 void ADVWORDFILEnoBLANK() {
   IgnoreBlanksFile();
   if (currentCharFile == MARKFILE) {
@@ -50,19 +49,6 @@ void ADVWORDFILE() {
   menggunakan procedure SalinWord */
   IgnoreBlanksFile();
   if (currentCharFile == MARKFILE) {
-    endWordFile = true;
-    ADVFILE();
-    CopyWordFile();
-  } else {
-    endWordFile = false;
-    CopyWordFile();
-    IgnoreBlanksFile();
-  }
-}
-
-void ADVTIME() {
-  IgnoreBlanksFile();
-  if (currentCharFile == '/') {
     endWordFile = true;
     ADVFILE();
     CopyWordFile();
@@ -149,7 +135,6 @@ void CropWord(Word *word, int maxLength) {
     word->Length = maxLength;
   }
 }
-
 void CropWordFront(Word *word, int croppedLength) {
   /* Memotong panjang kata sesuai dengan maxLength
      I.S. : word terdefinisi, maxLength merupakan panjang maksimum yang
@@ -171,7 +156,6 @@ void CropWordFront(Word *word, int croppedLength) {
         '\0';  // Pastikan string berakhir dengan null terminator
   }
 }
-
 void LowerCaseFile() {
   /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
   /* F.S. currentword menjadi lowercase di setiap karakternya */

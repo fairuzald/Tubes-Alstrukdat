@@ -1,4 +1,5 @@
 #include "initialization.h"
+Graph grafPertemanan;
 
 void readMatrix(PhotoMat *m, int nRow, int nCol) {
   /* I.S. isIdxValid(nRow,nCol) */
@@ -20,6 +21,7 @@ void readMatrix(PhotoMat *m, int nRow, int nCol) {
 void readGraphPertemanan(int countUser) {
   CreateGraph(&grafPertemanan, countUser);
   for (int i = 0; i < countUser; i++) {
+    ADVWORDFILE();
     for (int j = 0; j < countUser; j++) {
       if (currentWordFile.Length > 0) {
         if (currentWordFile.TabWord[2 * j] == '1') {
@@ -27,43 +29,55 @@ void readGraphPertemanan(int countUser) {
         }
       }
     }
-    ADVWORDFILE();
   }
 }
 
 void readReqPertemanan(int row) {
   CreateQueue(&friendRequestQueue);
   for (int i = 0; i < row; i++) {
+    // Yang meminta pertemanan
     ADVWORDFILEnoBLANK();
     Word id, addressId, friendCount;
     CopyWordwWord(&id, &currentWordFile);
     int idInt = wordToInt(id);
+    // printf("idInt: %d\n", idInt);
+
+    // Yang dimintai pertemanan
     ADVWORDFILEnoBLANK();
     CopyWordwWord(&addressId, &currentWordFile);
     int idAddressInt = wordToInt(addressId);
+    // printf("idAddressInt: %d\n", idAddressInt);
     ADVWORDFILEnoBLANK();
+
+    // Current word is friend count
     CopyWordwWord(&friendCount, &currentWordFile);
     int friendCountInt = wordToInt(friendCount);
+    // printf("friendCountInt: %d\n", friendCountInt);
     AppendQueue(&friendRequestQueue, idInt, idAddressInt, friendCountInt);
-    ADVWORDFILEnoBLANK();
   }
 }
 
 void readUserConfig(char filePath[]) {
   CreateuserList();
   char fullPath[200];
-  concat("config/", filePath, fullPath);
-  concat(fullPath, "/pengguna.config", fullPath);
+  concat(filePath, "/pengguna.config", fullPath);
+  boolean found = searchConfigFile(fullPath);
+  if (!found) {
+    printf("File %s tidak ditemukan.\n", fullPath);
+    return;
+  }
   STARTWORDFILE(fullPath);
+  ADVFILE();
 
   int countUser;
 
   countUser = wordToInt(currentWordFile);
   ADVWORDFILE();
-  Word nama, pass, bio, numberHP, weton, status;
-  PhotoMat pp;
 
   for (int i = 0; i < countUser; i++) {
+    Word nama, pass, bio, numberHP, weton, status;
+    PhotoMat pp;
+    boolean isPublic;
     CopyWordwWord(&nama, &currentWordFile);
     CropWord(&nama, 20);
     ADVWORDFILE();
@@ -82,28 +96,18 @@ void readUserConfig(char filePath[]) {
     CopyWordwWord(&weton, &currentWordFile);
     ADVWORDFILE();
 
-    boolean isPublic = compareWordwString(status, "PUBLIC");
+    isPublic = compareWordwString(status, "PUBLIC");
     CopyWordwWord(&status, &currentWordFile);
-
     ADVWORDFILE();
 
     readMatrix(&pp, 5, 5);
     loadUser(nama, pass, bio, numberHP, weton, isPublic, pp);
   }
-  displayAllUsers();
-  ADVWORDFILE();
+  // displayAllUsers();
   readGraphPertemanan(countUser);
 
   Word countRequest;
   CopyWordwWord(&countRequest, &currentWordFile);
   int countReq = wordToInt(countRequest);
   readReqPertemanan(countReq);
-
-  // ADVWORDFILE();
-  // readGraphPertemanan(countUser);
-
-  // Word countRequest;
-  // CopyWordwWord(&countRequest, &currentWordFile);
-  // int countReq = wordToInt(countRequest);
-  // readReqPertemanan(countReq);
 }

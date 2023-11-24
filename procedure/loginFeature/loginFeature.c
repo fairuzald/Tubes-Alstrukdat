@@ -1,4 +1,14 @@
 #include "loginFeature.h"
+
+void getIdFromCommand(Word *id) {
+  ADVWORD();
+  *id = currentWord;
+  while (currentChar != MARK) {
+    ADVWORD();
+    ConcatWords(id, id, &currentWord);
+  }
+}
+
 void loginFeatureUser(Word *command) {
   if (compareWordwString(*command, "GANTI_PROFIL")) {
     ganti_profil();
@@ -22,7 +32,7 @@ void loginFeatureTeman(Word *command, boolean sudahMasuk) {
     DaftarTeman(grafPertemanan, userList, currentUser.nama, sudahMasuk);
   } else if (compareWordwString(*command, "HAPUS_TEMAN")) {
     HapusTeman(&grafPertemanan, &userList, currentUser.nama, sudahMasuk);
-  } 
+  }
 }
 
 void loginFeatureTemanReq(Word *command) {
@@ -32,7 +42,7 @@ void loginFeatureTemanReq(Word *command) {
     displayFriendRequests(friendRequestQueue, userList, currentUser.nama);
   } else if (compareWordwString(*command, "SETUJUI_PERTEMANAN")) {
     approveFriendRequest(&friendRequestQueue, userList, currentUser.nama);
-  } 
+  }
 }
 
 void loginFeatureTweet(Word *command) {

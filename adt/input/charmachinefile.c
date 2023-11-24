@@ -12,17 +12,16 @@ static FILE *pita;
 static int retval;
 
 void STARTFILE(char path[]) {
+  /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+     Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+     I.S. : sembarang
+     F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar !=
+     MARKFILE maka EOP akan padam (false). Jika currentChar = MARKFILE maka EOP
+     akan menyala (true) */
+
   /* Algoritma */
-  FILE *pita;
-  if ((pita = fopen(path, "r")) != NULL) {
-    // File ada dan dapat dibuka
-    // Lanjutkan dengan operasi Anda di sini
-    ADVFILE();
-    fclose(pita);
-  } else {
-    // File tidak ada atau tidak dapat dibuka
-    printf("File %s tidak ditemukan atau tidak dapat dibuka.\n", path);
-  }
+  pita = fopen(path, "r");
+  ADVFILE();
 }
 
 void ADVFILE() {
