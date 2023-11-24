@@ -85,7 +85,7 @@ void ganti_profil() {
   printf("\nProfil anda sudah berhasil diperbarui!\n");
 }
 
-void lihat_profil(Word Username) {
+void lihat_profil(Word Username, Graph grafPertemanan) {
   /*Digunakan untuk melihat profil milik Username*/
   /*KAMUS LOKAL*/
   int i;
@@ -93,7 +93,7 @@ void lihat_profil(Word Username) {
   /*ALGORITMA*/
   i = userIndex(Username);
   if (i != IDX_UNDEF_U) {
-    if (PUBLIC(i)) {
+    if (PUBLIC(i) || (isTeman(grafPertemanan, Username, currentUser.nama) || compareWordwWord(Username,currentUser.nama))) {
       printf("\n| Nama: ");
       printWord(NAMA(i));
       printf("\n| Bio Akun: ");
@@ -172,12 +172,12 @@ void ubah_foto_profil() {
       if (k == 4) {
         COLOR(currentUser.fotoProfil, i, j) = currentWord.TabWord[0];
         CONTENT(currentUser.fotoProfil, i, j) = currentChar;
-        ADV();
         ADVWORD();
         i++;
         j = 0;
       } else {
-        COLOR(currentUser.fotoProfil, i, j) = currentWord.TabWord[0];
+        if(i!=0 && j==0) COLOR(currentUser.fotoProfil, i, j) = currentWord.TabWord[2];
+        else COLOR(currentUser.fotoProfil, i, j) = currentWord.TabWord[0];
         ADVWORD();
         CONTENT(currentUser.fotoProfil, i, j) = currentWord.TabWord[0];
         j++;

@@ -1,7 +1,6 @@
 #include "user.h"
 #include <stdio.h>
 
-User currentUser;
 
 boolean cekUnik(Word w){
 /*true jika w tidak ada di userList, digunakan untuk mengecek keunikan nama pengguna*/

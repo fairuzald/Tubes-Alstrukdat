@@ -17,7 +17,7 @@ void loginFeatureUser(Word *command) {
     IgnoreBlanks();
     ADVWORDnoIgnore();
     usn = currentWord;
-    lihat_profil(usn);
+    lihat_profil(usn,grafPertemanan);
   } else if (compareWordwString(*command, "ATUR_JENIS_AKUN")) {
     atur_jenis_akun();
   } else if (compareWordwString(*command, "UBAH_FOTO_PROFIL")) {
