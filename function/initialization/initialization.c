@@ -1,4 +1,3 @@
-
 #include "initialization.h"
 
 #include <stdio.h>
@@ -12,16 +11,11 @@ void readDateTime(Word time, Word date, DATETIME *output) {
 }
 
 void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
-  /* Mengambil kata setelah tanda '-' pada inputWord dan menyimpannya di
-     outputWord I.S. : inputWord terdefinisi F.S. : outputWord berisi kata
-     setelah tanda '-', jika tidak ada tanda '-' atau bertemu dengan '\n', maka
-     outputWord kosong */
   const int initialLength = inputWord->Length;
   const char *inputString = inputWord->TabWord;
   int indexFound = -1;
   int i = 0;
 
-  // Temukan posisi tanda '-' pertama
   while (inputString[i] != '\0' && inputString[i] != '\n') {
     if (inputString[i] == '-') {
       indexFound = i;
@@ -47,14 +41,9 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   }
 }
 
-// Folder config search
 boolean searchConfigFolder(char path[]) {
-  char fullPath[1000];
-  concat("config/", path, fullPath);
-
-  // Pengecekan keberadaan folder
   struct stat st;
-  if (stat(fullPath, &st) == -1) {
+  if (stat(path, &st) == -1) {
     printf("Folder %s tidak ditemukan.\n", path);
     return false;
   } else {
@@ -62,19 +51,30 @@ boolean searchConfigFolder(char path[]) {
     return true;
   }
 }
+boolean searchConfigFile(char path[]) {
+  struct stat st;
+  if (stat(path, &st) == -1) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 void loadSemuaConfig(Word *folderName) {
-  printWord(*folderName);
-  if (!searchConfigFolder(folderName->TabWord)) {
+  Word configPath;
+  concat("config/", folderName->TabWord, configPath.TabWord);
+  configPath.Length = folderName->Length + 7;
+  if (!searchConfigFolder(configPath.TabWord)) {
     return;
   }
 
-  readUserConfig(folderName->TabWord);
-  readUtasConfig(folderName->TabWord);
-  readDrafConfig(folderName->TabWord);
-  readKicauanConfig(folderName->TabWord);
-  readBalasanConfig(folderName->TabWord);
+  readUserConfig(configPath.TabWord);
+  // readUtasConfig(folderName->TabWord);
+  // readDrafConfig(folderName->TabWord);
+  // readKicauanConfig(folderName->TabWord);
+  // readBalasanConfig(folderName->TabWord);
 }
+
 void initialization(Word *command) {
   printf("Silakan masukan folder konfigurasi untuk dimuat: ");
   readInputNoIgnore(command);
