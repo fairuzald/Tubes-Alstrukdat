@@ -4,13 +4,13 @@
 #include <stdio.h>
 
 /* Ukuran maksimum baris dan kolom (n x n) */
-#define MAX_CAP 20
+#define CAP 20
 
 typedef int IdxType; /* Index baris, kolom */
-typedef int ElType;
+typedef int El;
 
 typedef struct {
-  ElType mem[MAX_CAP][MAX_CAP];
+  El mem[CAP][CAP];
   int n;  // Jumlah simpul dalam graf
 } Graph;
 

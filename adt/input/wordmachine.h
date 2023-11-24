@@ -43,6 +43,8 @@ F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
         Jika currentChar = MARK, EndWord = true.
 Proses : Akuisisi kata menggunakan procedure SalinWord */
 
+void ADVWORDnoIgnore();
+void concat(char *str1, char *str2, char *output);
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata

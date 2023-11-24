@@ -38,18 +38,16 @@ extern boolean sudahMasuk;
 #define FOTO(i) USER(i).fotoProfil
 
 /*  Kamus Umum */
-#define CAPACITY 20
+#define CAPACITYUSER 20
 /* Kapasitas penyimpanan */
-#define IDX_MIN 0
-/* Indeks minimum list */
-#define IDX_UNDEF -1
+#define IDX_UNDEF_U -1
 /* Indeks tak terdefinisi*/
 #define EMPTY ""
 /* Elemen string yang kosong*/
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
-  User contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+  User contents[CAPACITYUSER]; /* memori tempat penyimpan elemen (container) */
 } ListStatikUser;
 /* Definisi :
    List kosong: semua user berisi nilai bawaan (Word kosong untuk Word, 0 untuk
@@ -60,46 +58,29 @@ extern ListStatikUser userList; /*men-global-kan userList*/
 
 /* ********** KONSTRUKTOR ********** */
 PhotoMat initPP();
-/* Menginitialisasi foto profil */
 
 void CreateuserList();
-/* I.S. userList sembarang */
-/* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
-/* Proses: Inisialisasi semua elemen userList sesuai nilai bawaan */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya user *** */
 int userCount();
-/* Mengirimkan banyaknya user yang terdaftar */
-/* Mengirimkan nol jika belum ada user */
 
 /* *** Selektor INDEKS *** */
-int getLastIdx();
-/* Prekondisi : userList tidak kosong */
-/* Mengirimkan indeks elemen userList terakhir */
+int getLastUserId();
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
 boolean noUsers();
-/* Mengirimkan true jika userList kosong, mengirimkan false jika tidak */
-
 /* *** Test List penuh *** */
 boolean userFull();
-/* Mengirimkan true jika userList penuh, mengirimkan false jika tidak */
 
 /* ********** SEARCHING ********** */
 int userIndex(Word val);
-/* Search apakah ada user bernama val */
-/* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 
 /* ********** MENAMBAH ELEMEN ********** */
 void addUser(Word N, Word P);
-/* I.S. l terdefinisi dan tidak penuh, n dan p dipastikan valid*/
-/* F.S. Ditambahkan 1 user dengan nama dan password terisi, sedangkan sisanya
- * value bawaan*/
 
-void loadUser(Word N, Word P, Word B, Word HP, Word Weton, boolean Public,
-              PhotoMat Foto);
+void loadUser(Word N, Word P, Word B, Word HP, Word Weton, boolean Public, PhotoMat Foto);
+
 void displayAllUsers();
-
 #endif

@@ -9,18 +9,22 @@
 
 extern Graph grafPertemanan;
 
-int findID(ListStatikUser users, Word username);
+int findID(ListStatikUser userList, Word username);
 
-Word findUser(ListStatikUser users, int userID);
+Word findUser(ListStatikUser userList, int userID);
 
 int countTeman(Graph grafPertemanan, ListStatikUser userList, Word username);
 
-void DaftarTeman(Graph grafPertemanan, ListStatikUser userList, Word currentUser, boolean sudahMasuk);
+void DaftarTeman(Graph grafPertemanan, ListStatikUser userList,
+                 Word CurrentUser, boolean sudahMasuk);
 
 boolean isTeman(Graph grafPertemanan, Word userFriend, Word currentUser);
 
-void HapusTeman(Graph * grafPertemanan, ListStatikUser * userList, Word currentUser, boolean sudahMasuk);
+void HapusTeman(Graph* grafPertemanan, ListStatikUser* userList,
+                Word currentUser, boolean sudahMasuk);
 
-void insertFriend(Graph * grafPertemanan, Word userFriend, Word currentUser);
+void removeFriend(Graph* grafPertemanan, Word userFriend, Word currentUser);
+
+void insertFriend(Graph* grafPertemanan, Word userFriend, Word currentUser);
 
 #endif

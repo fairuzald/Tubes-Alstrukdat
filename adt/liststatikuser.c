@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 
-ListStatikUser userList;
 
 /* ********** KONSTRUKTOR ********** */
 PhotoMat initPP() {
@@ -23,7 +22,7 @@ PhotoMat initPP() {
 
 void CreateuserList() {
   /* I.S. userList sembarang */
-  /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITY */
+  /* F.S. Terbentuk userList kosong dengan kapasitas CAPACITYUSER */
   /* Proses: Inisialisasi semua elemen userList sesuai nilai bawaan */
   /*KAMUS LOKAL*/
   int i, j, k;
@@ -34,14 +33,14 @@ void CreateuserList() {
   emptyWord.TabWord[0] = BLANK;
   emptyWord.Length = 0;
 
-  for (i = IDX_MIN; i < CAPACITY; i++) {
+  for (i = 0; i < CAPACITYUSER; i++) {
     NAMA(i) = emptyWord;
     PASS(i) = emptyWord;
     BIO(i) = emptyWord;
     HP(i) = emptyWord;
     WETON(i) = emptyWord;
     PUBLIC(i) = true;
-    FOTO(i)=initPP();
+    FOTO(i) = initPP();
   }
 }
 
@@ -55,14 +54,14 @@ int userCount() {
 
   /*algoritma*/
   counter = 0;
-  while (NAMA(counter).Length != 0 && counter < CAPACITY) {
+  while (NAMA(counter).Length != 0 && counter < CAPACITYUSER) {
     counter += 1;
   }
   return counter;
 }
 
 /* *** Selektor INDEKS *** */
-int getLastIdx() {
+int getLastUserId() {
   /* Prekondisi : userList tidak kosong */
   /* Mengirimkan indeks elemen userList terakhir */
   return (userCount() - 1);
@@ -77,7 +76,7 @@ boolean noUsers() {
 /* *** Test List penuh *** */
 boolean userFull() {
   /* Mengirimkan true jika userList l penuh, mengirimkan false jika tidak */
-  return (userCount() == CAPACITY);
+  return (userCount() == CAPACITYUSER);
 }
 
 /* ********** SEARCHING ********** */
@@ -89,14 +88,14 @@ int userIndex(Word val) {
 
   /*algoritma*/
   if (noUsers()) {
-    return IDX_UNDEF;
+    return IDX_UNDEF_U;
   } else {
-    for (i = IDX_MIN; i <= getLastIdx(); i++) {
+    for (i = 0; i <= getLastUserId(); i++) {
       if (compareWordwWord(NAMA(i), val)) {
         return i;
       }
     }
-    return IDX_UNDEF;
+    return IDX_UNDEF_U;
   }
 }
 
@@ -117,7 +116,7 @@ void addUser(Word N, Word P) {
 void loadUser(Word N, Word P, Word B, Word HP, Word Weton, boolean Public,
               PhotoMat Foto) {
   if (!userFull()) {
-    int idx = getLastIdx() + 1;
+    int idx = getLastUserId() + 1;
     NAMA(idx) = N;
     PASS(idx) = P;
     BIO(idx) = B;
@@ -135,7 +134,7 @@ void displayAllUsers() {
     printf("List of Users:\n");
     printf("=====================\n");
 
-    for (int i = IDX_MIN; i <= getLastIdx(); i++) {
+    for (int i = 0; i <= getLastUserId(); i++) {
       printf("Index: %d\n", i);
       printf("Name: ");
       printWord(NAMA(i));

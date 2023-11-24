@@ -87,6 +87,37 @@ void ADVWORD() {
   }
 }
 
+void ADVWORDnoIgnore() {
+  int ctr;
+  
+  if (currentChar == MARK) {
+    endWord = true;
+  } else {
+    endWord = false;
+    ctr=0;
+    while (currentChar != MARK) {
+      currentWord.TabWord[ctr] = currentChar;
+      ADV();
+      ctr++;
+    }
+    currentWord.Length = ctr;
+    endWord = true;
+  }
+}
+
+void concat(char *str1, char *str2, char *output) {
+  int i, j;
+  for (i = 0; str1[i] != '\0'; ++i) {
+    output[i] = str1[i];
+  }
+
+  for (j = 0; str2[j] != '\0'; ++j, ++i) {
+    output[i] = str2[j];
+  }
+
+  output[i] = '\0';
+}
+
 void CopyWord() {
   /* Mengakuisisi kata, menyimpan dalam currentWord
      I.S. : currentChar adalah karakter pertama dari kata

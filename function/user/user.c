@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 User currentUser;
-boolean sudahMasuk;
 
 boolean cekUnik(Word w){
 /*true jika w tidak ada di userList, digunakan untuk mengecek keunikan nama pengguna*/
@@ -57,7 +56,7 @@ void masuk(){
       printf("Masukkan nama:\n");
       STARTWORDnoIgnore(20);
       i=userIndex(currentWord);
-      while (i==IDX_UNDEF){
+      while (i==IDX_UNDEF_U){
         printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
         printf("\nMasukkan nama:\n");
         STARTWORDnoIgnore(20);

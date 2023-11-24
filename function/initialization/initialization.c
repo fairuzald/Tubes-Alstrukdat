@@ -5,19 +5,6 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-void concat(char *str1, char *str2, char *output) {
-  int i, j;
-  for (i = 0; str1[i] != '\0'; ++i) {
-    output[i] = str1[i];
-  }
-
-  for (j = 0; str2[j] != '\0'; ++j, ++i) {
-    output[i] = str2[j];
-  }
-
-  output[i] = '\0';
-}
-
 void readDateTime(Word time, Word date, DATETIME *output) {
   int hh, mm, ss;
   splitTime(time, &hh, &mm, &ss);
@@ -61,12 +48,13 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
 }
 
 // Folder config search
-boolean searchConfigFolder(char path[1000]) {
-  // Membuat path lengkap untuk folder konfigurasi
+boolean searchConfigFolder(char path[]) {
+  char fullPath[1000];
+  concat("config/", path, fullPath);
 
   // Pengecekan keberadaan folder
   struct stat st;
-  if (stat(path, &st) == -1) {
+  if (stat(fullPath, &st) == -1) {
     printf("Folder %s tidak ditemukan.\n", path);
     return false;
   } else {
@@ -75,31 +63,21 @@ boolean searchConfigFolder(char path[1000]) {
   }
 }
 
-void initialization(Word *command) {
-  printf("Silakan masukan folder konfigurasi untuk dimuat: ");
-  readInputNoIgnore(command);
-  Word configFolder;
-  CopyWordwWord(&configFolder, &currentWord);
-  printWord(configFolder);
-  char path[200];
-  configFolder.TabWord[configFolder.Length] = '\0';
-  printWord(configFolder);
-  if (!searchConfigFolder(path)) {
+void loadSemuaConfig(Word *folderName) {
+  printWord(*folderName);
+  if (!searchConfigFolder(folderName->TabWord)) {
     return;
   }
 
-  readUserConfig(path);
-  readUtasConfig(path);
-  readDrafConfig(path);
-  readKicauanConfig(path);
-  readBalasanConfig(path);
-
-  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
+  readUserConfig(folderName->TabWord);
+  readUtasConfig(folderName->TabWord);
+  readDrafConfig(folderName->TabWord);
+  readKicauanConfig(folderName->TabWord);
+  readBalasanConfig(folderName->TabWord);
 }
-
-int main() {
-  Word command;
-  initialization(&command);
-
-  return 0;
+void initialization(Word *command) {
+  printf("Silakan masukan folder konfigurasi untuk dimuat: ");
+  readInputNoIgnore(command);
+  loadSemuaConfig(command);
+  printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }
