@@ -1,10 +1,16 @@
 #include "initialization.h"
 
 void readKicauanConfig(char filePath[]) {
-  char fullPath[1000];
-  concat(filePath, "/kicauan.config", fullPath);
-  STARTWORDFILE(fullPath);
   CreateListDinTweet(&listTweetMain, 100);
+  char fullPath[200];
+  concat(filePath, "/kicauan.config", fullPath);
+  boolean found = searchConfigFile(fullPath);
+  if (!found) {
+    printf("File %s tidak ditemukan.\n", fullPath);
+    return;
+  }
+  STARTWORDFILE(fullPath);
+  ADVFILE();
 
   int countKicauan;
 
@@ -42,9 +48,8 @@ void readKicauanConfig(char filePath[]) {
     readDateTime(time, date, &dt);
     tweet = CreateTweet(text, author, dt, id, 0, 0, likeCount, 0, NULL, NULL,
                         NULL, false);
-    displayTweet(tweet);
+    // displayTweet(tweet);
     insertLastListTweet(&listTweetMain, tweet);
     // TulisDATETIME(dt);
-    ADVWORDFILE();
   }
 }

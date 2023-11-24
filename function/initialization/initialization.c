@@ -41,7 +41,7 @@ void ExtractWordAfterDash(const Word *inputWord, Word *outputWord) {
   }
 }
 
-boolean searchConfigFolder(char path[]) {
+boolean searchConfigFolder(char path[200]) {
   struct stat st;
   if (stat(path, &st) == -1) {
     printf("Folder %s tidak ditemukan.\n", path);
@@ -51,7 +51,7 @@ boolean searchConfigFolder(char path[]) {
     return true;
   }
 }
-boolean searchConfigFile(char path[]) {
+boolean searchConfigFile(char path[200]) {
   struct stat st;
   if (stat(path, &st) == -1) {
     return false;
@@ -69,9 +69,9 @@ void loadSemuaConfig(Word *folderName) {
   }
 
   readUserConfig(configPath.TabWord);
-  // readUtasConfig(folderName->TabWord);
+  readKicauanConfig(configPath.TabWord);
   // readDrafConfig(folderName->TabWord);
-  // readKicauanConfig(folderName->TabWord);
+  // readUtasConfig(folderName->TabWord);
   // readBalasanConfig(folderName->TabWord);
 }
 
